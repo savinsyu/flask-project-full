@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать запись{% endblock %}
+{% block content %}
+{% include 'errors.html' %}
+<div class="container px-4 py-5" id="custom-cards">
+   <h2 class="pb-2">Редактировать запись</h2>
+   <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
+         <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+            <form method="post">
+               <div class="mb-3 mt-3">
+                  <label for="title" class="form-label">Название записи</label>
+                  <textarea class="form-control" id="title" name="title" rows="1" placeholder="Введите название записи" required></textarea>
+               </div>
+               <div class="mb-3">
+                  <label for="content" class="form-label">Текст записи</label>
+                  <textarea class="form-control" id="content" name="content" rows="3" placeholder="Введите текст записи" required></textarea>
+               </div>
+               <button type="submit" class="btn btn-primary" value=>Сохранить запись</button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

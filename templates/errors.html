@@ -1,0 +1,9 @@
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+<ul class="flashes">
+   {% for message in messages %}
+   <strong class="alert alert-danger d-flex align-items-center">{{ message }}</strong>
+   {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}

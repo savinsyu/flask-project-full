@@ -1,0 +1,28 @@
+* {
+    font-family: system-ui;
+}
+    
+p {
+    padding: 10px;
+}
+
+
+.nav-link {
+    padding: 0;
+}
+
+.btn-success {
+    margin: 10px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+img {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}

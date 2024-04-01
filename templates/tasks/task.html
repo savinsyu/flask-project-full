@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Задача{% endblock %}
+{% block content %}
+<div class="container px-4 py-5" id="custom-cards">
+   <h2 class="pb-2">{{ task.title_task }}</h2>
+   <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
+         <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
+         {{ task.content }}
+            <a class="btn btn-success btn-sm" href="{{ url_for('tasks') }}">Вернуться к задачам</a>
+         </div>
+      </div>
+   </div>
+</div>
+{% endblock %}

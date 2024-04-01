@@ -1,0 +1,80 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   <div class="container-fluid">
+      <a class="navbar-brand" href="{{ url_for('index') }}">Flask Обучение</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <ul class="navbar-nav me-auto mb-1 mb-lg-0">
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">Записи</a>
+               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li class="dropdown-item">
+                     <a class="dropdown-item" href="{{ url_for('new_post') }}">Новая запись</a>
+                  </li>
+                  <li>
+                     <hr class="dropdown-divider">
+                  </li>
+                  <li class="dropdown-item">
+                     <a class="dropdown-item" href="{{ url_for('posts') }}">Записи</a>
+                  </li>
+               </ul>
+            </li>
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">Релизы</a>
+               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                     <a class="dropdown-item" href="{{ url_for('new_release') }}">Новый релиз</a>
+                  </li>
+                  <li>
+                     <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                     <a class="dropdown-item" href="{{ url_for('releases') }}">Релизы</a>
+                  </li>
+               </ul>
+            </li>
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">Задачи</a>
+               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                     <a class="dropdown-item" href="{{ url_for('new_task') }}">Новая задача</a>
+                  </li>
+                  <li>
+                     <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                     <a class="dropdown-item" href="{{ url_for('tasks') }}">Задачи</a>
+                  </li>
+               </ul>
+            </li>
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle" href="#"  role="button" data-bs-toggle="dropdown" aria-expanded="false">Песочница</a>
+               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                     <a class="dropdown-item" href="{{ url_for('new_sandbox') }}">Новая запись песочницы</a>
+                  </li>
+                  <li>
+                     <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                     <a class="dropdown-item" href="{{ url_for('sandboxes') }}">Все записи песочницы</a>
+                  </li>
+               </ul>
+            </li>
+            <li class="nav-link dropdown ">
+                <a class="nav-link dropdown" href="{{ url_for('upload_images') }}">Загрузка картинок</a>
+            </li>
+           <li class="nav-link dropdown ">
+                <a class="nav-link dropdown" href="{{ url_for('test') }}">Тестовая страница</a>
+            </li>
+            <li class="nav-link dropdown ">
+               <a class="nav-link dropdown" href="{{ url_for('password') }}">Генерация пароля</a>
+           </li>
+                        <li class="nav-link dropdown ">
+               <a class="nav-link dropdown" href="{{ url_for('parsing') }}">Парсинг</a>
+           </li>
+         </ul>
+      </div>
+   </div>
+</nav>

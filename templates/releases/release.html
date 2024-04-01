@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Release{% endblock %}
+{% block content %}
+<div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2">{{ release.title }}</h2>
+    <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg">
+            <p>{{ release.content }}</p>
+            <a class="btn btn-success btn-sm" href="{{ url_for('releases') }}">Back to the releases page</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
