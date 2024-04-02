@@ -164,3 +164,10 @@ In the bash or cmd of the project's working directory, write the command:
 python dump.py
 ```
 After that, a dump of the database is created in the working directory.
+# Port work
+If you need to work with other projects on the local machine, you must specify different ports:
+http://127.0.0.1:82
+http://127.0.0.1:81
+Specifies the port in this line of the application file:
+if name == "main":
+app.run(debug=True, host='0.0.0.0', port=81)
