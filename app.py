@@ -7,7 +7,6 @@ from werkzeug.utils import secure_filename
 from password_generator import generate_password
 import requests
 
-
 UPLOAD_FOLDER = 'images'
 # RUS Прописываем какие расширения возможны для загрузки
 # ENG Specify which extensions can be downloaded
@@ -88,14 +87,6 @@ def index():
 @app.route("/test")
 def test():
     return render_template("test.html")
-
-
-@app.route("/parsing")
-def parsing():
-    r = requests.get('https://api.github.com/events')
-    requests
-    print(requests)
-    return render_template("parsing.html")
 
 
 @app.route("/posts")
@@ -410,4 +401,4 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    app.run(debug=True,host='0.0.0.0', port=82)
+    app.run(debug=True, host='0.0.0.0', port=82)
