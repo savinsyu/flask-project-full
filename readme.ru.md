@@ -1,15 +1,15 @@
-*Read this in other languages: [Russian](readme.ru.md)*
+*Почитать версию на английском: [English](readme.md)*
 
-# File generation requirements
-## Saving dependencies
+# Генерация файла установки компонентов
+## Генерация файла
 ```
 python -m pip freeze > requirements.txt
 ```
-## Running dependencies from a file
+## Установка компонентов из файла
 ```
 pip install -r requirements.txt
 ```
-# Creating tables 
+# Создание таблиц
 ```
 CREATE TABLE
   IF NOT EXISTS tasks (
@@ -34,21 +34,20 @@ create table sandbox
 );  
   
 ```
-# Creating routes
-Creating routesTo create a page, a link to it is written in the base or navbar template
-Here is an example of a link:
+# Создание маршрутов
+Для создания страницы ссылка на нее прописывается в базовом шаблоне или навигационной панели
+Вот пример ссылки:
 ```
 <a class="nav-link" href="{{ url_for('sql') }}"> SQL </a>
 ```
-In the application script itself, in our git case app.py, we prescribe the route to the page.
+В самом скрипте приложения, в нашем случае git app.py, мы прописываем маршрут к странице.
 ```
 @app.route('/sql')
 def sql():
     return render_template('sql.html')
 ```
-Where the 1st line is the route itself, the 2nd line is the function declaration and the 3rd line is the page output from the templates.
-
-The page itself can be simply copied from index.html to change the content.
+Где 1-я строка - это сам маршрут, 2-я строка - объявление функции, а 3-я строка - выходные данные страницы из шаблонов.
+Саму страницу можно просто скопировать с index.html, чтобы изменить содержимое.
 ```
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock %}
@@ -56,8 +55,8 @@ The page itself can be simply copied from index.html to change the content.
 <p>Главная</p>
 {% endblock %}
 ```
-# Uploading pictures
-HTML page.
+# Загрузка изображений
+HTML страница.
 ```
 <title>Python Flask File Upload Example</title>
 <h2>Select a file to upload</h2>
@@ -83,8 +82,8 @@ HTML page.
 	</p>
 </form>
 ```
-App logic.
-The most important thing is to correctly specify the folder where the files will be saved
+# Логика приложения.
+Самое главное - правильно указать папку, в которую будут сохранены файлы
 ```
 UPLOAD_FOLDER = 'static'
 # расширения файлов, которые разрешено загружать
@@ -120,13 +119,13 @@ def upload_file():
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif, py, docx')
             return redirect(request.url)
 ```
-# Own styles 
-To connect your css file, you need to write the following code in base.html
+# Свои стили 
+Чтобы подключить ваш css-файл, вам нужно написать следующий код в base.html
 ```
 <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 ```
-# Handling 404 Error in Flask
-It often happens that the user accidentally incorrectly specifies a link in the address bar. In order for the error to be displayed correctly, you need to register page 404.
+# Страница 404
+Часто бывает, что пользователь случайно неправильно указывает ссылку в адресной строке. Для того, чтобы ошибка отображалась корректно, вам необходимо зарегистрировать страницу 404.
 ```
 @app.errorhandler(404)
 def page_not_found(e):
@@ -142,8 +141,8 @@ def page_not_found(e):
   <p><a href="{{ url_for('index') }}">go somewhere nice</a>
 {% endblock %}
 ```
-# Creating a database backup
-Creating an application file dump.py
+# Создание дампа базы данных
+Создание дампа базы данных dump.py
 ```
 import sqlite3
 import io
@@ -159,8 +158,8 @@ print(' Backup performed successfully!')
 print(' Data Saved as backupdatabase_dump.sql')
 conn.close()
 ```
-In the bash or cmd of the project's working directory, write the command:
+В bash или cmd рабочего каталога проекта напишите команду::
 ```
 python dump.py
 ```
-After that, a dump of the database is created in the working directory.
+После этого в рабочем каталоге создается дамп базы данных.
