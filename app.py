@@ -2,7 +2,6 @@ from datetime import datetime as dt
 import os
 from flask import Flask, render_template, request, redirect, url_for, flash, make_response
 import sqlite3
-# from flask_bootstrap import Bootstrap5
 from werkzeug.utils import secure_filename
 from password_generator import generate_password
 import requests

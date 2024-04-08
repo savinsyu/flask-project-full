@@ -540,6 +540,11 @@ INSERT INTO "sandbox" VALUES(150496,'Samsung');
 INSERT INTO "sandbox" VALUES(150497,'Samsung');
 INSERT INTO "sandbox" VALUES(150498,'675757567567567');
 INSERT INTO "sandbox" VALUES(150499,'hfghfghgfhfhgfgh');
+DELETE FROM "sqlite_sequence";
+INSERT INTO "sqlite_sequence" VALUES('posts',50);
+INSERT INTO "sqlite_sequence" VALUES('tasks',9);
+INSERT INTO "sqlite_sequence" VALUES('releases',18);
+INSERT INTO "sqlite_sequence" VALUES('sandbox',150499);
 CREATE TABLE "tasks"
 (
     id_task       INTEGER
@@ -557,9 +562,4 @@ Quis enim lobortis scelerisque fermentum dui. Tellus molestie nunc non blandit m
 Elementum curabitur vitae nunc sed. Tincidunt ornare massa eget egestas purus viverra accumsan in nisl. Pretium fusce id velit ut tortor pretium. Volutpat blandit aliquam etiam erat velit. Vel orci porta non pulvinar neque laoreet suspendisse interdum. Aliquet porttitor lacus luctus accumsan. Eu feugiat pretium nibh ipsum consequat nisl vel pretium lectus. Mauris a diam maecenas sed enim ut sem viverra aliquet. Aenean sed adipiscing diam donec adipiscing. Pharetra et ultrices neque ornare aenean euismod elementum nisi. Eros donec ac odio tempor orci. Urna nec tincidunt praesent semper. Suspendisse ultrices gravida dictum fusce ut placerat orci nulla pellentesque. Facilisis volutpat est velit egestas dui.
 
 Malesuada proin libero nunc consequat interdum varius sit. Ultrices eros in cursus turpis massa tincidunt dui ut ornare. Velit laoreet id donec ultrices. Mauris sit amet massa vitae tortor condimentum lacinia. Elit pellentesque habitant morbi tristique senectus. Maecenas pharetra convallis posuere morbi leo. Aliquam etiam erat velit scelerisque in dictum non consectetur a. Orci porta non pulvinar neque laoreet suspendisse interdum. Nibh cras pulvinar mattis nunc sed blandit. Hac habitasse platea dictumst quisque sagittis purus sit. Cursus metus aliquam eleifend mi in nulla. Lectus magna fringilla urna porttitor rhoncus dolor purus non enim. Nec feugiat in fermentum posuere. Vel quam elementum pulvinar etiam. Sit amet purus gravida quis blandit turpis cursus. Proin fermentum leo vel orci porta non pulvinar neque.');
-DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('posts',50);
-INSERT INTO "sqlite_sequence" VALUES('tasks',9);
-INSERT INTO "sqlite_sequence" VALUES('releases',18);
-INSERT INTO "sqlite_sequence" VALUES('sandbox',150499);
 COMMIT;
