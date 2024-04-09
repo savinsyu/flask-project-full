@@ -16,7 +16,12 @@
                   <label for="content" class="form-label">Текст релиза</label>
                   <textarea class="form-control" id="content" name="content" rows="3" placeholder="Введите текст релиза" required></textarea>
                </div>
+               <div class="mb-3 mt-3">
+                  <label for="version" class="form-label">Версия релиза</label>
+                  <textarea class="form-control" id="version" name="version" rows="1" placeholder="Введите версию релиза" required></textarea>
+               </div>
                <button type="submit" class="btn btn-primary" value=>Добавить</button>
+               <a class="btn btn-secondary" href="{{ url_for('releases') }}">Вернуться к списку релизов</a>
             </form>
          </div>
       </div>
