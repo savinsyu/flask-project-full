@@ -80,7 +80,11 @@ def close_db_connection(conn):
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    conn = get_db_connection()
+    last_post = conn.execute("SELECT * FROM posts ORDER BY id DESC").fetchone()
+    last_task = conn.execute("SELECT * FROM tasks ORDER BY id_task DESC").fetchone()
+    last_release = conn.execute("SELECT * FROM releases ORDER BY id DESC").fetchone()
+    return render_template("index.html", last_post = last_post, last_task = last_task, last_release = last_release)
 
 
 @app.route("/test")
@@ -298,75 +302,6 @@ def new_release():
             flash('Ошибка сохранения записи!', category='error')
 
     return render_template("releases/add_release.html")
-        
-# Блок песочницы, пока скрываю
-# @app.route("/sandboxes")
-# def sandboxes():
-#     conn = get_db_connection()
-#     sandboxes = conn.execute("SELECT * FROM sandbox").fetchall()
-#     sandboxes = conn.execute("SELECT * FROM sandbox LIMIT 5").fetchall()
-#     conn.close()
-#     return render_template("sandbox/sandboxes.html", sandboxes=sandboxes)
-#
-#
-# @app.route("/sandbox/<int:sandbox_id>")
-# def get_sandbox(sandbox_id):
-#     conn = get_db_connection()
-#     sandbox = conn.execute("SELECT * FROM sandbox WHERE id = ?", (sandbox_id,)).fetchone()
-#     conn.close()
-#     return render_template("sandbox/sandbox.html", sandbox=sandbox)
-#
-#
-# @app.route("/<int:id>/edit_sandbox", methods=("GET", "POST"))
-# def edit_sandbox(id, edit_title_sandbox):
-#     if request.method == "POST":
-#         edit_content_sandbox = request.form["content"]
-#         if len(request.form['content']) > 10:
-#             conn = get_db_connection()
-#             conn.execute(
-#                 "UPDATE sandbox SET content = ? WHERE id = ?",
-#                 (edit_content_sandbox, id),
-#             )
-#             conn.commit()
-#             conn.close()
-#             if not edit_title_sandbox:
-#                 flash('Ошибка сохранения записи!', category='error')
-#             else:
-#                 flash('Релиз успешно сохранен!', category='success')
-#         else:
-#             flash('Ошибка сохранения запииси!', category='error')
-#
-#     return render_template("sandbox/edit_sandbox.html")
-#
-#
-# @app.route("/<int:id>/delete_sandbox", methods=("POST",))
-# def delete_sandbox(id):
-#     conn = get_db_connection()
-#     conn.execute("DELETE FROM sandbox WHERE id= ?", (id,))
-#     conn.commit()
-#     conn.close()
-#     return redirect(url_for("sandboxes"))
-#
-#
-# @app.route("/new_sandbox", methods=["GET", "POST"])
-# def new_sandbox():
-#     if request.method == "POST":
-#         content = request.form["content"]
-#         if len(request.form['content']) > 10:
-#             conn = get_db_connection()
-#             conn.execute(
-#                 "INSERT INTO sandbox (content) VALUES (?)", (content,)
-#             )
-#             conn.commit()
-#             conn.close()
-#             if not content:
-#                 flash('Ошибка сохранения записи!', category='error')
-#             else:
-#                 flash('Запись успешно добавлена!', category='success')
-#         else:
-#             flash('Ошибка сохранения записи!', category='error')
-#
-#     return render_template("sandbox/add_sandbox.html")
 
 
 def allowed_file(filename):

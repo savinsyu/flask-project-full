@@ -1,23 +1,25 @@
 <div class="container px-4 py-5" id="featured-3">
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-      <div class="feature col">
-        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-        </div>
-        <h3 class="fs-2 text-body-emphasis"><a href="{{ url_for('posts') }}"><b>Записи</b></a></h3>
-        <p>В этом разделе добавлены полезные записи по программированию.</p>
+   <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+      <div class="col-md-6">
+         <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <h2>Последняя запись</h2>
+            <p>{{ last_post.title }}</p>
+            <a class="btn btn-outline-light" href="{{ url_for('posts') }}" type="button">Перейти ко всем записям</a>
+         </div>
       </div>
-      <div class="feature col">
-        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-        </div>
-        <h3 class="fs-2 text-body-emphasis"><a href="{{ url_for('releases') }}"><b>Релизы</b></a></h3>
-        <p>Релизы добавляются в этот раздел.</p>
+      <div class="col-md-6">
+         <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <h2>Последний релиз</h2>
+            <p>{{ last_release.title }}</p>
+            <a class="btn btn-outline-light" href="{{ url_for('releases') }}" type="button">Перейти ко всем релизам</a>
+         </div>
       </div>
-      <div class="feature col">
-        <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-        </div>
-        <h3 class="fs-2 text-body-emphasis"><a href="{{ url_for('tasks') }}"><b>Задачи</b></a></h3>
-        <p>В этом разделе добавляются новые задачи для завершения проекта.</p>
+      <div class="col-md-6">
+         <div class="h-100 p-5 text-white bg-dark rounded-3">
+            <h2>Последняя задача</h2>
+            <p>{{ last_task.title_task }}</p>
+            <a class="btn btn-outline-light" href="{{ url_for('tasks') }}" type="button">Перейти ко всем задачам</a>
+         </div>
       </div>
-    </div>
-  </div>
-  </div>
+   </div>
+</div>
