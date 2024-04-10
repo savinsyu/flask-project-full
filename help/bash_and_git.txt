@@ -1,0 +1,153 @@
+Копирование файлов:
+
+cp bash_and_git.txt ~/draft-project
+
+Очистка экрана:
+
+clear
+
+Завершает процесс:
+
+kill номер процесса
+
+Показывает историю команд:
+
+history
+
+Выводит список процессов:
+
+ps
+
+Показывает текущий путь к папке:
+
+pwd
+
+Возврат в вышестоящую директорию:
+
+cd ..
+
+Переход в корневой каталог:
+
+cd ~
+
+Вывод содержимого каталога(файлов и папок):
+
+ls
+
+Переход  в оперделенную папку:
+
+cd Users/
+
+Вывод папок раздела:
+
+ls -d */
+
+Создание папки или папок(несколько папко через пробел нужно указать):
+
+mkdir folder
+
+Перемещение или переименование файлов.
+Файл intro перенесется в папку manual под именем chap1:
+
+mv intro manual/chap1
+
+Файл chap3 перенесется в папку manual:
+
+mv chap3 manual
+
+Файл appendix переименуется в apndx.a:
+
+mv appendix apndx.a
+
+Чтение указанного файла:
+
+cat id_ed25519.pub
+
+Удаление файла:
+
+rm myfile
+
+Удаление папки с содержанием:
+
+rm -R GitHub/
+
+Удаление папки с содержанием принудительно:
+
+rm -f -R GitHub/
+
+
+Выход из командной строки:
+
+exit
+
+Запрос DNS определенного адреса:
+
+nslookup agp-01.v0-app0180.plagate.ru
+
+Запуск процесса в фоновом режиме:
+
+flask_project_lite_version/venv/scripts/python.exe flask_project_lite_version/app.py &
+
+Генерация ssh-ключа:
+
+ssh-keygen
+
+Создание виртуального окружения Python:
+
+python -m venv venv 
+
+Создание файла скрипта bash.sh
+
+touch bash.sh
+
+Открытие файла встроенным bash редактором:
+
+nano bash.sh
+
+Запуск скрипта bash:
+
+./bash.sh
+
+Настройка прав на файл скрипта:
+
+cmod +x bash.sh
+
+Назначение git глобальной почты:
+
+git config --global user.email "s.savin1@gitlab.plagate.ru"
+
+Назначение git глобального имени:
+
+git config --global user.name "s.savin1"
+
+Клонирование удаленного репозитория:
+
+git clone ssh://git@gitlab.plagate.ru:2224/apk-group/agp-group/agp.git
+
+Проверка изменений репозитория:
+
+git status
+
+Вывод конфигурации git:
+
+git config --list
+
+Подготовка файлов для коммита:
+
+git add .
+
+Написание коммита:
+
+git commit -m "test"
+
+Отправка изменений на репозиторий:
+
+git push
+
+Скачивание изменения из репозитория на локальную машину:
+
+git pull
+
+Инициализация git в папке:
+
+git init
