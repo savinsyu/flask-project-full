@@ -1,11 +1,12 @@
 BEGIN TRANSACTION;
 CREATE TABLE "posts"
 (
-    id      INTEGER
+    id         INTEGER
         primary key autoincrement,
-    title   TEXT not null,
-    content TEXT not null
-, image_post TEXT);
+    title      TEXT not null,
+    content    TEXT not null,
+    image_post TEXT default 'no_image.png'
+);
 INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На изображении отображается структура SQL-запроса.','sql_query_structure.jpg');
 INSERT INTO "posts" VALUES(38,'lorem loremloremloremlorem','loremloremloremloremloremloremloremloremloremloremloremloremloremlorem','sql_query_structure.jpg');
 INSERT INTO "posts" VALUES(44,'BoxModel','BoxModel','BoxModel_Properties.png');
@@ -15,7 +16,7 @@ INSERT INTO "posts" VALUES(47,'Grid','Grid','Grid_Layout_Properties.png');
 INSERT INTO "posts" VALUES(48,'Shorthand Properties','Shorthand Properties','Shorthand_Properties.png');
 INSERT INTO "posts" VALUES(49,'Shorthand Properties v3','Shorthand Properties v3','Shorthand_Properties_v3.png');
 INSERT INTO "posts" VALUES(50,'SQL','SQL','SQL-help.jpg');
-INSERT INTO "posts" VALUES(51,'Как сделать скрипт на bash','https://selectel.ru/blog/tutorials/linux-bash-scripting-guide/',NULL);
+INSERT INTO "posts" VALUES(51,'Как сделать скрипт на bash','https://selectel.ru/blog/tutorials/linux-bash-scripting-guide/','no_image.png');
 CREATE TABLE "releases"
 (
     id       INTEGER
@@ -40,6 +41,11 @@ INSERT INTO "releases" VALUES(19,'2024-04-06 18:12:23','Создан и протестирован з
 INSERT INTO "releases" VALUES(24,'2024-04-09 13:44:33','Версия релиза, кнопка возврата, песочница, раздел инструменты','На проект добавлена версионность релизов и кнопка возврата к списку: записей, релизов, задач.
 Скрыт раздел песочница.
 Создан раздел меню Инструменты, в него перемещены разделы Загрузка картинок и Генерация пароля.',1.1);
+INSERT INTO "releases" VALUES(25,'2024-04-10 10:53:38','Исправление верстки картинок, главной страницы, вывод последних записей разделов на главную страницу',' - Уменьшены кнопки в генераторе паролей;
+ - Добавлена на проект картинка, которая по умолчанию сохраняется в при создании записи;
+ - Скорректирована ширина картинок, значение width выставил 100%;
+ - Написана логика вывода последних записей разделов на главную страницу.
+ - Скорректирована главная страница проекта',1.2);
 CREATE TABLE sandbox
 (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -554,10 +560,9 @@ CREATE TABLE "tasks"
     title_task    TEXT not null,
     content       TEXT not null
 );
-INSERT INTO "tasks" VALUES(11,'2024-04-09 14:19:07','На главную страницу вывести последние задачи, релизы и записи','На главную страницу вывести последние задачи, релизы и записи, а также сделать кнопку перехода ко всем записям.');
 DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('posts',51);
 INSERT INTO "sqlite_sequence" VALUES('tasks',12);
 INSERT INTO "sqlite_sequence" VALUES('sandbox',150499);
-INSERT INTO "sqlite_sequence" VALUES('releases',24);
+INSERT INTO "sqlite_sequence" VALUES('releases',25);
+INSERT INTO "sqlite_sequence" VALUES('posts',52);
 COMMIT;
