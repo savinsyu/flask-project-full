@@ -7,19 +7,5 @@
             <a class="btn btn-outline-light" href="{{ url_for('posts') }}" type="button">Перейти ко всем записям</a>
          </div>
       </div>
-      <div class="col-md-6">
-         <div class="h-100 p-5 text-white bg-dark rounded-3">
-            <h2>Последний релиз</h2>
-            <p>{{ last_release.title }}</p>
-            <a class="btn btn-outline-light" href="{{ url_for('releases') }}" type="button">Перейти ко всем релизам</a>
-         </div>
-      </div>
-      <div class="col-md-6">
-         <div class="h-100 p-5 text-white bg-dark rounded-3">
-            <h2>Последняя задача</h2>
-            <p>{{ last_task.title_task }}</p>
-            <a class="btn btn-outline-light" href="{{ url_for('tasks') }}" type="button">Перейти ко всем задачам</a>
-         </div>
-      </div>
    </div>
 </div>

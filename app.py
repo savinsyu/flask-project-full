@@ -82,9 +82,7 @@ def close_db_connection(conn):
 def index():
     conn = get_db_connection()
     last_post = conn.execute("SELECT * FROM posts ORDER BY id DESC").fetchone()
-    last_task = conn.execute("SELECT * FROM tasks ORDER BY id_task DESC").fetchone()
-    last_release = conn.execute("SELECT * FROM releases ORDER BY id DESC").fetchone()
-    return render_template("index.html", last_post = last_post, last_task = last_task, last_release = last_release)
+    return render_template("index.html", last_post = last_post)
 
 
 @app.route("/test")
@@ -106,7 +104,6 @@ def get_post(post_id):
     post = conn.execute("SELECT id, title, content, image_post FROM posts WHERE id = ?", (post_id,)).fetchone()
     conn.close()
     return render_template("posts/post.html", post=post)
-
 
 @app.route("/<int:id>/edit_post", methods=("GET", "POST"))
 def edit_post(id):
@@ -161,147 +158,6 @@ def new_post():
             flash('Ошибка сохранения записи!', category='error')
 
     return render_template("posts/add_post.html")
-
-
-@app.route("/tasks")
-def tasks():
-    conn = get_db_connection()
-    tasks = conn.execute("SELECT * FROM tasks").fetchall()
-    conn.close()
-    return render_template("tasks/tasks.html", tasks=tasks)
-
-
-@app.route("/tasks/<int:task_id>")
-def get_task(task_id):
-    conn = get_db_connection()
-    task = conn.execute("SELECT * FROM tasks WHERE id_task = ?", (task_id,)).fetchone()
-    conn.close()
-    return render_template("tasks/task.html", task=task)
-
-
-@app.route("/<int:id_task>/edit_task", methods=("GET", "POST"))
-def edit_task(id_task):
-    if request.method == "POST":
-        title_task_edit = request.form["title_task"]
-        task_content_edit = request.form["content"]
-        if len(request.form['title_task']) > 4 and len(request.form['content']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "UPDATE tasks SET title_task = ?, content = ? WHERE id_task = ?",
-                (title_task_edit, task_content_edit, id_task),
-            )
-            conn.commit()
-            conn.close()
-            if not title_task_edit:
-                flash('Ошибка сохранения записи!', category='error')
-            else:
-                flash('Задача успешно сохранена!', category='success')
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("tasks/edit_task.html")
-
-
-@app.route("/<int:id_task>/delete_task", methods=("POST",))
-def delete_task(id_task):
-    conn = get_db_connection()
-    conn.execute("DELETE FROM tasks WHERE id_task = ?", (id_task,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for("tasks"))
-
-
-@app.route("/new_task", methods=["GET", "POST"])
-def new_task():
-    if request.method == "POST":
-        title = request.form["title_task"]
-        content = request.form["content"]
-        if len(request.form['title_task']) > 4 and len(request.form['content']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "INSERT INTO tasks (title_task, content) VALUES (?, ?)", (title, content)
-            )
-            conn.commit()
-            conn.close()
-            if not title:
-                flash('Ошибка сохранения записи!', category='error')
-            else:
-                flash('Задача успешно добавлена!', category='success')
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("tasks/add_task.html")
-
-
-@app.route("/releases")
-def releases():
-    conn = get_db_connection()
-    releases = conn.execute("SELECT * FROM releases").fetchall()
-    conn.close()
-    return render_template("releases/releases.html", releases=releases)
-
-
-@app.route("/release/<int:release_id>")
-def get_release(release_id):
-    conn = get_db_connection()
-    release = conn.execute("SELECT * FROM releases WHERE id = ?", (release_id,)).fetchone()
-    conn.close()
-    return render_template("releases/release.html", release=release)
-
-
-@app.route("/<int:id>/edit_release", methods=("GET", "POST"))
-def edit_release(id):
-    if request.method == "POST":
-        edit_title_release = request.form["title"]
-        edit_content_release = request.form["content"]
-        if len(request.form['title']) > 4 and len(request.form['content']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "UPDATE releases SET title = ?, content = ? WHERE id = ?",
-                (edit_title_release, edit_content_release, id),
-            )
-            conn.commit()
-            conn.close()
-            if not edit_title_release:
-                flash('Ошибка сохранения записи!', category='error')
-            else:
-                flash('Релиз успешно сохранен!', category='success')
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("releases/edit_release.html")
-
-
-@app.route("/<int:id>/delete_release", methods=("POST",))
-def delete_release(id):
-    conn = get_db_connection()
-    conn.execute("DELETE FROM releases WHERE id= ?", (id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for("releases"))
-
-
-@app.route("/new_release", methods=["GET", "POST"])
-def new_release():
-    if request.method == "POST":
-        title = request.form["title"]
-        content = request.form["content"]
-        version = request.form["version"]
-        if len(request.form['title']) > 4 and len(request.form['content']) > 10 and len(request.form['version']) > 1:
-            conn = get_db_connection()
-            conn.execute(
-                "INSERT INTO releases (title, content, version) VALUES (?, ?, ?)", (title, content, version)
-            )
-            conn.commit()
-            conn.close()
-            if not title:
-                flash('Ошибка сохранения записи!', category='error')
-            else:
-                flash('Релиз успешно сохранен!', category='success')
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("releases/add_release.html")
 
 
 def allowed_file(filename):
