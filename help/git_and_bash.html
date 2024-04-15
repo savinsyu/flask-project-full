@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>       
+    <p>Копирование файлов:</p>
+    <b>cp bash_and_git.txt ~/draft-project</b>
+    <p>Очистка экрана:</p>
+    <b>clear</b>
+    <p>Завершает процесс:</p>
+    <b>kill номер процесса</b>
+    <p>Показывает историю команд:</p>
+    <b>history</b>
+    <p>Выводит список процессов:</p>
+    <b>ps</b>
+    <p>Показывает текущий путь к папке:</p>
+    <b>pwd</b>
+    <p>Возврат в вышестоящую директорию:</p>
+    <b>cd ..</b>
+    <p>Возврат на две папки выше:</p>
+    <b>cd ../..</b>
+    <p>Переход в корневой каталог:</p>
+    <b>cd ~</b>
+    <p>Вывод содержимого каталога(файлов и папок):</p>
+    <b>ls</b>
+    <p>Вернуться назад:</p>
+    <b>cd -</b>
+    <p>Переход  в оперделенную папку:</p>
+    <b>cd Users/</b>
+    <p>Показать файлы в данной папке, включая и скрытые:</p>
+    <b>ls -f</b>
+    <p>Вывод папок раздела:</p>
+    <b>ls -d */</b>
+    <p>Создание папки или папок(несколько папко через пробел нужно указать):</p>
+    <b>mkdir folder</b>
+    <p>Перемещение или переименование файлов.</p>
+    <p>Файл intro перенесется в папку manual под именем chap1:</p>
+    <b>mv intro manual/chap1</b>
+    <p>Файл chap3 перенесется в папку manual:</p>
+    <b>mv chap3 manual</b>
+    <p>Файл appendix переименуется в apndx.a:</p>
+    <b>mv appendix apndx.a</b>
+    <p>Чтение указанного файла:</p>
+    <b>cat id_ed25519.pub</b>
+    <p>Удаление файла:</p>
+    <b>rm myfile</b>
+    <p>Удаление папки с содержанием:</p>
+    <b>rm -R GitHub/</b>
+    <p>Удаление папки с содержанием принудительно:</p>
+    <b>rm -f -R GitHub/</b>
+    <p>Выход из командной строки:</p>
+    <b>exit</b>
+    <p>Запрос DNS определенного адреса:</p>
+    <b>nslookup agp-01.v0-app0180.plagate.ru</b>
+    <p>Запуск процесса в фоновом режиме:</p>
+    <b>flask_project_lite_version/venv/scripts/python.exe flask_project_lite_version/app.py &</b>
+    <p>Генерация ssh-ключа:</p>
+    <b>ssh-keygen</b>
+    <p>Создание виртуального окружения Python:</p>
+    <b>python -m venv venv </b>
+    <p>Создание файла скрипта bash.sh</p>
+    <b>touch bash.sh</b>
+    <p>Открытие файла встроенным bash редактором:</p>
+    <b>nano bash.sh</b>
+    <p>Запуск скрипта bash:</p>
+    <b>./bash.sh</b>
+    <p>Настройка прав на файл скрипта:</p>
+    <b>cmod +x bash.sh</b>
+    <p>Назначение git глобальной почты:</p>
+    <b>git config --global user.email "s.savin1@gitlab.plagate.ru"</b>
+    <p>Назначение git глобального имени:</p>
+    <b>git config --global user.name "s.savin1"</b>
+    <p>Клонирование удаленного репозитория:
+    <b>git clone ssh://git@gitlab.plagate.ru:2224/apk-group/agp-group/agp.git</b>
+    <p>Проверка изменений репозитория:</p>
+    <b>git status</b>
+    <p>Вывод конфигурации git:</p>
+    <b>git config --list</b>
+    <p>Подготовка файлов для коммита:</p>
+    <b>git add .</b>
+    <p>Написание коммита:</p>
+    <b>git commit -m "test"</b>
+    <p>Отправка изменений на репозиторий:</p>
+    <b>git push</b>
+    <p>Скачивание изменения из репозитория на локальную машину:</p>
+    <b>git pull</b>
+    <p>Инициализация git в папке:</p>
+    <b>git init</b>
+</body>
+</html>
