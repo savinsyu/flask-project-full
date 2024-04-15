@@ -89,6 +89,10 @@ def index():
 def test():
     return render_template("test.html")
 
+@app.route("/help/git_and_bash")
+def git_and_bash():
+    return render_template("help/git_and_bash.html")
+
 
 @app.route("/posts")
 def posts():
