@@ -97,6 +97,13 @@ def git_and_bashes():
     conn.close()
     return render_template("git_and_bash.html", git_and_bashes=git_and_bashes)
 
+@app.route("/links")
+def links():
+    conn = get_db_connection()
+    links = conn.execute("SELECT * FROM links").fetchall()
+    conn.close()
+    return render_template("links.html", links=links)
+
 
 @app.route("/posts")
 def posts():

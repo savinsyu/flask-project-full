@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Полезные ссылки{% endblock %}
+{% block content %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Название</th>
+      <th scope="col">Ссылка</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for links in links %}
+    <tr>
+      <th>{{ links['name'] }}</th>
+      <td><a href="{{ links['link'] }}" target="_blank">{{ links['link'] }}</a></td>
+    </tr>
+   {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
