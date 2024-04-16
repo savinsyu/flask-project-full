@@ -33,6 +33,13 @@ create table sandbox
     content  text
 );  
   
+  
+  CREATE TABLE
+  IF NOT EXISTS git_and_bash (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    command TEXT NOT NULL,
+    name TEXT NOT NULL
+  )
 ```
 # Создание маршрутов
 Для создания страницы ссылка на нее прописывается в базовом шаблоне или навигационной панели

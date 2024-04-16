@@ -1,4 +1,17 @@
 BEGIN TRANSACTION;
+CREATE TABLE git_and_bash (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    command TEXT NOT NULL,
+    name TEXT NOT NULL
+  );
+INSERT INTO "git_and_bash" VALUES(1,'CTRL + U','Удаление последней набранной строки');
+INSERT INTO "git_and_bash" VALUES(2,'CTRL + R','Поиск текста в истории');
+INSERT INTO "git_and_bash" VALUES(3,'cp bash_and_git.txt ~/draft-project','Копирование файлов');
+INSERT INTO "git_and_bash" VALUES(4,'clear','Очистка экрана');
+INSERT INTO "git_and_bash" VALUES(5,'kill номер процесса','Завершает процесс');
+INSERT INTO "git_and_bash" VALUES(6,'history','Показывает историю команд');
+INSERT INTO "git_and_bash" VALUES(7,'ps','Выводит список процессов');
+INSERT INTO "git_and_bash" VALUES(8,'pwd','Показывает текущий путь к папке');
 CREATE TABLE "posts"
 (
     id         INTEGER
@@ -18,4 +31,5 @@ INSERT INTO "posts" VALUES(50,'SQL','SQL','SQL-help.jpg');
 INSERT INTO "posts" VALUES(51,'Как сделать скрипт на bash','https://selectel.ru/blog/tutorials/linux-bash-scripting-guide/','no_image.png');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',52);
+INSERT INTO "sqlite_sequence" VALUES('git_and_bash',8);
 COMMIT;

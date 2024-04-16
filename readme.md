@@ -32,6 +32,14 @@ create table sandbox
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     content  text
 );  
+
+
+CREATE TABLE
+  IF NOT EXISTS git_and_bash (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    command TEXT NOT NULL,
+    name TEXT NOT NULL
+  )
   
 ```
 # Creating routes
