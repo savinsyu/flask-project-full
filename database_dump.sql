@@ -47,6 +47,7 @@ INSERT INTO "git_and_bash" VALUES(40,'git commit -m "test"','Написание коммита')
 INSERT INTO "git_and_bash" VALUES(41,'git push','Отправка изменений на репозиторий');
 INSERT INTO "git_and_bash" VALUES(42,'git init','Инициализация git в папке');
 INSERT INTO "git_and_bash" VALUES(43,'git pull','Скачивание изменения из репозитория на локальную машину');
+INSERT INTO "git_and_bash" VALUES(46,'ls -l','Выводит списокм папки и файлы текущего раздела с датой изменения, размером и правами доступа');
 CREATE TABLE links (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -65,6 +66,6 @@ INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На изображении отображает
 INSERT INTO "posts" VALUES(50,'SQL','SQL','SQL-help.jpg');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',52);
-INSERT INTO "sqlite_sequence" VALUES('git_and_bash',45);
+INSERT INTO "sqlite_sequence" VALUES('git_and_bash',46);
 INSERT INTO "sqlite_sequence" VALUES('links',1);
 COMMIT;
