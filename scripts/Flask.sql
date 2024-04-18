@@ -5,19 +5,28 @@ CREATE TABLE
     name TEXT NOT NULL
   )
   
-INSERT INTO  git_and_bash (command, name) VALUES ('test', 'test')
-
-SELECT * FROM git_and_bash gab ORDER BY id DESC 
-
-SELECT * FROM git_and_bash WHERE command LIKE '%ls%' 
-
-INSERT INTO  git_and_bash (command, name) VALUES ('ls -l', 'Выводит списокм папки и файлы текущего раздела с датой изменения, размером и правами доступа')
-
-DELETE FROM git_and_bash WHERE id = 45
-
 CREATE TABLE
   IF NOT EXISTS links (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     link TEXT NOT NULL
   )
+  
+INSERT INTO  git_and_bash (command, name) VALUES ('test', 'test')
+INSERT INTO  git_and_bash (command, name) VALUES ('rm *', 'Удаляет все файлы в ткущей директории')
+INSERT INTO  links (name, link) VALUES ('Работа с 7zip из командной строки', 'https://www.dmosk.ru/miniinstruktions.php?mini=7zip-cmd ')  
+
+SELECT * FROM git_and_bash gab ORDER BY id DESC 
+SELECT * FROM git_and_bash WHERE command LIKE '%ls%' 
+SELECT * FROM links l  ORDER BY id DESC
+
+DELETE FROM git_and_bash WHERE id = 45
+
+
+  
+
+  
+   
+  
+
+
