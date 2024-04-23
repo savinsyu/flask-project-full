@@ -93,7 +93,7 @@ def test():
 @app.route("/git_and_bash")
 def git_and_bashes():
     conn = get_db_connection()
-    git_and_bashes = conn.execute("SELECT * FROM git_and_bash").fetchall()
+    git_and_bashes = conn.execute("SELECT * FROM git_and_bash ORDER BY 2").fetchall()
     conn.close()
     return render_template("git_and_bash.html", git_and_bashes=git_and_bashes)
 
