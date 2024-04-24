@@ -16,6 +16,8 @@ INSERT INTO  git_and_bash (command, name) VALUES ('test', 'test')
 
 INSERT INTO  git_and_bash (command, name) VALUES ('rm *', 'Удаляет все файлы в ткущей директории')
 
+INSERT INTO  git_and_bash (command, name) VALUES ('history -c', 'Удаляет все команды из истории')
+
 INSERT INTO  links (name, link) VALUES ('Работа с 7zip из командной строки', 'https://www.dmosk.ru/miniinstruktions.php?mini=7zip-cmd ')  
 
 INSERT INTO  links (name, link) VALUES ('Список команд Windows CMD  с описанием и примерами', 'https://ab57.ru/cmdlist.html')  

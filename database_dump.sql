@@ -49,6 +49,7 @@ INSERT INTO "git_and_bash" VALUES(42,'git init','Инициализация git в папке');
 INSERT INTO "git_and_bash" VALUES(43,'git pull','Скачивание изменения из репозитория на локальную машину');
 INSERT INTO "git_and_bash" VALUES(46,'ls -l','Выводит списокм папки и файлы текущего раздела с датой изменения, размером и правами доступа');
 INSERT INTO "git_and_bash" VALUES(47,'rm *','Удаляет все файлы в ткущей директории');
+INSERT INTO "git_and_bash" VALUES(48,'history -c','Удаляет все команды из истории');
 CREATE TABLE links (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -71,6 +72,6 @@ INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На изображении отображает
 INSERT INTO "posts" VALUES(50,'SQL','SQL','SQL-help.jpg');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',52);
-INSERT INTO "sqlite_sequence" VALUES('git_and_bash',47);
+INSERT INTO "sqlite_sequence" VALUES('git_and_bash',48);
 INSERT INTO "sqlite_sequence" VALUES('links',4);
 COMMIT;
