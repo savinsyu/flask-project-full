@@ -23,3 +23,10 @@ a {
 img {
     width: 70%;
 }
+
+.bd-example {
+    padding: 1.5rem;
+    margin: 1.5rem;
+    border-radius: 10px;
+    border: solid #dee2e6 1px;
+}

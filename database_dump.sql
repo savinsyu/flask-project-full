@@ -68,8 +68,8 @@ CREATE TABLE "posts"
     content    TEXT not null,
     image_post TEXT default 'no_image.png'
 );
-INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На изображении отображается структура SQL-запроса.','sql_query_structure.jpg');
-INSERT INTO "posts" VALUES(50,'SQL','SQL','SQL-help.jpg');
+INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На картинке изображена структура SQL-запроса.','sql_query_structure.jpg');
+INSERT INTO "posts" VALUES(50,'Шпаргалка по SQL.','Шпаргалка по SQL.','SQL-help.jpg');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',52);
 INSERT INTO "sqlite_sequence" VALUES('git_and_bash',48);

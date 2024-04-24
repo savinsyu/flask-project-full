@@ -4,20 +4,11 @@ from flask import Flask, render_template, request, redirect, url_for, flash, mak
 import sqlite3
 from werkzeug.utils import secure_filename
 from password_generator import generate_password
-import requests
 
-UPLOAD_FOLDER = 'images'
-# RUS Прописываем какие расширения возможны для загрузки
-# ENG Specify which extensions can be downloaded
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 app = Flask(__name__)
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-# RUS Прописываем ограничение размера картинки
-# ENG We prescribe a limit on the size of the image
-app.config['MAX_CONTENT_LENGTH'] = 1 * 1000 * 1000
-# bootstrap = Bootstrap5()
+
 app.secret_key = "secret key"
 
 
@@ -173,37 +164,6 @@ def new_post():
             flash('Ошибка сохранения записи!', category='error')
 
     return render_template("posts/add_post.html")
-
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-@app.route('/upload_images')
-def upload_images():
-    return render_template("upload_images.html")
-
-
-@app.route('/', methods=['POST'])
-def upload_file():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            flash('Не выбран файл')
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            flash('Не выбран файл картинки')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            flash('Картинка успешно загружена')
-            # RUS При успешной загрузке картинки возвращаемся на станицу загрузки картинки.
-            # ENG If the image is successfully uploaded, we return to the image upload page.
-            return redirect('/upload_images')
-        else:
-            flash('Разрешенными типами файлов являются png, jpg, jpeg')
-            return redirect(request.url)
 
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ INSERT INTO  links (name, link) VALUES ('Работа с 7zip из команд�
 
 INSERT INTO  links (name, link) VALUES ('Список команд Windows CMD  с описанием и примерами', 'https://ab57.ru/cmdlist.html')  
 
-SELECT * FROM git_and_bash gab ORDER BY id DESC 
+SELECT * FROM git_and_bash gab ORDER BY 2 ASC 
 
 SELECT * FROM git_and_bash WHERE command LIKE '%ls%' 
 
