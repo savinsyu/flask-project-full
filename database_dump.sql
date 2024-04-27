@@ -71,18 +71,31 @@ CREATE TABLE "posts"
 INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На картинке изображена структура SQL-запроса.','sql_query_structure.jpg');
 INSERT INTO "posts" VALUES(50,'Шпаргалка по SQL.','Шпаргалка по SQL.','SQL-help.jpg');
 CREATE TABLE [sql] ( 
-  [id] INTEGER AUTO_INCREMENT NULL,
+  [id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [command] TEXT NOT NULL,
-  [name] TEXT NOT NULL,
-   PRIMARY KEY ([id])
+  [name] TEXT NOT NULL
 );
+INSERT INTO "sql" VALUES(1,'INSERT INTO  git_and_bash (command, name) VALUES (''test'', ''test'')','Добавление новой записи в таблицу');
+INSERT INTO "sql" VALUES(2,'SELECT * FROM git_and_bash WHERE command LIKE ''%ls%'' ','Поиск в поле значений по части слова');
+INSERT INTO "sql" VALUES(3,'SELECT * FROM links ORDER BY id DESC','Сортировка всех записей по убыванию');
+INSERT INTO "sql" VALUES(4,'SELECT * FROM links ORDER BY id ASC','Сортировка по возрастанию');
+INSERT INTO "sql" VALUES(5,'DELETE FROM git_and_bash WHERE id = 45','Удаление определенной записи');
+INSERT INTO "sql" VALUES(6,'DELETE FROM [train];','Очистка таблицы');
+INSERT INTO "sql" VALUES(7,'UPDATE [sql] SET [name]=''Сортировка всех записей по убыванию'' WHERE ([sql].[id] = 3);','Изменение значения записи определенного поля');
+INSERT INTO "sql" VALUES(8,'ALTER TABLE [train] ADD [imya] VARCHAR(250) NOT NULL;','Добавление поля в таблицу');
+INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [familia];','Переименование поля таблицы');
 CREATE TABLE [train] ( 
-  [id] INTEGER AUTO_INCREMENT NULL,
-  [train_name] TEXT NOT NULL,
-   PRIMARY KEY ([id])
+  [id] INTEGER PRIMARY KEY AUTOINCREMENT,
+  [familia] TEXT NOT NULL,
+  [imya] VARCHAR(250) NOT NULL,
+  [otchestvo] VARCHAR(250) NOT NULL,
+  [age] INT NOT NULL
 );
+INSERT INTO "train" VALUES(1,'Иванов','Иван','Иванович',50);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',52);
 INSERT INTO "sqlite_sequence" VALUES('git_and_bash',49);
 INSERT INTO "sqlite_sequence" VALUES('links',4);
+INSERT INTO "sqlite_sequence" VALUES('sql',9);
+INSERT INTO "sqlite_sequence" VALUES('train',1);
 COMMIT;
