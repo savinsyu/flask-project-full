@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Тренировочный раздел{% endblock %}
+{% block content %}
+<div class="bd-example">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Название</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for train in trains %}
+      <tr>
+        <th>{{ train['id'] }}</th>
+        <td>{{ train['train_name'] }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

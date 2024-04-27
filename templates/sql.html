@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}SQL команды{% endblock %}
+{% block content %}
+<div class="bd-example">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Команда</th>
+        <th scope="col">Описание</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for sql in sql %}
+      <tr>
+        <th>{{ sql['command'] }}</th>
+        <td>{{ sql['name'] }}</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

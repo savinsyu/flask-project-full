@@ -1,13 +1,9 @@
 from datetime import datetime as dt
-import os
 from flask import Flask, render_template, request, redirect, url_for, flash, make_response
 import sqlite3
-from werkzeug.utils import secure_filename
 from password_generator import generate_password
 
-
 app = Flask(__name__)
-
 
 app.secret_key = "secret key"
 
@@ -73,7 +69,7 @@ def close_db_connection(conn):
 def index():
     conn = get_db_connection()
     last_post = conn.execute("SELECT * FROM posts ORDER BY id DESC").fetchone()
-    return render_template("index.html", last_post = last_post)
+    return render_template("index.html", last_post=last_post)
 
 
 @app.route("/test")
@@ -87,6 +83,7 @@ def git_and_bashes():
     git_and_bashes = conn.execute("SELECT * FROM git_and_bash ORDER BY 2").fetchall()
     conn.close()
     return render_template("git_and_bash.html", git_and_bashes=git_and_bashes)
+
 
 @app.route("/links")
 def links():
@@ -104,12 +101,29 @@ def posts():
     return render_template("posts/posts.html", posts=posts)
 
 
+@app.route("/train")
+def trains():
+    conn = get_db_connection()
+    trains = conn.execute("SELECT * FROM train").fetchall()
+    conn.close()
+    return render_template("train.html", trains=trains)
+
+
+@app.route("/sql")
+def sql():
+    conn = get_db_connection()
+    sql = conn.execute("SELECT * FROM train").fetchall()
+    conn.close()
+    return render_template("train.html", sql=sql)
+
+
 @app.route("/post/<int:post_id>")
 def get_post(post_id):
     conn = get_db_connection()
     post = conn.execute("SELECT id, title, content, image_post FROM posts WHERE id = ?", (post_id,)).fetchone()
     conn.close()
     return render_template("posts/post.html", post=post)
+
 
 @app.route("/<int:id>/edit_post", methods=("GET", "POST"))
 def edit_post(id):

@@ -70,8 +70,19 @@ CREATE TABLE "posts"
 );
 INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На картинке изображена структура SQL-запроса.','sql_query_structure.jpg');
 INSERT INTO "posts" VALUES(50,'Шпаргалка по SQL.','Шпаргалка по SQL.','SQL-help.jpg');
+CREATE TABLE [sql] ( 
+  [id] INTEGER AUTO_INCREMENT NULL,
+  [command] TEXT NOT NULL,
+  [name] TEXT NOT NULL,
+   PRIMARY KEY ([id])
+);
+CREATE TABLE [train] ( 
+  [id] INTEGER AUTO_INCREMENT NULL,
+  [train_name] TEXT NOT NULL,
+   PRIMARY KEY ([id])
+);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',52);
-INSERT INTO "sqlite_sequence" VALUES('git_and_bash',48);
+INSERT INTO "sqlite_sequence" VALUES('git_and_bash',49);
 INSERT INTO "sqlite_sequence" VALUES('links',4);
 COMMIT;
