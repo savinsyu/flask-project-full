@@ -112,9 +112,9 @@ def trains():
 @app.route("/sql")
 def sql():
     conn = get_db_connection()
-    sql = conn.execute("SELECT * FROM train").fetchall()
+    sql = conn.execute("SELECT * FROM sql").fetchall()
     conn.close()
-    return render_template("train.html", sql=sql)
+    return render_template("sql.html", sql=sql)
 
 
 @app.route("/post/<int:post_id>")

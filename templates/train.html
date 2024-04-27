@@ -6,14 +6,20 @@
     <thead>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">Название</th>
+        <th scope="col">Фамилия</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Отчество</th>
+        <th scope="col">Возраст</th>
       </tr>
     </thead>
     <tbody>
     {% for train in trains %}
       <tr>
-        <th>{{ train['id'] }}</th>
-        <td>{{ train['train_name'] }}</td>
+        <td>{{ train['id'] }}</td>
+        <td>{{ train['familia'] }}</td>
+        <td>{{ train['imya'] }}</td>
+        <td>{{ train['otchestvo'] }}</td>
+        <td>{{ train['age'] }}</td>
       </tr>
     {% endfor %}
     </tbody>
