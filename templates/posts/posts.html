@@ -16,12 +16,12 @@
             <th>{{ post['title'] }}</th>
             <td>{{ post['content'] }}</td>
             <td>
-               <a href="{{ url_for('get_post', post_id=post['id']) }}" class="btn btn-primary m-2"><img
+               <a href="{{ url_for('get_post', post_id=post['id']) }}"><img
                      src="/static/icons/eye.png" width="16px"></a>
-               <div class="col"><a href="{{ url_for('edit_post', id=post['id']) }}" class="btn btn-secondary m-2"><img
+               <div class="col"><a href="{{ url_for('edit_post', id=post['id']) }}"><img
                         src="/static/icons/pencil.png"></a>
                   <form action="{{ url_for('delete', id=post['id']) }}" method="POST">
-                     <input type="image" src="/static/icons/trash.png" value="Удалить запись?" class="btn btn-danger m-2"
+                     <input type="image" src="/static/icons/trash.png" value="Удалить запись?"
                         onclick="return confirm('Вы уверены что хотите удалить запись?')">
                   </form>
             </td>
