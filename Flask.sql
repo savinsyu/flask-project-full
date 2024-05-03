@@ -26,6 +26,13 @@ INSERT INTO  git_and_bash (command, name) VALUES
 ('date', 'Вывод текущей даты и времени'),
 ('test1', 'test1');
 
+# Добавление нескольких записей в таблицу
+
+INSERT INTO  pandas (command, name) VALUES 
+('anime = pd.read_csv("anime-recommendations-database/anime.csv")', 'Загрузка CSV-данных'),
+('df.to_csv("saved_ratings.csv", index=False))', 'Экспорт в формат CSV'),
+('anime_copy = anime.copy(deep=True)', 'Копирование датафрейма');
+
 # Поиск в поле значений по части слова
 
 SELECT * FROM git_and_bash WHERE command LIKE '%ls%' 

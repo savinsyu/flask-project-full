@@ -66,6 +66,9 @@ CREATE TABLE pandas (
     command TEXT NOT NULL,
     name TEXT NOT NULL
   );
+INSERT INTO "pandas" VALUES(1,'anime = pd.read_csv("anime-recommendations-database/anime.csv")','Загрузка CSV-данных');
+INSERT INTO "pandas" VALUES(2,'df.to_csv("saved_ratings.csv", index=False))','Экспорт в формат CSV');
+INSERT INTO "pandas" VALUES(3,'anime_copy = anime.copy(deep=True)','Копирование датафрейма');
 CREATE TABLE "posts"
 (
     id         INTEGER
@@ -107,4 +110,5 @@ INSERT INTO "sqlite_sequence" VALUES('git_and_bash',51);
 INSERT INTO "sqlite_sequence" VALUES('links',4);
 INSERT INTO "sqlite_sequence" VALUES('sql',9);
 INSERT INTO "sqlite_sequence" VALUES('train',1);
+INSERT INTO "sqlite_sequence" VALUES('pandas',3);
 COMMIT;
