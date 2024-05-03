@@ -50,6 +50,7 @@ INSERT INTO "git_and_bash" VALUES(43,'git pull','Скачивание изменения из репозит
 INSERT INTO "git_and_bash" VALUES(46,'ls -l','Выводит списокм папки и файлы текущего раздела с датой изменения, размером и правами доступа');
 INSERT INTO "git_and_bash" VALUES(47,'rm *','Удаляет все файлы в ткущей директории');
 INSERT INTO "git_and_bash" VALUES(48,'history -c','Удаляет все команды из истории');
+INSERT INTO "git_and_bash" VALUES(50,'date','Вывод текущей даты и времени');
 CREATE TABLE links (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -60,6 +61,11 @@ INSERT INTO "links" VALUES(2,'Как создать и запустить bat-файлы
 ','https://www.nic.ru/help/kak-sozdat6-i-zapustit6-bat-fajly_11640.html');
 INSERT INTO "links" VALUES(3,'Работа с 7zip из командной строки','https://www.dmosk.ru/miniinstruktions.php?mini=7zip-cmd ');
 INSERT INTO "links" VALUES(4,'Список команд Windows CMD  с описанием и примерами','https://ab57.ru/cmdlist.html');
+CREATE TABLE pandas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    command TEXT NOT NULL,
+    name TEXT NOT NULL
+  );
 CREATE TABLE "posts"
 (
     id         INTEGER
@@ -70,6 +76,9 @@ CREATE TABLE "posts"
 );
 INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На картинке изображена структура SQL-запроса.','sql_query_structure.jpg');
 INSERT INTO "posts" VALUES(50,'Шпаргалка по SQL.','Шпаргалка по SQL.','SQL-help.jpg');
+INSERT INTO "posts" VALUES(53,'Как сделать темную тему в Windows 10?','В поле "Поиск" вводим слово "Тема".
+Нажимаем "Выбор главного цвета" и выбираем в раскрывающемся поле пункт "Тёмный".','no_image.png');
+INSERT INTO "posts" VALUES(54,'Тестовая запись ','Тестовая запись ','no_image.png');
 CREATE TABLE [sql] ( 
   [id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [command] TEXT NOT NULL,
@@ -93,8 +102,8 @@ CREATE TABLE [train] (
 );
 INSERT INTO "train" VALUES(1,'Иванов','Иван','Иванович',50);
 DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('posts',52);
-INSERT INTO "sqlite_sequence" VALUES('git_and_bash',49);
+INSERT INTO "sqlite_sequence" VALUES('posts',54);
+INSERT INTO "sqlite_sequence" VALUES('git_and_bash',51);
 INSERT INTO "sqlite_sequence" VALUES('links',4);
 INSERT INTO "sqlite_sequence" VALUES('sql',9);
 INSERT INTO "sqlite_sequence" VALUES('train',1);

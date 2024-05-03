@@ -20,6 +20,7 @@ indent_mode=2
 [project]
 name=flask_project
 base_path=P:\\s.savin\\flask_project
+description=
 
 [long line marker]
 long_line_behaviour=1
@@ -27,3 +28,4 @@ long_line_column=72
 
 [files]
 current_page=0
+FILE_NAME_0=608;HTML;0;EUTF-8;1;1;0;P%3A%5Cs.savin%5Cflask_project%5Ctemplates%5Cgit_and_bash.html;0;4

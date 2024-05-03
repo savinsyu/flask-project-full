@@ -85,6 +85,14 @@ def git_and_bashes():
     return render_template("git_and_bash.html", git_and_bashes=git_and_bashes)
 
 
+@app.route("/pandas")
+def pandas_commands():
+    conn = get_db_connection()
+    pandas_commands = conn.execute("SELECT * FROM pandas ORDER BY 2").fetchall()
+    conn.close()
+    return render_template("pandas.html", pandas_commands=pandas_commands)
+
+
 @app.route("/links")
 def links():
     conn = get_db_connection()

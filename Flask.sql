@@ -6,10 +6,25 @@ CREATE TABLE
     command TEXT NOT NULL,
     name TEXT NOT NULL
   )
+  
+  # Создание таблицы
+
+CREATE TABLE
+  IF NOT EXISTS pandas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    command TEXT NOT NULL,
+    name TEXT NOT NULL
+  );
 
 # Добавление записей в таблицу
 
-INSERT INTO  git_and_bash (command, name) VALUES ('test', 'test')
+INSERT INTO  git_and_bash (command, name) VALUES ('date', 'Вывод текущей даты и времени')
+
+# Добавление нескольких записей в таблицу
+
+INSERT INTO  git_and_bash (command, name) VALUES 
+('date', 'Вывод текущей даты и времени'),
+('test1', 'test1');
 
 # Поиск в поле значений по части слова
 
@@ -25,7 +40,7 @@ SELECT * FROM links ORDER BY id ASC
 
 # Удаление определенной записи
 
-DELETE FROM git_and_bash WHERE id = 45
+DELETE FROM git_and_bash WHERE id = 51;
 
 # Очистка таблицы
 
