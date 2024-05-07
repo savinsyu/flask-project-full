@@ -69,6 +69,23 @@ CREATE TABLE pandas (
 INSERT INTO "pandas" VALUES(1,'anime = pd.read_csv("anime-recommendations-database/anime.csv")','Загрузка CSV-данных');
 INSERT INTO "pandas" VALUES(2,'df.to_csv("saved_ratings.csv", index=False))','Экспорт в формат CSV');
 INSERT INTO "pandas" VALUES(3,'anime_copy = anime.copy(deep=True)','Копирование датафрейма');
+INSERT INTO "pandas" VALUES(4,'len(df)','Подсчёт количества строк в датафрейме');
+INSERT INTO "pandas" VALUES(5,'len(ratings["user_id"].unique())','Подсчёт количества уникальных значений в столбце');
+INSERT INTO "pandas" VALUES(6,'anime.describe()','Вывод статистических сведений о датафрейме');
+INSERT INTO "pandas" VALUES(7,'anime.type.value_counts()','Для того чтобы подсчитать количество значений в конкретном столбце, можно воспользоваться следующей конструкцие.');
+INSERT INTO "pandas" VALUES(8,'anime.columns.tolist()','Получение списка значений столбцов');
+INSERT INTO "pandas" VALUES(9,'anime["genre"].tolist()','Создание списка или объекта Series на основе значений столбца');
+INSERT INTO "pandas" VALUES(10,'anime["train set"] = True','Присоединение к датафрейму нового столбца с заданным значением');
+INSERT INTO "pandas" VALUES(11,'anime[["name","episodes"]]','Создание нового датафрейма из подмножества столбцов');
+INSERT INTO "pandas" VALUES(12,'anime.drop(["anime_id", "genre", "members"], axis=1).head()','Удаление заданных столбцов');
+INSERT INTO "pandas" VALUES(13,'anime_modified.iloc[0:3]','Получение строк по числовым индексам');
+INSERT INTO "pandas" VALUES(14,'anime[anime["type"].isin(["TV", "Movie"])]','Для получения строк датафрейма в ситуации, когда имеется список значений столбцов, можно воспользоваться следующей командой');
+INSERT INTO "pandas" VALUES(15,'anime[anime["rating"] > 8]','Фильтрация по значению');
+INSERT INTO "pandas" VALUES(16,'anime.sort_values("rating", ascending=False)','Сортировка');
+INSERT INTO "pandas" VALUES(17,'anime.groupby("type").count()','Функция df.groupby и подсчёт количества записей');
+INSERT INTO "pandas" VALUES(18,'anime_modified.loc[["Haikyuu!! Second Season","Gintama"]]','Получение строк с нужными индексными значениями');
+INSERT INTO "pandas" VALUES(19,'rating.merge(anime, left_on=’anime_id’, right_on=’anime_id’, suffixes=(‘_left’, ‘_right’))','Слияние датафреймов');
+INSERT INTO "pandas" VALUES(20,'anime.info()','Получение сведений о датафрейм');
 CREATE TABLE "posts"
 (
     id         INTEGER
@@ -110,5 +127,5 @@ INSERT INTO "sqlite_sequence" VALUES('git_and_bash',51);
 INSERT INTO "sqlite_sequence" VALUES('links',4);
 INSERT INTO "sqlite_sequence" VALUES('sql',9);
 INSERT INTO "sqlite_sequence" VALUES('train',1);
-INSERT INTO "sqlite_sequence" VALUES('pandas',3);
+INSERT INTO "sqlite_sequence" VALUES('pandas',20);
 COMMIT;
