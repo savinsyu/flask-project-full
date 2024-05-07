@@ -1,5 +1,5 @@
 #!/bin/bash
-git add .  
-git commit -a
+set text= "Reserve Copy: %date%   %time% "
+git add . 
+git commit -m %text% 
 git push 
-echo "Коммит отправлен"
