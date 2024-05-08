@@ -61,6 +61,7 @@ INSERT INTO "links" VALUES(2,'Как создать и запустить bat-файлы
 ','https://www.nic.ru/help/kak-sozdat6-i-zapustit6-bat-fajly_11640.html');
 INSERT INTO "links" VALUES(3,'Работа с 7zip из командной строки','https://www.dmosk.ru/miniinstruktions.php?mini=7zip-cmd ');
 INSERT INTO "links" VALUES(4,'Список команд Windows CMD  с описанием и примерами','https://ab57.ru/cmdlist.html');
+INSERT INTO "links" VALUES(5,'Интересный материал про bash','https://linuxsimply.com/bash-scripting-tutorial/basics/');
 CREATE TABLE pandas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     command TEXT NOT NULL,
@@ -124,7 +125,7 @@ INSERT INTO "train" VALUES(1,'Иванов','Иван','Иванович',50);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',54);
 INSERT INTO "sqlite_sequence" VALUES('git_and_bash',51);
-INSERT INTO "sqlite_sequence" VALUES('links',4);
+INSERT INTO "sqlite_sequence" VALUES('links',14);
 INSERT INTO "sqlite_sequence" VALUES('sql',9);
 INSERT INTO "sqlite_sequence" VALUES('train',1);
 INSERT INTO "sqlite_sequence" VALUES('pandas',20);

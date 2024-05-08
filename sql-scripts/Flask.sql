@@ -29,21 +29,38 @@ INSERT INTO  git_and_bash (command, name) VALUES
 # Добавление нескольких записей в таблицу
 
 INSERT INTO  pandas (command, name) VALUES 
-('anime = pd.read_csv("anime-recommendations-database/anime.csv")', 'Загрузка CSV-данных'),
-('df.to_csv("saved_ratings.csv", index=False))', 'Экспорт в формат CSV'),
-('anime_copy = anime.copy(deep=True)', 'Копирование датафрейма');
+('len(df)', 'Подсчёт количества строк в датафрейме'),
+('len(ratings["user_id"].unique())', 'Подсчёт количества уникальных значений в столбце'),
+('anime.describe()', 'Вывод статистических сведений о датафрейме'),
+('anime.type.value_counts()', 'Для того чтобы подсчитать количество значений в конкретном столбце, можно воспользоваться следующей конструкцие.'),
+('anime.columns.tolist()', 'Получение списка значений столбцов'),
+('anime["genre"].tolist()', 'Создание списка или объекта Series на основе значений столбца'),
+('anime["train set"] = True', 'Присоединение к датафрейму нового столбца с заданным значением'),
+('anime[["name","episodes"]]', 'Создание нового датафрейма из подмножества столбцов'),
+('anime.drop(["anime_id", "genre", "members"], axis=1).head()', 'Удаление заданных столбцов'),
+('anime_modified.iloc[0:3]', 'Получение строк по числовым индексам'),
+('anime[anime["type"].isin(["TV", "Movie"])]', 'Для получения строк датафрейма в ситуации, когда имеется список значений столбцов, можно воспользоваться следующей командой'),
+('anime[anime["rating"] > 8]', 'Фильтрация по значению'),
+('anime.sort_values("rating", ascending=False)', 'Сортировка'),
+('anime.groupby("type").count()', 'Функция df.groupby и подсчёт количества записей'),
+('anime_modified.loc[["Haikyuu!! Second Season","Gintama"]]', 'Получение строк с нужными индексными значениями'),
+('rating.merge(anime, left_on=’anime_id’, right_on=’anime_id’, suffixes=(‘_left’, ‘_right’))', 'Слияние датафреймов'),
+('anime.info()', 'Получение сведений о датафрейм');
+
+SELECT * FROM pandas;
+SELECT * FROM git_and_bash;
 
 # Поиск в поле значений по части слова
 
-SELECT * FROM git_and_bash WHERE command LIKE '%ls%' 
+SELECT * FROM git_and_bash WHERE command LIKE '%ls%';
 
 # Сортировка по убыванию
 
-SELECT * FROM links ORDER BY id DESC
+SELECT * FROM links ORDER BY id DESC;
 
 # Сортировка по возрастанию
 
-SELECT * FROM links ORDER BY id ASC
+SELECT * FROM links ORDER BY id ASC;
 
 # Удаление определенной записи
 
