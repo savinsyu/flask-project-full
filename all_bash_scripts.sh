@@ -16,3 +16,9 @@ set text= "Reserve Copy: %date%   %time% "
 git add .
 git commit -m %text%
 git push
+
+# Копируем файл ноутбука в папку проекта
+cp ~/jupyter/jupyter.ipynb /p/s.savin/flask_project/ && echo "Файл скопирован!"
+
+# Копируем конфигурацию
+cp -r ~/dbeaver-ce-24.0.4-win32.win32.x86_64/dbeaver/bases* /p/s.savin/Work/
