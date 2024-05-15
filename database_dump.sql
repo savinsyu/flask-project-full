@@ -51,6 +51,8 @@ INSERT INTO "git_and_bash" VALUES(46,'ls -l','Выводит списокм папки и файлы теку
 INSERT INTO "git_and_bash" VALUES(47,'rm *','Удаляет все файлы в ткущей директории');
 INSERT INTO "git_and_bash" VALUES(48,'history -c','Удаляет все команды из истории');
 INSERT INTO "git_and_bash" VALUES(50,'date','Вывод текущей даты и времени');
+INSERT INTO "git_and_bash" VALUES(52,'mkdir test1 test2','Создаем две папки в текущем каталоге');
+INSERT INTO "git_and_bash" VALUES(53,'rm -R *','Удаление всех папок текущей директории');
 CREATE TABLE links (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -99,7 +101,6 @@ INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На картинке изображена ст
 INSERT INTO "posts" VALUES(50,'Шпаргалка по SQL.','Шпаргалка по SQL.','SQL-help.jpg');
 INSERT INTO "posts" VALUES(53,'Как сделать темную тему в Windows 10?','В поле "Поиск" вводим слово "Тема".
 Нажимаем "Выбор главного цвета" и выбираем в раскрывающемся поле пункт "Тёмный".','no_image.png');
-INSERT INTO "posts" VALUES(54,'Тестовая запись ','Тестовая запись ','no_image.png');
 CREATE TABLE [sql] ( 
   [id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [command] TEXT NOT NULL,
@@ -124,7 +125,7 @@ CREATE TABLE [train] (
 INSERT INTO "train" VALUES(1,'Иванов','Иван','Иванович',50);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',54);
-INSERT INTO "sqlite_sequence" VALUES('git_and_bash',51);
+INSERT INTO "sqlite_sequence" VALUES('git_and_bash',53);
 INSERT INTO "sqlite_sequence" VALUES('links',14);
 INSERT INTO "sqlite_sequence" VALUES('sql',9);
 INSERT INTO "sqlite_sequence" VALUES('train',1);
