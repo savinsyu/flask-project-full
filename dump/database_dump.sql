@@ -64,31 +64,36 @@ INSERT INTO "links" VALUES(2,'Как создать и запустить bat-файлы
 INSERT INTO "links" VALUES(3,'Работа с 7zip из командной строки','https://www.dmosk.ru/miniinstruktions.php?mini=7zip-cmd ');
 INSERT INTO "links" VALUES(4,'Список команд Windows CMD  с описанием и примерами','https://ab57.ru/cmdlist.html');
 INSERT INTO "links" VALUES(5,'Интересный материал про bash','https://linuxsimply.com/bash-scripting-tutorial/basics/');
+INSERT INTO "links" VALUES(15,'Горячие клавиши Bash','https://selectel.ru/blog/tutorials/linux-terminal-hotkeys/');
 CREATE TABLE pandas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     command TEXT NOT NULL,
     name TEXT NOT NULL
   );
-INSERT INTO "pandas" VALUES(1,'anime = pd.read_csv("anime-recommendations-database/anime.csv")','Загрузка CSV-данных');
+INSERT INTO "pandas" VALUES(1,'data = pd.read_csv("data.csv")','Загрузка CSV-данных');
 INSERT INTO "pandas" VALUES(2,'df.to_csv("saved_ratings.csv", index=False))','Экспорт в формат CSV');
-INSERT INTO "pandas" VALUES(3,'anime_copy = anime.copy(deep=True)','Копирование датафрейма');
-INSERT INTO "pandas" VALUES(4,'len(df)','Подсчёт количества строк в датафрейме');
-INSERT INTO "pandas" VALUES(5,'len(ratings["user_id"].unique())','Подсчёт количества уникальных значений в столбце');
-INSERT INTO "pandas" VALUES(6,'anime.describe()','Вывод статистических сведений о датафрейме');
-INSERT INTO "pandas" VALUES(7,'anime.type.value_counts()','Для того чтобы подсчитать количество значений в конкретном столбце, можно воспользоваться следующей конструкцие.');
-INSERT INTO "pandas" VALUES(8,'anime.columns.tolist()','Получение списка значений столбцов');
-INSERT INTO "pandas" VALUES(9,'anime["genre"].tolist()','Создание списка или объекта Series на основе значений столбца');
-INSERT INTO "pandas" VALUES(10,'anime["train set"] = True','Присоединение к датафрейму нового столбца с заданным значением');
-INSERT INTO "pandas" VALUES(11,'anime[["name","episodes"]]','Создание нового датафрейма из подмножества столбцов');
-INSERT INTO "pandas" VALUES(12,'anime.drop(["anime_id", "genre", "members"], axis=1).head()','Удаление заданных столбцов');
-INSERT INTO "pandas" VALUES(13,'anime_modified.iloc[0:3]','Получение строк по числовым индексам');
-INSERT INTO "pandas" VALUES(14,'anime[anime["type"].isin(["TV", "Movie"])]','Для получения строк датафрейма в ситуации, когда имеется список значений столбцов, можно воспользоваться следующей командой');
-INSERT INTO "pandas" VALUES(15,'anime[anime["rating"] > 8]','Фильтрация по значению');
-INSERT INTO "pandas" VALUES(16,'anime.sort_values("rating", ascending=False)','Сортировка');
-INSERT INTO "pandas" VALUES(17,'anime.groupby("type").count()','Функция df.groupby и подсчёт количества записей');
-INSERT INTO "pandas" VALUES(18,'anime_modified.loc[["Haikyuu!! Second Season","Gintama"]]','Получение строк с нужными индексными значениями');
-INSERT INTO "pandas" VALUES(19,'rating.merge(anime, left_on=’anime_id’, right_on=’anime_id’, suffixes=(‘_left’, ‘_right’))','Слияние датафреймов');
-INSERT INTO "pandas" VALUES(20,'anime.info()','Получение сведений о датафрейм');
+INSERT INTO "pandas" VALUES(3,'data_copy = data.copy(deep=True)','Копирование датафрейма');
+INSERT INTO "pandas" VALUES(4,'len(data)','Подсчёт количества строк в датафрейме');
+INSERT INTO "pandas" VALUES(5,'len(data["user_id"].unique())','Подсчёт количества уникальных значений в столбце');
+INSERT INTO "pandas" VALUES(6,'data.describe()','Вывод статистических сведений о датафрейме');
+INSERT INTO "pandas" VALUES(7,'data.type.value_counts()','Для того чтобы подсчитать количество значений в конкретном столбце, можно воспользоваться следующей конструкцие.');
+INSERT INTO "pandas" VALUES(8,'data.columns.tolist()','Получение списка значений столбцов');
+INSERT INTO "pandas" VALUES(9,'data["genre"].tolist()','Создание списка или объекта Series на основе значений столбца');
+INSERT INTO "pandas" VALUES(10,'data["train set"] = True','Присоединение к датафрейму нового столбца с заданным значением');
+INSERT INTO "pandas" VALUES(11,'data[["name","episodes"]]','Создание нового датафрейма из подмножества столбцов');
+INSERT INTO "pandas" VALUES(12,'data.drop(["density"], axis="columns")','Удаление столбца');
+INSERT INTO "pandas" VALUES(13,'data_modified.iloc[0:3]','Получение строк по числовым индексам');
+INSERT INTO "pandas" VALUES(14,'data[data["type"].isin(["TV", "Movie"])]','Для получения строк датафрейма в ситуации, когда имеется список значений столбцов, можно воспользоваться следующей командой');
+INSERT INTO "pandas" VALUES(15,'data[data["rating"] > 8]','Фильтрация по значению');
+INSERT INTO "pandas" VALUES(16,'data.sort_values("rating", ascending=False)','Сортировка');
+INSERT INTO "pandas" VALUES(17,'data.groupby("type").count()','Функция df.groupby и подсчёт количества записей');
+INSERT INTO "pandas" VALUES(18,'data_modified.loc[["Haikyuu!! Second Season","Gintama"]]','Получение строк с нужными индексными значениями');
+INSERT INTO "pandas" VALUES(19,'rating.merge(data, left_on=’data_id’, right_on=’data_id’, suffixes=(‘_left’, ‘_right’))','Слияние датафреймов');
+INSERT INTO "pandas" VALUES(20,'data.info()','Получение сведений о датафрейм');
+INSERT INTO "pandas" VALUES(21,'data.head()','Вывести первые пять строк датасета');
+INSERT INTO "pandas" VALUES(22,'data.drop(["density","members"], axis="columns")','Удаление нескольких столбцов');
+INSERT INTO "pandas" VALUES(23,'data = data.rename(columns={"Country Code": "country_code"})','Переименование столбца');
+INSERT INTO "pandas" VALUES(24,'data.shape','Вывести количество строк и столбцов датасета');
 CREATE TABLE "posts"
 (
     id         INTEGER
@@ -115,19 +120,11 @@ INSERT INTO "sql" VALUES(6,'DELETE FROM [train];','Очистка таблицы');
 INSERT INTO "sql" VALUES(7,'UPDATE [sql] SET [name]=''Сортировка всех записей по убыванию'' WHERE ([sql].[id] = 3);','Изменение значения записи определенного поля');
 INSERT INTO "sql" VALUES(8,'ALTER TABLE [train] ADD [imya] VARCHAR(250) NOT NULL;','Добавление поля в таблицу');
 INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [familia];','Переименование поля таблицы');
-CREATE TABLE [train] ( 
-  [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-  [familia] TEXT NOT NULL,
-  [imya] VARCHAR(250) NOT NULL,
-  [otchestvo] VARCHAR(250) NOT NULL,
-  [age] INT NOT NULL
-);
-INSERT INTO "train" VALUES(1,'Иванов','Иван','Иванович',50);
+INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',54);
 INSERT INTO "sqlite_sequence" VALUES('git_and_bash',53);
-INSERT INTO "sqlite_sequence" VALUES('links',14);
-INSERT INTO "sqlite_sequence" VALUES('sql',9);
-INSERT INTO "sqlite_sequence" VALUES('train',1);
-INSERT INTO "sqlite_sequence" VALUES('pandas',20);
+INSERT INTO "sqlite_sequence" VALUES('links',15);
+INSERT INTO "sqlite_sequence" VALUES('sql',10);
+INSERT INTO "sqlite_sequence" VALUES('pandas',24);
 COMMIT;

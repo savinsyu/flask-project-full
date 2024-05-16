@@ -80,7 +80,7 @@ def test():
 @app.route("/git_and_bash")
 def git_and_bashes():
     conn = get_db_connection()
-    git_and_bashes = conn.execute("SELECT * FROM git_and_bash ORDER BY 2").fetchall()
+    git_and_bashes = conn.execute("SELECT * FROM git_and_bash").fetchall()
     conn.close()
     return render_template("git_and_bash.html", git_and_bashes=git_and_bashes)
 
@@ -88,7 +88,7 @@ def git_and_bashes():
 @app.route("/pandas")
 def pandas_commands():
     conn = get_db_connection()
-    pandas_commands = conn.execute("SELECT * FROM pandas ORDER BY 2").fetchall()
+    pandas_commands = conn.execute("SELECT command, name FROM pandas").fetchall()
     conn.close()
     return render_template("pandas.html", pandas_commands=pandas_commands)
 
@@ -107,14 +107,6 @@ def posts():
     posts = conn.execute("SELECT * FROM posts").fetchall()
     conn.close()
     return render_template("posts/posts.html", posts=posts)
-
-
-@app.route("/train")
-def trains():
-    conn = get_db_connection()
-    trains = conn.execute("SELECT * FROM train").fetchall()
-    conn.close()
-    return render_template("train.html", trains=trains)
 
 
 @app.route("/sql")

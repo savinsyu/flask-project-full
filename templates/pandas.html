@@ -4,8 +4,7 @@
 <div class="bd-example">
   <table class="table">
     <thead>
-      <tr>		
-		<th scope="col">ID</th>
+      <tr>
         <th scope="col">Команда</th>
         <th scope="col">Описание</th>
       </tr>
@@ -13,7 +12,6 @@
     <tbody>
     {% for pandas_commands in pandas_commands %}
       <tr>
-		<td>{{ pandas_commands['id'] }}</td>
         <td>{{ pandas_commands['command'] }}</td>
         <td>{{ pandas_commands['name'] }}</td>
       </tr>
