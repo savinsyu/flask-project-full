@@ -65,6 +65,7 @@ INSERT INTO "links" VALUES(3,'Работа с 7zip из командной строки','https://www.dm
 INSERT INTO "links" VALUES(4,'Список команд Windows CMD  с описанием и примерами','https://ab57.ru/cmdlist.html');
 INSERT INTO "links" VALUES(5,'Интересный материал про bash','https://linuxsimply.com/bash-scripting-tutorial/basics/');
 INSERT INTO "links" VALUES(15,'Горячие клавиши Bash','https://selectel.ru/blog/tutorials/linux-terminal-hotkeys/');
+INSERT INTO "links" VALUES(16,'Красивый python','https://sky.pro/media/pep8/');
 CREATE TABLE pandas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     command TEXT NOT NULL,
@@ -94,6 +95,8 @@ INSERT INTO "pandas" VALUES(21,'data.head()','Вывести первые пять строк датасета
 INSERT INTO "pandas" VALUES(22,'data.drop(["density","members"], axis="columns")','Удаление нескольких столбцов');
 INSERT INTO "pandas" VALUES(23,'data = data.rename(columns={"Country Code": "country_code"})','Переименование столбца');
 INSERT INTO "pandas" VALUES(24,'data.shape','Вывести количество строк и столбцов датасета');
+INSERT INTO "pandas" VALUES(25,'data.max()','Получим максимальные значения в каждом столбце');
+INSERT INTO "pandas" VALUES(26,'data_convert = data.astype("int16")','Изменение типа столбца');
 CREATE TABLE "posts"
 (
     id         INTEGER
@@ -124,7 +127,7 @@ INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных')
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',54);
 INSERT INTO "sqlite_sequence" VALUES('git_and_bash',53);
-INSERT INTO "sqlite_sequence" VALUES('links',15);
+INSERT INTO "sqlite_sequence" VALUES('links',16);
 INSERT INTO "sqlite_sequence" VALUES('sql',10);
-INSERT INTO "sqlite_sequence" VALUES('pandas',24);
+INSERT INTO "sqlite_sequence" VALUES('pandas',26);
 COMMIT;
