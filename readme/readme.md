@@ -179,3 +179,47 @@ http://127.0.0.1:81
 Specifies the port in this line of the application file:
 if name == "main":
 app.run(debug=True, host='0.0.0.0', port=81)
+
+# Bash scripts
+Below described scripts are given as an example, it is necessary to take into account the placement of catalogs in the system
+## Creating a database dump
+```
+venv/scripts/python.exe dump.py
+```
+
+## Copy sql scripts to the sql-scripts folder from the dbeaver workspace
+```
+cp ~/dbeaver-ce-24.0.4-win32.win32.x86_64/dbeaver/bases/work/Scripts/Flask.sql /p/s.savin/flask_project/sql-scripts
+```
+
+## Launch the application
+```
+venv/scripts/python.exe app.py
+```
+
+## The app opens in the default browser
+```
+venv/scripts/python.exe -m webbrowser http://127.0.0.1:82
+```
+
+## Creating and sending a commit
+```
+set text= "Reserve Copy: %date%   %time% "
+git add .
+git commit -m %text%
+git push
+```
+
+## Copy the DBeaver configuration
+```
+cp -r ~/dbeaver-ce-24.0.4-win32.win32.x86_64/dbeaver/bases* /p/s.savin/Work/
+```
+
+## Running two bash scripts in sequence
+```
+./dump_database.sh && ./commit.sh
+```
+
+
+
+
