@@ -130,7 +130,7 @@ INSERT INTO "sql" VALUES(8,'ALTER TABLE [train] ADD [imya] VARCHAR(250) NOT NULL
 INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [familia];','Переименование поля таблицы');
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных');
 DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('posts',55);
+INSERT INTO "sqlite_sequence" VALUES('posts',57);
 INSERT INTO "sqlite_sequence" VALUES('git_and_bash',53);
 INSERT INTO "sqlite_sequence" VALUES('links',16);
 INSERT INTO "sqlite_sequence" VALUES('sql',10);
