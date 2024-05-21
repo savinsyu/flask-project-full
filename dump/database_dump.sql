@@ -109,6 +109,11 @@ INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На картинке изображена ст
 INSERT INTO "posts" VALUES(50,'Шпаргалка по SQL.','Шпаргалка по SQL.','SQL-help.jpg');
 INSERT INTO "posts" VALUES(53,'Как сделать темную тему в Windows 10?','В поле "Поиск" вводим слово "Тема".
 Нажимаем "Выбор главного цвета" и выбираем в раскрывающемся поле пункт "Тёмный".','no_image.png');
+INSERT INTO "posts" VALUES(55,'Создание и активация виртуального окружения python','Создаем виртуальное окружение командой:
+python -m venv venv
+После чего нужно сделать активацию окружения командой:
+venv\Scripts\activate.bat
+','no_image.png');
 CREATE TABLE [sql] ( 
   [id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [command] TEXT NOT NULL,
@@ -125,7 +130,7 @@ INSERT INTO "sql" VALUES(8,'ALTER TABLE [train] ADD [imya] VARCHAR(250) NOT NULL
 INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [familia];','Переименование поля таблицы');
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных');
 DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('posts',54);
+INSERT INTO "sqlite_sequence" VALUES('posts',55);
 INSERT INTO "sqlite_sequence" VALUES('git_and_bash',53);
 INSERT INTO "sqlite_sequence" VALUES('links',16);
 INSERT INTO "sqlite_sequence" VALUES('sql',10);
