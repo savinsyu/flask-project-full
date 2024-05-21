@@ -66,6 +66,7 @@ INSERT INTO "links" VALUES(4,'Список команд Windows CMD  с описанием и примерами
 INSERT INTO "links" VALUES(5,'Интересный материал про bash','https://linuxsimply.com/bash-scripting-tutorial/basics/');
 INSERT INTO "links" VALUES(15,'Горячие клавиши Bash','https://selectel.ru/blog/tutorials/linux-terminal-hotkeys/');
 INSERT INTO "links" VALUES(16,'Красивый python','https://sky.pro/media/pep8/');
+INSERT INTO "links" VALUES(17,'Работа с gitignore','https://wiki.merionet.ru/articles/fajl-gitignore-kak-ignorirovat-fajly-i-papki-v-git');
 CREATE TABLE pandas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     command TEXT NOT NULL,
@@ -114,6 +115,7 @@ python -m venv venv
 После чего нужно сделать активацию окружения командой:
 venv\Scripts\activate.bat
 ','no_image.png');
+INSERT INTO "posts" VALUES(56,'dgfdfgdgdgdgdkhjkjh','dgfdfgdgdgdgdhjkjhk','no_image.png');
 CREATE TABLE [sql] ( 
   [id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [command] TEXT NOT NULL,
@@ -130,9 +132,9 @@ INSERT INTO "sql" VALUES(8,'ALTER TABLE [train] ADD [imya] VARCHAR(250) NOT NULL
 INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [familia];','Переименование поля таблицы');
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных');
 DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('posts',55);
+INSERT INTO "sqlite_sequence" VALUES('posts',56);
 INSERT INTO "sqlite_sequence" VALUES('git_and_bash',53);
-INSERT INTO "sqlite_sequence" VALUES('links',16);
+INSERT INTO "sqlite_sequence" VALUES('links',17);
 INSERT INTO "sqlite_sequence" VALUES('sql',10);
 INSERT INTO "sqlite_sequence" VALUES('pandas',26);
 COMMIT;

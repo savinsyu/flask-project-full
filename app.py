@@ -127,6 +127,8 @@ def get_post(post_id):
 
 @app.route("/<int:id>/edit_post", methods=("GET", "POST"))
 def edit_post(id):
+    conn = get_db_connection()
+    post_view = conn.execute("SELECT id, title, content FROM posts WHERE id = ?", (id,)).fetchone()
     if request.method == "POST":
         title_edit = request.form["title"]
         content_edit = request.form["content"]
@@ -139,22 +141,14 @@ def edit_post(id):
             conn.commit()
             conn.close()
             if not title_edit:
-                flash('Ошибка сохранения записи!', category='error')
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
             else:
                 flash('Запись успешно сохранена!', category='success')
+
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("posts/edit_post.html")
-
-
-@app.route("/<int:id>/delete", methods=("POST",))
-def delete(id):
-    conn = get_db_connection()
-    conn.execute("DELETE FROM posts WHERE id = ?", (id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for("posts"))
+    return render_template("posts/edit_post.html", post_view=post_view)
 
 
 @app.route("/new", methods=["GET", "POST"])
@@ -180,7 +174,14 @@ def new_post():
     return render_template("posts/add_post.html")
 
 
+@app.route("/<int:id>/delete", methods=("POST",))
+def delete(id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM posts WHERE id = ?", (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("posts"))
+
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=82)
-
-print('App start!')
