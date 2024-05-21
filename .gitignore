@@ -1,6 +1,3 @@
-/venv
+venv/
 ._pycache_
-.db
 .idea
-.csv
-.sql
