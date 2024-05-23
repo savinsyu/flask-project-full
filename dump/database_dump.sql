@@ -53,6 +53,7 @@ INSERT INTO "git_and_bash" VALUES(48,'history -c','Удаляет все команды из истори
 INSERT INTO "git_and_bash" VALUES(50,'date','Вывод текущей даты и времени');
 INSERT INTO "git_and_bash" VALUES(52,'mkdir test1 test2','Создаем две папки в текущем каталоге');
 INSERT INTO "git_and_bash" VALUES(53,'rm -R *','Удаление всех папок текущей директории');
+INSERT INTO "git_and_bash" VALUES(54,' ~/AppData/Local/Programs/Python/Python312/python.exe venv/Scripts/pip.exe install flask-paginate','Установки нужной библиотеки');
 CREATE TABLE links (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -115,7 +116,6 @@ python -m venv venv
 После чего нужно сделать активацию окружения командой:
 venv\Scripts\activate.bat
 ','no_image.png');
-INSERT INTO "posts" VALUES(56,'dgfdfgdgdgdgdkhjkjh','dgfdfgdgdgdgdhjkjhk','no_image.png');
 CREATE TABLE [sql] ( 
   [id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [command] TEXT NOT NULL,
@@ -133,7 +133,7 @@ INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [f
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',56);
-INSERT INTO "sqlite_sequence" VALUES('git_and_bash',53);
+INSERT INTO "sqlite_sequence" VALUES('git_and_bash',54);
 INSERT INTO "sqlite_sequence" VALUES('links',17);
 INSERT INTO "sqlite_sequence" VALUES('sql',10);
 INSERT INTO "sqlite_sequence" VALUES('pandas',26);
