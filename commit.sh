@@ -1,4 +1,5 @@
 #!/bin/bash
-TEXT="%date%"
+DATE=$(date)
+TEXT="Add commit date: $DATE"
 git add .
-git commit -m "%TEXT%"
+git commit -m "$TEXT"
