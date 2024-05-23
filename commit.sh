@@ -1,5 +1,5 @@
 #!/bin/bash
-TEXT="Reserve Copy: %date% %time%"
+TEXT=date
 git add . 
 git commit -m %TEXT%
 git push 
