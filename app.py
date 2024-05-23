@@ -1,9 +1,16 @@
-from datetime import datetime as dt
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response
-import sqlite3
-from password_generator import generate_password
+try:
+    import sqlite3
+    from datetime import datetime as dt
+    from datetime import datetime as dt
+    from flask import Flask, render_template, request, redirect, url_for, flash, make_response
+    from password_generator import generate_password
+    print('Все библиотеки установлены.')
+except ModuleNotFoundError:
+    print('Некоторые библиотеки не установлены.')
+
 
 app = Flask(__name__)
+
 
 app.secret_key = "secret key"
 
@@ -79,10 +86,12 @@ def test():
 
 @app.route("/git_and_bash")
 def git_and_bashes():
-    conn = get_db_connection()
+    conn = get_db_connection() 
     git_and_bashes = conn.execute("SELECT * FROM git_and_bash").fetchall()
     conn.close()
-    return render_template("git_and_bash.html", git_and_bashes=git_and_bashes)
+   
+    return render_template("git_and_bash.html", 
+                           git_and_bashes=git_and_bashes,)
 
 
 @app.route("/pandas")
