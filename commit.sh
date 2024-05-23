@@ -1,4 +1,4 @@
 #!/bin/bash
 TEXT="%date%"
 git add .
-git commit -m %TEXT%
+git commit -m "%TEXT%"
