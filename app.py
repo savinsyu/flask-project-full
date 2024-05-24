@@ -84,14 +84,24 @@ def test():
     return render_template("test.html")
 
 
-@app.route("/git_and_bash")
-def git_and_bashes():
+@app.route("/git")
+def git():
     conn = get_db_connection() 
-    git_and_bashes = conn.execute("SELECT * FROM git_and_bash").fetchall()
+    git = conn.execute("SELECT * FROM git").fetchall()
     conn.close()
    
-    return render_template("git_and_bash.html", 
-                           git_and_bashes=git_and_bashes,)
+    return render_template("git.html",
+                           git=git,)
+
+
+@app.route("/bash")
+def bash():
+    conn = get_db_connection()
+    bash = conn.execute("SELECT * FROM bash").fetchall()
+    conn.close()
+
+    return render_template("bash.html",
+                           bash=bash,)
 
 
 @app.route("/pandas")
