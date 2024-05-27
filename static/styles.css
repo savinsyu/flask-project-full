@@ -31,3 +31,7 @@ a:hover {
     border-radius: 10px;
     border: solid #dee2e6 1px;
 }
+
+.list-group-item:hover {
+    background-color: rgb(154, 136, 127);
+}

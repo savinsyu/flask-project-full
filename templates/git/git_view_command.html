@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Страница записи{% endblock %}
+{% block content %}
+<div class="bd-example">
+   <h2 class="pb-2">{{ git_view.title }}</h2>
+   <p>{{ git_view['git_command'] }}</p>
+    <ul class="list-group list-group-horizontal">
+        <li class="list-group-item"><a href="{{ url_for('git_list_commands') }}"><img src="/static/icons/list.png"></a></li>
+        <li class="list-group-item"><a href="{{ url_for('edit_git_command', git_id=git_view['git_id']) }}"><img src="/static/icons/pencil.png"></a></li>
+        <li class="list-group-item"> <form action="{{ url_for('delete_git_command', git_id=git_view['git_id'])}}" method="POST">
+         <input type="image" src="/static/icons/trash.png" value="Удалить запись?"
+            onclick="return confirm('Вы уверены что хотите удалить запись?')">
+      </form></li>
+    </ul>
+   </div>
+</div>
+{% endblock %}

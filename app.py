@@ -85,13 +85,79 @@ def test():
 
 
 @app.route("/git")
-def git():
+def git_list_commands():
     conn = get_db_connection() 
-    git = conn.execute("SELECT * FROM git").fetchall()
+    git_list = conn.execute("SELECT * FROM git").fetchall()
     conn.close()
-   
-    return render_template("git.html",
-                           git=git,)
+    return render_template("git/git_list_commands.html",
+                           git_list=git_list,)
+
+
+@app.route("/git/view/<int:git_id>")
+def get_post_git_command(git_id):
+    conn = get_db_connection()
+    git_view = conn.execute("SELECT git_id, git_command, git_name FROM git WHERE git_id = ?", (git_id,)).fetchone()
+    conn.close()
+    return render_template("git/git_view_command.html",
+                           git_view=git_view)
+
+
+@app.route("/git/edit/<int:git_id>/", methods=("GET", "POST"))
+def edit_git_command(git_id):
+    conn = get_db_connection()
+    edit_git_command_view = conn.execute("SELECT git_id, git_command, git_name FROM git WHERE git_id = ?", (git_id,)).fetchone()
+    if request.method == "POST":
+        git_command_edit = request.form["git_command"]
+        git_name_edit = request.form["git_name"]
+        if len(request.form['git_command']) > 4 and len(request.form['git_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "UPDATE git SET git_command = ?, git_name = ? WHERE git_id = ?",
+                (git_command_edit, git_name_edit, git_id),
+            )
+            conn.commit()
+            conn.close()
+            if not git_command_edit:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("git/edit_git_command.html", edit_git_command_view=edit_git_command_view)
+
+
+@app.route("/git/new_git_command", methods=["GET", "POST"])
+def add_git_command():
+    if request.method == "POST":
+        new_git_command = request.form["git_command"]
+        new_git_name = request.form["git_name"]
+        if len(request.form['git_command']) > 4 and len(request.form['git_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO git (git_command, git_name) VALUES (?, ?)", (new_git_command, new_git_name)
+            )
+            conn.commit()
+            conn.close()
+            if not new_git_command:
+                flash('Ошибка сохранения записи!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("git/add_git_command.html")
+
+
+@app.route("/git/delete/<int:git_id>/", methods=("POST",))
+def delete_git_command(git_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM git WHERE git_id = ?", (git_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("git_list_commands"))
 
 
 @app.route("/bash")
@@ -99,7 +165,6 @@ def bash():
     conn = get_db_connection()
     bash = conn.execute("SELECT * FROM bash").fetchall()
     conn.close()
-
     return render_template("bash.html",
                            bash=bash,)
 
@@ -141,7 +206,7 @@ def get_post(post_id):
     conn = get_db_connection()
     post = conn.execute("SELECT id, title, content, image_post FROM posts WHERE id = ?", (post_id,)).fetchone()
     conn.close()
-    return render_template("posts/post.html", post=post)
+    return render_template("posts/git_view_command.html", post=post)
 
 
 @app.route("/<int:id>/edit_post", methods=("GET", "POST"))
@@ -167,7 +232,7 @@ def edit_post(id):
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("posts/edit_post.html", post_view=post_view)
+    return render_template("posts/edit_git_command.html", post_view=post_view)
 
 
 @app.route("/new", methods=["GET", "POST"])
@@ -190,7 +255,7 @@ def new_post():
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("posts/add_post.html")
+    return render_template("posts/add_git_command.html")
 
 
 @app.route("/<int:id>/delete", methods=("POST",))
