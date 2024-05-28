@@ -44,6 +44,9 @@ INSERT INTO "bash" VALUES(50,'date','Вывод текущей даты и времени');
 INSERT INTO "bash" VALUES(52,'mkdir test1 test2','Создаем две папки в текущем каталоге');
 INSERT INTO "bash" VALUES(53,'rm -R *','Удаление всех папок текущей директории');
 INSERT INTO "bash" VALUES(54,' ~/AppData/Local/Programs/Python/Python312/python.exe venv/Scripts/pip.exe install flask-paginate','Установки нужной библиотеки');
+INSERT INTO "bash" VALUES(55,'cd /p/s.savin/flask-project-full/','Переход из текущего раздела в другой раздел с определенной папкой.');
+INSERT INTO "bash" VALUES(56,'ls *.sh
+','Выводит на экран все файлы с указанным расширением.');
 CREATE TABLE git (
     git_id INTEGER PRIMARY KEY AUTOINCREMENT,
     git_command TEXT NOT NULL,
@@ -135,7 +138,7 @@ INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [f
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',56);
-INSERT INTO "sqlite_sequence" VALUES('bash',54);
+INSERT INTO "sqlite_sequence" VALUES('bash',56);
 INSERT INTO "sqlite_sequence" VALUES('sql',11);
 INSERT INTO "sqlite_sequence" VALUES('git',14);
 INSERT INTO "sqlite_sequence" VALUES('pandas',27);
