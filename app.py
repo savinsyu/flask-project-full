@@ -75,15 +75,11 @@ def close_db_connection(conn):
 @app.route("/")
 def index():
     conn = get_db_connection()
-    last_post = conn.execute("SELECT * FROM posts ORDER BY id DESC").fetchone()
+    last_post = conn.execute("SELECT * FROM links ORDER BY links_id DESC").fetchone()
     return render_template("index.html", last_post=last_post)
 
 
-@app.route("/test")
-def test():
-    return render_template("test.html")
-
-
+# Блок Git
 @app.route("/git")
 def git_list_commands():
     conn = get_db_connection() 
@@ -160,71 +156,41 @@ def delete_git_command(git_id):
     return redirect(url_for("git_list_commands"))
 
 
+# Блок Bash
 @app.route("/bash")
-def bash():
+def bash_list_commands():
     conn = get_db_connection()
-    bash = conn.execute("SELECT * FROM bash").fetchall()
+    bash_list = conn.execute("SELECT * FROM bash").fetchall()
     conn.close()
-    return render_template("bash.html",
-                           bash=bash,)
+    return render_template("bash/bash_list_commands.html",
+                           bash_list=bash_list,)
 
 
-@app.route("/pandas")
-def pandas_commands():
+@app.route("/bash/view/<int:bash_id>")
+def get_post_bash_command(bash_id):
     conn = get_db_connection()
-    pandas_commands = conn.execute("SELECT command, name FROM pandas").fetchall()
+    bash_view = conn.execute("SELECT bash_id, bash_command, bash_name FROM bash WHERE bash_id = ?", (bash_id,)).fetchone()
     conn.close()
-    return render_template("pandas.html", pandas_commands=pandas_commands)
+    return render_template("bash/bash_view_command.html",
+                           bash_view=bash_view)
 
 
-@app.route("/links")
-def links():
+@app.route("/bash/edit/<int:bash_id>/", methods=("GET", "POST"))
+def edit_bash_command(bash_id):
     conn = get_db_connection()
-    links = conn.execute("SELECT * FROM links").fetchall()
-    conn.close()
-    return render_template("links.html", links=links)
-
-
-@app.route("/posts")
-def posts():
-    conn = get_db_connection()
-    posts = conn.execute("SELECT * FROM posts").fetchall()
-    conn.close()
-    return render_template("posts/posts.html", posts=posts)
-
-
-@app.route("/sql")
-def sql():
-    conn = get_db_connection()
-    sql = conn.execute("SELECT * FROM sql").fetchall()
-    conn.close()
-    return render_template("sql.html", sql=sql)
-
-
-@app.route("/post/<int:post_id>")
-def get_post(post_id):
-    conn = get_db_connection()
-    post = conn.execute("SELECT id, title, content, image_post FROM posts WHERE id = ?", (post_id,)).fetchone()
-    conn.close()
-    return render_template("posts/git_view_command.html", post=post)
-
-
-@app.route("/<int:id>/edit_post", methods=("GET", "POST"))
-def edit_post(id):
-    conn = get_db_connection()
-    post_view = conn.execute("SELECT id, title, content FROM posts WHERE id = ?", (id,)).fetchone()
+    edit_bash_command_view = conn.execute("SELECT bash_id, bash_command, bash_name FROM bash WHERE bash_id = ?", (bash_id,)).fetchone()
     if request.method == "POST":
-        title_edit = request.form["title"]
-        content_edit = request.form["content"]
-        if len(request.form['title']) > 4 and len(request.form['content']) > 10:
+        bash_command_edit = request.form["bash_command"]
+        bash_name_edit = request.form["bash_name"]
+        if len(request.form['bash_command']) > 4 and len(request.form['bash_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "UPDATE posts SET title = ?, content = ? WHERE id = ?",
-                (title_edit, content_edit, id),
+                "UPDATE bash SET bash_command = ?, bash_name = ? WHERE bash_id = ?",
+                (bash_command_edit, bash_name_edit, bash_id),
             )
             conn.commit()
             conn.close()
-            if not title_edit:
+            if not bash_command_edit:
                 flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
             else:
                 flash('Запись успешно сохранена!', category='success')
@@ -232,22 +198,22 @@ def edit_post(id):
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("posts/edit_git_command.html", post_view=post_view)
+    return render_template("bash/edit_bash_command.html", edit_bash_command_view=edit_bash_command_view)
 
 
-@app.route("/new", methods=["GET", "POST"])
-def new_post():
+@app.route("/bash/new_bash_command", methods=["GET", "POST"])
+def add_bash_command():
     if request.method == "POST":
-        title = request.form["title"]
-        content = request.form["content"]
-        if len(request.form['title']) > 4 and len(request.form['content']) > 10:
+        new_bash_command = request.form["bash_command"]
+        new_bash_name = request.form["bash_name"]
+        if len(request.form['bash_command']) > 4 and len(request.form['bash_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "INSERT INTO posts (title, content) VALUES (?, ?)", (title, content)
+                "INSERT INTO bash (bash_command, bash_name) VALUES (?, ?)", (new_bash_command, new_bash_name)
             )
             conn.commit()
             conn.close()
-            if not title:
+            if not new_bash_command:
                 flash('Ошибка сохранения записи!', category='error')
             else:
                 flash('Запись успешно добавлена!')
@@ -255,16 +221,247 @@ def new_post():
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("posts/add_git_command.html")
+    return render_template("bash/add_bash_command.html")
 
 
-@app.route("/<int:id>/delete", methods=("POST",))
-def delete(id):
+@app.route("/bash/delete/<int:bash_id>/", methods=("POST",))
+def delete_bash_command(bash_id):
     conn = get_db_connection()
-    conn.execute("DELETE FROM posts WHERE id = ?", (id,))
+    conn.execute("DELETE FROM bash WHERE bash_id = ?", (bash_id,))
     conn.commit()
     conn.close()
-    return redirect(url_for("posts"))
+    return redirect(url_for("bash_list_commands"))
+
+
+# Блок SQL
+@app.route("/sql")
+def sql_list_commands():
+    conn = get_db_connection()
+    sql_list = conn.execute("SELECT * FROM sql").fetchall()
+    conn.close()
+    return render_template("sql/sql_list_commands.html",
+                           sql_list=sql_list,)
+
+
+@app.route("/sql/view/<int:sql_id>")
+def get_post_sql_command(sql_id):
+    conn = get_db_connection()
+    sql_view = conn.execute("SELECT sql_id, sql_command, sql_name FROM sql WHERE sql_id = ?", (sql_id,)).fetchone()
+    conn.close()
+    return render_template("sql/sql_view_command.html",
+                           sql_view=sql_view)
+
+
+@app.route("/sql/edit/<int:sql_id>/", methods=("GET", "POST"))
+def edit_sql_command(sql_id):
+    conn = get_db_connection()
+    edit_sql_command_view = conn.execute("SELECT sql_id, sql_command, sql_name FROM sql WHERE sql_id = ?", (sql_id,)).fetchone()
+    if request.method == "POST":
+        sql_command_edit = request.form["sql_command"]
+        sql_name_edit = request.form["sql_name"]
+        if len(request.form['sql_command']) > 4 and len(request.form['sql_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "UPDATE sql SET sql_command = ?, sql_name = ? WHERE sql_id = ?",
+                (sql_command_edit, sql_name_edit, sql_id),
+            )
+            conn.commit()
+            conn.close()
+            if not sql_command_edit:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("sql/edit_sql_command.html", edit_sql_command_view=edit_sql_command_view)
+
+
+@app.route("/sql/new_sql_command", methods=["GET", "POST"])
+def add_sql_command():
+    if request.method == "POST":
+        new_sql_command = request.form["sql_command"]
+        new_sql_name = request.form["sql_name"]
+        if len(request.form['sql_command']) > 4 and len(request.form['sql_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO sql (sql_command, sql_name) VALUES (?, ?)", (new_sql_command, new_sql_name)
+            )
+            conn.commit()
+            conn.close()
+            if not new_sql_command:
+                flash('Ошибка сохранения записи!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("sql/add_sql_command.html")
+
+
+@app.route("/sql/delete/<int:sql_id>/", methods=("POST",))
+def delete_sql_command(sql_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM sql WHERE sql_id = ?", (sql_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("sql_list_commands"))
+
+
+# Блок Pandas
+@app.route("/pandas")
+def pandas_list_commands():
+    conn = get_db_connection() 
+    pandas_list = conn.execute("SELECT * FROM pandas").fetchall()
+    conn.close()
+    return render_template("pandas/pandas_list_commands.html",
+                           pandas_list=pandas_list,)
+
+
+@app.route("/pandas/view/<int:pandas_id>")
+def get_post_pandas_command(pandas_id):
+    conn = get_db_connection()
+    pandas_view = conn.execute("SELECT pandas_id, pandas_command, pandas_name FROM pandas WHERE pandas_id = ?", (pandas_id,)).fetchone()
+    conn.close()
+    return render_template("pandas/pandas_view_command.html",
+                           pandas_view=pandas_view)
+
+
+@app.route("/pandas/edit/<int:pandas_id>/", methods=("GET", "POST"))
+def edit_pandas_command(pandas_id):
+    conn = get_db_connection()
+    edit_pandas_command_view = conn.execute("SELECT pandas_id, pandas_command, pandas_name FROM pandas WHERE pandas_id = ?", (pandas_id,)).fetchone()
+    if request.method == "POST":
+        pandas_command_edit = request.form["pandas_command"]
+        pandas_name_edit = request.form["pandas_name"]
+        if len(request.form['pandas_command']) > 4 and len(request.form['pandas_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "UPDATE pandas SET pandas_command = ?, pandas_name = ? WHERE pandas_id = ?",
+                (pandas_command_edit, pandas_name_edit, pandas_id),
+            )
+            conn.commit()
+            conn.close()
+            if not pandas_command_edit:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("pandas/edit_pandas_command.html", edit_pandas_command_view=edit_pandas_command_view)
+
+
+@app.route("/pandas/new_pandas_command", methods=["GET", "POST"])
+def add_pandas_command():
+    if request.method == "POST":
+        new_pandas_command = request.form["pandas_command"]
+        new_pandas_name = request.form["pandas_name"]
+        if len(request.form['pandas_command']) > 4 and len(request.form['pandas_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO pandas (pandas_command, pandas_name) VALUES (?, ?)", (new_pandas_command, new_pandas_name)
+            )
+            conn.commit()
+            conn.close()
+            if not new_pandas_command:
+                flash('Ошибка сохранения записи!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("pandas/add_pandas_command.html")
+
+
+@app.route("/pandas/delete/<int:pandas_id>/", methods=("POST",))
+def delete_pandas_command(pandas_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM pandas WHERE pandas_id = ?", (pandas_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("pandas_list_commands"))
+
+
+# Блок links
+@app.route("/links")
+def links_list_commands():
+    conn = get_db_connection() 
+    links_list = conn.execute("SELECT * FROM links").fetchall()
+    conn.close()
+    return render_template("links/links_list_commands.html",
+                           links_list=links_list,)
+
+
+@app.route("/links/view/<int:links_id>")
+def get_post_links_command(links_id):
+    conn = get_db_connection()
+    links_view = conn.execute("SELECT links_id, links_command, links_name FROM links WHERE links_id = ?", (links_id,)).fetchone()
+    conn.close()
+    return render_template("links/links_view_command.html",
+                           links_view=links_view)
+
+
+@app.route("/links/edit/<int:links_id>/", methods=("GET", "POST"))
+def edit_links_command(links_id):
+    conn = get_db_connection()
+    edit_links_command_view = conn.execute("SELECT links_id, links_command, links_name FROM links WHERE links_id = ?", (links_id,)).fetchone()
+    if request.method == "POST":
+        links_command_edit = request.form["links_command"]
+        links_name_edit = request.form["links_name"]
+        if len(request.form['links_command']) > 4 and len(request.form['links_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "UPDATE links SET links_command = ?, links_name = ? WHERE links_id = ?",
+                (links_command_edit, links_name_edit, links_id),
+            )
+            conn.commit()
+            conn.close()
+            if not links_command_edit:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("links/edit_links_command.html", edit_links_command_view=edit_links_command_view)
+
+
+@app.route("/links/new_links_command", methods=["GET", "POST"])
+def add_links_command():
+    if request.method == "POST":
+        new_links_command = request.form["links_command"]
+        new_links_name = request.form["links_name"]
+        if len(request.form['links_command']) > 4 and len(request.form['links_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO links (links_command, links_name) VALUES (?, ?)", (new_links_command, new_links_name)
+            )
+            conn.commit()
+            conn.close()
+            if not new_links_command:
+                flash('Ошибка сохранения записи!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("links/add_links_command.html")
+
+
+@app.route("/links/delete/<int:links_id>/", methods=("POST",))
+def delete_links_command(links_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM links WHERE links_id = ?", (links_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("links_list_commands"))
 
 
 if __name__ == "__main__":

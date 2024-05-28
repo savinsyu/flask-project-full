@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать запись{% endblock %}
+{% block content %}
+{% include 'errors.html' %}
+<div class="bd-example">
+   <form method="post">
+      <div class="mb-3">
+         <label for="pandas_command" class="form-label">Команда</label>
+         <textarea class="form-control" id="pandas_command" name="pandas_command" rows="1" placeholder="Введите команду"
+            required>{{ edit_pandas_command_view.pandas_command }}</textarea>
+      </div>
+      <div class="mb-3">
+         <label for="pandas_name" class="form-label">Описание команды</label>
+         <textarea class="form-control" id="pandas_name" name="pandas_name" rows="3" placeholder="Введите описание команды"
+            required>{{ edit_pandas_command_view.pandas_name }}</textarea>
+         <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+               <button type="submit" value=><img
+                     src="/static/icons/save.png"></button>
+            </li>
+            <li class="list-group-item"><a href="{{ url_for('pandas_list_commands') }}"><img
+                     src="/static/icons/list.png"></a>
+            </li>
+         </ul>
+      </div>
+   </form>
+</div>
+
+{% endblock %}

@@ -3,6 +3,7 @@
 {% block content %}
 <div class="bd-example">
    <h2 class="pb-2">{{ git_view.title }}</h2>
+   <p>{{ git_view['git_name'] }}</p>
    <p>{{ git_view['git_command'] }}</p>
     <ul class="list-group list-group-horizontal">
         <li class="list-group-item"><a href="{{ url_for('git_list_commands') }}"><img src="/static/icons/list.png"></a></li>

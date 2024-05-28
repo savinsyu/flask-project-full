@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Добавить команду{% endblock %}
+{% block content %}
+{% include 'errors.html' %}
+<div class="bd-example">
+   <form method="post">
+      <div class="mb-3 mt-3">
+         <label for="links_command" class="form-label">Команда</label>
+         <textarea class="form-control" id="links_command" name="links_command" rows="1" placeholder="Введите команду"
+            required></textarea>
+      </div>
+      <div class="mb-3">
+         <label for="links_name" class="form-label">Описание команды</label>
+         <textarea class="form-control" id="links_name" name="links_name" rows="6" placeholder="Введите описание команды"
+            required></textarea>
+      </div>
+      <ul class="list-group list-group-horizontal">
+         <li class="list-group-item">
+            <button type="submit" value=><img src="/static/icons/plus.png"></button>
+         </li>
+         <li class="list-group-item"><a href="{{ url_for('links_list_commands') }}"><img src="/static/icons/list.png"></a>
+         </li>
+      </ul>
+   </form>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 <div class="bd-example">
-   <h2>Последняя запись</h2>
-   <p>{{ last_post.title }}</p>
-   <a class="btn btn-success" href="{{ url_for('posts') }}" type="button">Перейти ко всем записям</a>
+   <h2>Последняя добавленная ссылка.</h2>
+   <p>{{ last_post.links_name }}</p>
+   <a class="btn btn-success" href="{{ url_for('links_list_commands') }}" type="button">Перейти ко всем ссылкам</a>
 </div>
