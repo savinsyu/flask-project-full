@@ -1,64 +1,71 @@
 BEGIN TRANSACTION;
-CREATE TABLE git_and_bash (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    command TEXT NOT NULL,
-    name TEXT NOT NULL
+CREATE TABLE "bash" (
+    bash_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bash_command TEXT NOT NULL,
+    bash_name TEXT NOT NULL
   );
-INSERT INTO "git_and_bash" VALUES(1,'CTRL + U','Удаление последней набранной строки');
-INSERT INTO "git_and_bash" VALUES(2,'CTRL + R','Поиск текста в истории');
-INSERT INTO "git_and_bash" VALUES(3,'cp bash_and_git.txt ~/draft-project','Копирование файлов');
-INSERT INTO "git_and_bash" VALUES(4,'clear','Очистка экрана');
-INSERT INTO "git_and_bash" VALUES(5,'kill номер процесса','Завершает процесс');
-INSERT INTO "git_and_bash" VALUES(6,'history','Показывает историю команд');
-INSERT INTO "git_and_bash" VALUES(7,'ps','Выводит список процессов');
-INSERT INTO "git_and_bash" VALUES(8,'pwd','Показывает текущий путь к папке');
-INSERT INTO "git_and_bash" VALUES(9,'cd ..','Возврат в вышестоящую директорию');
-INSERT INTO "git_and_bash" VALUES(10,'cd ../..','Возврат на две папки выше');
-INSERT INTO "git_and_bash" VALUES(11,'cd ~','Переход в корневой каталог:');
-INSERT INTO "git_and_bash" VALUES(12,'ls','Вывод содержимого каталога(файлов и папок)');
-INSERT INTO "git_and_bash" VALUES(13,'cd -','Вернуться назад');
-INSERT INTO "git_and_bash" VALUES(14,'cd Users/','Переход  в оперделенную папку');
-INSERT INTO "git_and_bash" VALUES(15,'ls -f','Показать файлы в данной папке, включая и скрытые');
-INSERT INTO "git_and_bash" VALUES(16,'ls -d */','Вывод папок раздела');
-INSERT INTO "git_and_bash" VALUES(17,'mkdir folder','Создание папки или папок(несколько папок через пробел нужно указать)');
-INSERT INTO "git_and_bash" VALUES(18,'mv intro manual/chap1','Файл intro перенесется в папку manual под именем chap1');
-INSERT INTO "git_and_bash" VALUES(19,'mv chap3 manual','Файл chap3 перенесется в папку manual');
-INSERT INTO "git_and_bash" VALUES(20,'mv appendix apndx.a','Файл appendix переименуется в apndx.a');
-INSERT INTO "git_and_bash" VALUES(21,'cat id_ed25519.pub','Чтение указанного файла');
-INSERT INTO "git_and_bash" VALUES(22,'rm myfile','Удаление файла');
-INSERT INTO "git_and_bash" VALUES(23,'rm -R GitHub/','Удаление папки с содержанием');
-INSERT INTO "git_and_bash" VALUES(24,'rm -f -R GitHub/','Удаление папки с содержанием принудительно');
-INSERT INTO "git_and_bash" VALUES(25,'exit','Выход из командной строки');
-INSERT INTO "git_and_bash" VALUES(26,'nslookup test.ru','Запрос DNS определенного адреса');
-INSERT INTO "git_and_bash" VALUES(27,'flask_project_lite_version/venv/scripts/python.exe flask_project_lite_version/app.py &','Запуск процесса в фоновом режиме');
-INSERT INTO "git_and_bash" VALUES(28,'ssh-keygen','Генерация ssh-ключа');
-INSERT INTO "git_and_bash" VALUES(29,'python -m venv venv','Создание виртуального окружения Python');
-INSERT INTO "git_and_bash" VALUES(30,'touch bash.sh','Создание файла скрипта bash.sh');
-INSERT INTO "git_and_bash" VALUES(31,'nano bash.sh','Открытие файла встроенным bash редактором');
-INSERT INTO "git_and_bash" VALUES(32,'./bash.sh','Запуск скрипта bash');
-INSERT INTO "git_and_bash" VALUES(33,'cmod +x bash.sh','Настройка прав на файл скрипта');
-INSERT INTO "git_and_bash" VALUES(34,'git config --global user.email "s.savin1@gitlab.plagate.ru"','Назначение git глобальной почты');
-INSERT INTO "git_and_bash" VALUES(35,'git config --global user.name "s.savin1"','Назначение git глобального имени');
-INSERT INTO "git_and_bash" VALUES(36,'git clone адрес ссылки','Клонирование удаленного репозитория');
-INSERT INTO "git_and_bash" VALUES(37,'git status','Проверка изменений репозитория');
-INSERT INTO "git_and_bash" VALUES(38,'git config --list','Вывод конфигурации git');
-INSERT INTO "git_and_bash" VALUES(39,'git add .','Подготовка файлов для коммита');
-INSERT INTO "git_and_bash" VALUES(40,'git commit -m "test"','Написание коммита');
-INSERT INTO "git_and_bash" VALUES(41,'git push','Отправка изменений на репозиторий');
-INSERT INTO "git_and_bash" VALUES(42,'git init','Инициализация git в папке');
-INSERT INTO "git_and_bash" VALUES(43,'git pull','Скачивание изменения из репозитория на локальную машину');
-INSERT INTO "git_and_bash" VALUES(46,'ls -l','Выводит списокм папки и файлы текущего раздела с датой изменения, размером и правами доступа');
-INSERT INTO "git_and_bash" VALUES(47,'rm *','Удаляет все файлы в ткущей директории');
-INSERT INTO "git_and_bash" VALUES(48,'history -c','Удаляет все команды из истории');
-INSERT INTO "git_and_bash" VALUES(50,'date','Вывод текущей даты и времени');
-INSERT INTO "git_and_bash" VALUES(52,'mkdir test1 test2','Создаем две папки в текущем каталоге');
-INSERT INTO "git_and_bash" VALUES(53,'rm -R *','Удаление всех папок текущей директории');
-INSERT INTO "git_and_bash" VALUES(54,' ~/AppData/Local/Programs/Python/Python312/python.exe venv/Scripts/pip.exe install flask-paginate','Установки нужной библиотеки');
-CREATE TABLE links (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    link TEXT NOT NULL
+INSERT INTO "bash" VALUES(1,'CTRL + U','Удаление последней набранной строки');
+INSERT INTO "bash" VALUES(2,'CTRL + R','Поиск текста в истории');
+INSERT INTO "bash" VALUES(3,'cp bash_and_git.txt ~/draft-project','Копирование файлов');
+INSERT INTO "bash" VALUES(4,'clear','Очистка экрана');
+INSERT INTO "bash" VALUES(5,'kill номер процесса','Завершает процесс');
+INSERT INTO "bash" VALUES(6,'history','Показывает историю команд');
+INSERT INTO "bash" VALUES(7,'ps','Выводит список процессов');
+INSERT INTO "bash" VALUES(8,'pwd','Показывает текущий путь к папке');
+INSERT INTO "bash" VALUES(9,'cd ..','Возврат в вышестоящую директорию');
+INSERT INTO "bash" VALUES(10,'cd ../..','Возврат на две папки выше');
+INSERT INTO "bash" VALUES(11,'cd ~','Переход в корневой каталог:');
+INSERT INTO "bash" VALUES(12,'ls','Вывод содержимого каталога(файлов и папок)');
+INSERT INTO "bash" VALUES(13,'cd -','Вернуться назад');
+INSERT INTO "bash" VALUES(14,'cd Users/','Переход  в оперделенную папку');
+INSERT INTO "bash" VALUES(15,'ls -f','Показать файлы в данной папке, включая и скрытые');
+INSERT INTO "bash" VALUES(16,'ls -d */','Вывод папок раздела');
+INSERT INTO "bash" VALUES(17,'mkdir folder','Создание папки или папок(несколько папок через пробел нужно указать)');
+INSERT INTO "bash" VALUES(18,'mv intro manual/chap1','Файл intro перенесется в папку manual под именем chap1');
+INSERT INTO "bash" VALUES(19,'mv chap3 manual','Файл chap3 перенесется в папку manual');
+INSERT INTO "bash" VALUES(20,'mv appendix apndx.a','Файл appendix переименуется в apndx.a');
+INSERT INTO "bash" VALUES(21,'cat id_ed25519.pub','Чтение указанного файла');
+INSERT INTO "bash" VALUES(22,'rm myfile','Удаление файла');
+INSERT INTO "bash" VALUES(23,'rm -R GitHub/','Удаление папки с содержанием');
+INSERT INTO "bash" VALUES(24,'rm -f -R GitHub/','Удаление папки с содержанием принудительно');
+INSERT INTO "bash" VALUES(25,'exit','Выход из командной строки');
+INSERT INTO "bash" VALUES(26,'nslookup test.ru','Запрос DNS определенного адреса');
+INSERT INTO "bash" VALUES(27,'flask_project_lite_version/venv/scripts/python.exe flask_project_lite_version/app.py &','Запуск процесса в фоновом режиме');
+INSERT INTO "bash" VALUES(28,'ssh-keygen','Генерация ssh-ключа');
+INSERT INTO "bash" VALUES(29,'python -m venv venv','Создание виртуального окружения Python');
+INSERT INTO "bash" VALUES(30,'touch bash.sh','Создание файла скрипта bash.sh');
+INSERT INTO "bash" VALUES(31,'nano bash.sh','Открытие файла встроенным bash редактором');
+INSERT INTO "bash" VALUES(32,'./bash.sh','Запуск скрипта bash');
+INSERT INTO "bash" VALUES(33,'cmod +x bash.sh','Настройка прав на файл скрипта');
+INSERT INTO "bash" VALUES(46,'ls -l','Выводит списокм папки и файлы текущего раздела с датой изменения, размером и правами доступа');
+INSERT INTO "bash" VALUES(47,'rm *','Удаляет все файлы в ткущей директории');
+INSERT INTO "bash" VALUES(48,'history -c','Удаляет все команды из истории');
+INSERT INTO "bash" VALUES(50,'date','Вывод текущей даты и времени');
+INSERT INTO "bash" VALUES(52,'mkdir test1 test2','Создаем две папки в текущем каталоге');
+INSERT INTO "bash" VALUES(53,'rm -R *','Удаление всех папок текущей директории');
+INSERT INTO "bash" VALUES(54,' ~/AppData/Local/Programs/Python/Python312/python.exe venv/Scripts/pip.exe install flask-paginate','Установки нужной библиотеки');
+CREATE TABLE git (
+    git_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    git_command TEXT NOT NULL,
+    git_name TEXT NOT NULL
   );
+INSERT INTO "git" VALUES(1,'git config --global user.email "s.savin1@gitlab.plagate.ru"','Назначение git глобальной почты');
+INSERT INTO "git" VALUES(2,'git config --global user.name "s.savin1"','Назначение git глобального имени');
+INSERT INTO "git" VALUES(3,'git clone адрес ссылки','Клонирование удаленного репозитория');
+INSERT INTO "git" VALUES(4,'git status','Проверка изменений репозитория');
+INSERT INTO "git" VALUES(5,'git config --list','Вывод конфигурации git');
+INSERT INTO "git" VALUES(6,'git add .','Подготовка файлов для коммита');
+INSERT INTO "git" VALUES(7,'git commit -m "test"','Написание коммита');
+INSERT INTO "git" VALUES(8,'git push','Отправка изменений на репозиторий');
+INSERT INTO "git" VALUES(9,'git init','Инициализация git в папке');
+INSERT INTO "git" VALUES(10,'git pull','Скачивание изменения из репозитория на локальную машину');
+CREATE TABLE "links"
+(
+    links_id      INTEGER
+        primary key autoincrement,
+    links_name    TEXT not null,
+    links_command TEXT not null
+);
 INSERT INTO "links" VALUES(1,'Как сделать скрипт на bash','https://selectel.ru/blog/tutorials/linux-bash-scripting-guide/');
 INSERT INTO "links" VALUES(2,'Как создать и запустить bat-файлы
 ','https://www.nic.ru/help/kak-sozdat6-i-zapustit6-bat-fajly_11640.html');
@@ -68,11 +75,13 @@ INSERT INTO "links" VALUES(5,'Интересный материал про bash','https://linuxsimply
 INSERT INTO "links" VALUES(15,'Горячие клавиши Bash','https://selectel.ru/blog/tutorials/linux-terminal-hotkeys/');
 INSERT INTO "links" VALUES(16,'Красивый python','https://sky.pro/media/pep8/');
 INSERT INTO "links" VALUES(17,'Работа с gitignore','https://wiki.merionet.ru/articles/fajl-gitignore-kak-ignorirovat-fajly-i-papki-v-git');
-CREATE TABLE pandas (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    command TEXT NOT NULL,
-    name TEXT NOT NULL
-  );
+CREATE TABLE "pandas"
+(
+    pandas_id      INTEGER
+        primary key autoincrement,
+    pandas_command TEXT not null,
+    pandas_name    TEXT not null
+);
 INSERT INTO "pandas" VALUES(1,'data = pd.read_csv("data.csv")','Загрузка CSV-данных');
 INSERT INTO "pandas" VALUES(2,'df.to_csv("saved_ratings.csv", index=False))','Экспорт в формат CSV');
 INSERT INTO "pandas" VALUES(3,'data_copy = data.copy(deep=True)','Копирование датафрейма');
@@ -109,17 +118,10 @@ CREATE TABLE "posts"
 );
 INSERT INTO "posts" VALUES(31,'Структура SQL-запроса','На картинке изображена структура SQL-запроса.','sql_query_structure.jpg');
 INSERT INTO "posts" VALUES(50,'Шпаргалка по SQL.','Шпаргалка по SQL.','SQL-help.jpg');
-INSERT INTO "posts" VALUES(53,'Как сделать темную тему в Windows 10?','В поле "Поиск" вводим слово "Тема".
-Нажимаем "Выбор главного цвета" и выбираем в раскрывающемся поле пункт "Тёмный".','no_image.png');
-INSERT INTO "posts" VALUES(55,'Создание и активация виртуального окружения python','Создаем виртуальное окружение командой:
-python -m venv venv
-После чего нужно сделать активацию окружения командой:
-venv\Scripts\activate.bat
-','no_image.png');
 CREATE TABLE [sql] ( 
-  [id] INTEGER PRIMARY KEY AUTOINCREMENT,
-  [command] TEXT NOT NULL,
-  [name] TEXT NOT NULL
+  "sql_id" INTEGER PRIMARY KEY AUTOINCREMENT,
+  "sql_command" TEXT NOT NULL,
+  "sql_name" TEXT NOT NULL
 );
 INSERT INTO "sql" VALUES(1,'INSERT INTO  git_and_bash (command, name) VALUES (''test'', ''test'')','Добавление новой записи в таблицу');
 INSERT INTO "sql" VALUES(2,'SELECT * FROM git_and_bash WHERE command LIKE ''%ls%'' ','Поиск в поле значений по части слова');
@@ -133,8 +135,9 @@ INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [f
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('posts',56);
-INSERT INTO "sqlite_sequence" VALUES('git_and_bash',54);
+INSERT INTO "sqlite_sequence" VALUES('bash',54);
+INSERT INTO "sqlite_sequence" VALUES('sql',11);
+INSERT INTO "sqlite_sequence" VALUES('git',14);
+INSERT INTO "sqlite_sequence" VALUES('pandas',27);
 INSERT INTO "sqlite_sequence" VALUES('links',17);
-INSERT INTO "sqlite_sequence" VALUES('sql',10);
-INSERT INTO "sqlite_sequence" VALUES('pandas',26);
 COMMIT;
