@@ -1,37 +1,16 @@
 * {
     font-family: Bahnschrift;
     font-size: 14pt;
-}
-    
-p {
-    padding: 10px;
-}
-
-
-.nav-link {
-    padding: 0;
-}
-
-a {
     color: black;
+}
+
+.list-group-item a, .add{
     text-decoration: none;
+    color: black;
+    font-size: 11pt;
+    font-weight: bold;
 }
 
-a:hover {
+.list-group-item a:hover{
     color: red;
-}
-
-.bd-example {
-    padding: 1.5rem;
-    margin: 1.5rem;
-    border-radius: 10px;
-    border: solid #dee2e6 1px;
-}
-
-.list-group-item a:hover {
-    color: rgb(255, 255, 255);
-}
-
-.list-group-item:hover {
-    background-color: #f8f9fa;
 }

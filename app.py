@@ -160,7 +160,7 @@ def delete_git_command(git_id):
 @app.route("/bash")
 def bash_list_commands():
     conn = get_db_connection()
-    bash_list = conn.execute("SELECT * FROM bash").fetchall()
+    bash_list = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("bash/bash_list_commands.html",
                            bash_list=bash_list,)
@@ -169,7 +169,7 @@ def bash_list_commands():
 @app.route("/bash/view/<int:bash_id>")
 def get_post_bash_command(bash_id):
     conn = get_db_connection()
-    bash_view = conn.execute("SELECT bash_id, bash_command, bash_name FROM bash WHERE bash_id = ?", (bash_id,)).fetchone()
+    bash_view = conn.execute("SELECT bash_id, bash_command, bash_name, bash_description FROM bash WHERE bash_id = ?", (bash_id,)).fetchone()
     conn.close()
     return render_template("bash/bash_view_command.html",
                            bash_view=bash_view)
@@ -178,15 +178,16 @@ def get_post_bash_command(bash_id):
 @app.route("/bash/edit/<int:bash_id>/", methods=("GET", "POST"))
 def edit_bash_command(bash_id):
     conn = get_db_connection()
-    edit_bash_command_view = conn.execute("SELECT bash_id, bash_command, bash_name FROM bash WHERE bash_id = ?", (bash_id,)).fetchone()
+    edit_bash_command_view = conn.execute("SELECT * FROM bash WHERE bash_id = ?", (bash_id,)).fetchone()
     if request.method == "POST":
         bash_command_edit = request.form["bash_command"]
         bash_name_edit = request.form["bash_name"]
-        if len(request.form['bash_command']) > 4 and len(request.form['bash_name']) > 10:
+        bash_description_edit = request.form["bash_description"]
+        if len(request.form['bash_command']) > 1 and len(request.form['bash_name']) > 10 and len(request.form['bash_description']):
             conn = get_db_connection()
             conn.execute(
-                "UPDATE bash SET bash_command = ?, bash_name = ? WHERE bash_id = ?",
-                (bash_command_edit, bash_name_edit, bash_id),
+                "UPDATE bash SET bash_command = ?, bash_name = ?, bash_description = ? WHERE bash_id = ?",
+                (bash_command_edit, bash_name_edit, bash_description_edit, bash_id),
             )
             conn.commit()
             conn.close()
@@ -206,7 +207,7 @@ def add_bash_command():
     if request.method == "POST":
         new_bash_command = request.form["bash_command"]
         new_bash_name = request.form["bash_name"]
-        if len(request.form['bash_command']) > 4 and len(request.form['bash_name']) > 10:
+        if len(request.form['bash_command']) > 1 and len(request.form['bash_name']) > 10:
             conn = get_db_connection()
             conn.execute(
                 "INSERT INTO bash (bash_command, bash_name) VALUES (?, ?)", (new_bash_command, new_bash_name)
@@ -214,9 +215,11 @@ def add_bash_command():
             conn.commit()
             conn.close()
             if not new_bash_command:
-                flash('Ошибка сохранения записи!', category='error')
+                flash('Ошибка сохранения записи, Вы ввели слишком мало символов!', category='error')
             else:
                 flash('Запись успешно добавлена!')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("bash_list_commands"))
 
         else:
             flash('Ошибка сохранения записи!', category='error')

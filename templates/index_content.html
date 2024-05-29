@@ -1,5 +1,11 @@
-<div class="bd-example">
-   <h2>Последняя добавленная ссылка.</h2>
-   <p>{{ last_post.links_name }}</p>
-   <a class="btn btn-success" href="{{ url_for('links_list_commands') }}" type="button">Перейти ко всем ссылкам</a>
+<div class="card m-2">
+   <h2 class="card-header">Последняя добавленная ссылка.</h2>
+   <div class="card-body">
+      <h5 class="card-title">{{ last_post.links_name }}</h5>
+      <ul class="list-group list-group-horizontal">
+         <li class="list-group-item">
+            <a href="{{ url_for('bash_list_commands') }}">Перейти ко всем записям</a>
+         </li>
+      </ul>
+   </div>
 </div>
