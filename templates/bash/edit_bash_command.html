@@ -1,8 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Редактировать запись{% endblock %}
 {% block content %}
-
-
 <div class="container p-4">
    <form method="post">
       <div class="card mb-3">
@@ -12,12 +10,12 @@
       </div>
       <div class="card mb-3">
          <label for="bash_name" class="card-header">Описание команды</label>
-         <textarea class="form-control" id="bash_name" name="bash_name" rows="3" placeholder="Введите описание команды"
+         <textarea class="form-control" id="bash_name" name="bash_name" rows="1" placeholder="Введите описание команды"
             required>{{ edit_bash_command_view.bash_name }}</textarea>
       </div>
       <div class="card mb-3">
-         <label for="bash_description" class="card-header">Описание команды</label>
-         <textarea class="form-control" id="bash_description" name="bash_description" rows="3" placeholder="Введите описание команды"
+         <label for="bash_description" class="card-header">Подробно</label>
+         <textarea class="form-control" id="bash_description" name="bash_description" rows="8" placeholder="Введите описание команды"
             required>{{ edit_bash_command_view.bash_description }}</textarea>
       </div>
       <ul class="list-group list-group-horizontal">
@@ -33,5 +31,4 @@
 <div class="container p-4">
    {% include 'errors.html' %}
 </div>
-
 {% endblock %}

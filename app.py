@@ -4,13 +4,12 @@ try:
     from datetime import datetime as dt
     from flask import Flask, render_template, request, redirect, url_for, flash, make_response
     from password_generator import generate_password
+
     print('Все библиотеки установлены.')
 except ModuleNotFoundError:
     print('Некоторые библиотеки не установлены.')
 
-
 app = Flask(__name__)
-
 
 app.secret_key = "secret key"
 
@@ -82,17 +81,18 @@ def index():
 # Блок Git
 @app.route("/git")
 def git_list_commands():
-    conn = get_db_connection() 
-    git_list = conn.execute("SELECT * FROM git").fetchall()
+    conn = get_db_connection()
+    git_list = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("git/git_list_commands.html",
-                           git_list=git_list,)
+                           git_list=git_list, )
 
 
 @app.route("/git/view/<int:git_id>")
 def get_post_git_command(git_id):
     conn = get_db_connection()
-    git_view = conn.execute("SELECT git_id, git_command, git_name FROM git WHERE git_id = ?", (git_id,)).fetchone()
+    git_view = conn.execute("SELECT * FROM git WHERE git_id = ?",
+                            (git_id,)).fetchone()
     conn.close()
     return render_template("git/git_view_command.html",
                            git_view=git_view)
@@ -101,15 +101,18 @@ def get_post_git_command(git_id):
 @app.route("/git/edit/<int:git_id>/", methods=("GET", "POST"))
 def edit_git_command(git_id):
     conn = get_db_connection()
-    edit_git_command_view = conn.execute("SELECT git_id, git_command, git_name FROM git WHERE git_id = ?", (git_id,)).fetchone()
+    edit_git_command_view = conn.execute("SELECT * FROM git WHERE git_id = ?",
+                                         (git_id,)).fetchone()
     if request.method == "POST":
         git_command_edit = request.form["git_command"]
         git_name_edit = request.form["git_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        git_description_edit = request.form["git_description"]
         if len(request.form['git_command']) > 4 and len(request.form['git_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "UPDATE git SET git_command = ?, git_name = ? WHERE git_id = ?",
-                (git_command_edit, git_name_edit, git_id),
+                "UPDATE git SET git_command = ?, git_name = ?, git_description = ? WHERE git_id = ?",
+                (git_command_edit, git_name_edit, git_description_edit, git_id),
             )
             conn.commit()
             conn.close()
@@ -117,6 +120,8 @@ def edit_git_command(git_id):
                 flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
             else:
                 flash('Запись успешно сохранена!', category='success')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("git_list_commands"))
 
         else:
             flash('Ошибка сохранения записи!', category='error')
@@ -129,10 +134,12 @@ def add_git_command():
     if request.method == "POST":
         new_git_command = request.form["git_command"]
         new_git_name = request.form["git_name"]
+        new_git_description = request.form["git_description"]
         if len(request.form['git_command']) > 4 and len(request.form['git_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "INSERT INTO git (git_command, git_name) VALUES (?, ?)", (new_git_command, new_git_name)
+                "INSERT INTO git (git_command, git_name, git_description) VALUES (?, ?, ?)",
+                (new_git_command, new_git_name, new_git_description)
             )
             conn.commit()
             conn.close()
@@ -140,7 +147,8 @@ def add_git_command():
                 flash('Ошибка сохранения записи!', category='error')
             else:
                 flash('Запись успешно добавлена!')
-
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("git_list_commands"))
         else:
             flash('Ошибка сохранения записи!', category='error')
 
@@ -150,7 +158,8 @@ def add_git_command():
 @app.route("/git/delete/<int:git_id>/", methods=("POST",))
 def delete_git_command(git_id):
     conn = get_db_connection()
-    conn.execute("DELETE FROM git WHERE git_id = ?", (git_id,))
+    conn.execute("DELETE FROM git WHERE git_id = ?",
+                 (git_id,))
     conn.commit()
     conn.close()
     return redirect(url_for("git_list_commands"))
@@ -163,13 +172,14 @@ def bash_list_commands():
     bash_list = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("bash/bash_list_commands.html",
-                           bash_list=bash_list,)
+                           bash_list=bash_list, )
 
 
 @app.route("/bash/view/<int:bash_id>")
 def get_post_bash_command(bash_id):
     conn = get_db_connection()
-    bash_view = conn.execute("SELECT bash_id, bash_command, bash_name, bash_description FROM bash WHERE bash_id = ?", (bash_id,)).fetchone()
+    bash_view = conn.execute("SELECT * FROM bash WHERE bash_id = ?",
+                             (bash_id,)).fetchone()
     conn.close()
     return render_template("bash/bash_view_command.html",
                            bash_view=bash_view)
@@ -178,12 +188,14 @@ def get_post_bash_command(bash_id):
 @app.route("/bash/edit/<int:bash_id>/", methods=("GET", "POST"))
 def edit_bash_command(bash_id):
     conn = get_db_connection()
-    edit_bash_command_view = conn.execute("SELECT * FROM bash WHERE bash_id = ?", (bash_id,)).fetchone()
+    edit_bash_command_view = conn.execute("SELECT * FROM bash WHERE bash_id = ?",
+                                          (bash_id,)).fetchone()
     if request.method == "POST":
         bash_command_edit = request.form["bash_command"]
         bash_name_edit = request.form["bash_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
         bash_description_edit = request.form["bash_description"]
-        if len(request.form['bash_command']) > 1 and len(request.form['bash_name']) > 10 and len(request.form['bash_description']):
+        if len(request.form['bash_command']) > 1 and len(request.form['bash_name']) > 10:
             conn = get_db_connection()
             conn.execute(
                 "UPDATE bash SET bash_command = ?, bash_name = ?, bash_description = ? WHERE bash_id = ?",
@@ -195,6 +207,8 @@ def edit_bash_command(bash_id):
                 flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
             else:
                 flash('Запись успешно сохранена!', category='success')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("bash_list_commands"))
 
         else:
             flash('Ошибка сохранения записи!', category='error')
@@ -207,10 +221,13 @@ def add_bash_command():
     if request.method == "POST":
         new_bash_command = request.form["bash_command"]
         new_bash_name = request.form["bash_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        new_bash_description = request.form["bash_description"]
         if len(request.form['bash_command']) > 1 and len(request.form['bash_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "INSERT INTO bash (bash_command, bash_name) VALUES (?, ?)", (new_bash_command, new_bash_name)
+                "INSERT INTO bash (bash_command, bash_name, bash_description) VALUES (?, ?, ?)",
+                (new_bash_command, new_bash_name, new_bash_description)
             )
             conn.commit()
             conn.close()
@@ -230,7 +247,8 @@ def add_bash_command():
 @app.route("/bash/delete/<int:bash_id>/", methods=("POST",))
 def delete_bash_command(bash_id):
     conn = get_db_connection()
-    conn.execute("DELETE FROM bash WHERE bash_id = ?", (bash_id,))
+    conn.execute("DELETE FROM bash WHERE bash_id = ?",
+                 (bash_id,))
     conn.commit()
     conn.close()
     return redirect(url_for("bash_list_commands"))
@@ -240,16 +258,17 @@ def delete_bash_command(bash_id):
 @app.route("/sql")
 def sql_list_commands():
     conn = get_db_connection()
-    sql_list = conn.execute("SELECT * FROM sql").fetchall()
+    sql_list = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("sql/sql_list_commands.html",
-                           sql_list=sql_list,)
+                           sql_list=sql_list, )
 
 
 @app.route("/sql/view/<int:sql_id>")
 def get_post_sql_command(sql_id):
     conn = get_db_connection()
-    sql_view = conn.execute("SELECT sql_id, sql_command, sql_name FROM sql WHERE sql_id = ?", (sql_id,)).fetchone()
+    sql_view = conn.execute("SELECT * FROM sql WHERE sql_id = ?",
+                            (sql_id,)).fetchone()
     conn.close()
     return render_template("sql/sql_view_command.html",
                            sql_view=sql_view)
@@ -258,15 +277,18 @@ def get_post_sql_command(sql_id):
 @app.route("/sql/edit/<int:sql_id>/", methods=("GET", "POST"))
 def edit_sql_command(sql_id):
     conn = get_db_connection()
-    edit_sql_command_view = conn.execute("SELECT sql_id, sql_command, sql_name FROM sql WHERE sql_id = ?", (sql_id,)).fetchone()
+    edit_sql_command_view = conn.execute("SELECT * FROM sql WHERE sql_id = ?",
+                                         (sql_id,)).fetchone()
     if request.method == "POST":
         sql_command_edit = request.form["sql_command"]
         sql_name_edit = request.form["sql_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        sql_description_edit = request.form["sql_description"]
         if len(request.form['sql_command']) > 4 and len(request.form['sql_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "UPDATE sql SET sql_command = ?, sql_name = ? WHERE sql_id = ?",
-                (sql_command_edit, sql_name_edit, sql_id),
+                "UPDATE sql SET sql_command = ?, sql_name = ?, sql_name = ? WHERE sql_id = ?",
+                (sql_command_edit, sql_name_edit, sql_description_edit, sql_id),
             )
             conn.commit()
             conn.close()
@@ -274,7 +296,8 @@ def edit_sql_command(sql_id):
                 flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
             else:
                 flash('Запись успешно сохранена!', category='success')
-
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("sql_list_commands"))
         else:
             flash('Ошибка сохранения записи!', category='error')
 
@@ -286,10 +309,13 @@ def add_sql_command():
     if request.method == "POST":
         new_sql_command = request.form["sql_command"]
         new_sql_name = request.form["sql_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        new_sql_description = request.form["sql_description"]
         if len(request.form['sql_command']) > 4 and len(request.form['sql_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "INSERT INTO sql (sql_command, sql_name) VALUES (?, ?)", (new_sql_command, new_sql_name)
+                "INSERT INTO sql (sql_command, sql_name, sql_description) VALUES (?, ?, ?)",
+                (new_sql_command, new_sql_name, new_sql_description)
             )
             conn.commit()
             conn.close()
@@ -297,7 +323,8 @@ def add_sql_command():
                 flash('Ошибка сохранения записи!', category='error')
             else:
                 flash('Запись успешно добавлена!')
-
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("sql_list_commands"))
         else:
             flash('Ошибка сохранения записи!', category='error')
 
@@ -307,7 +334,8 @@ def add_sql_command():
 @app.route("/sql/delete/<int:sql_id>/", methods=("POST",))
 def delete_sql_command(sql_id):
     conn = get_db_connection()
-    conn.execute("DELETE FROM sql WHERE sql_id = ?", (sql_id,))
+    conn.execute("DELETE FROM sql WHERE sql_id = ?",
+                 (sql_id,))
     conn.commit()
     conn.close()
     return redirect(url_for("sql_list_commands"))
@@ -316,17 +344,18 @@ def delete_sql_command(sql_id):
 # Блок Pandas
 @app.route("/pandas")
 def pandas_list_commands():
-    conn = get_db_connection() 
-    pandas_list = conn.execute("SELECT * FROM pandas").fetchall()
+    conn = get_db_connection()
+    pandas_list = conn.execute("SELECT * FROM pandas ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("pandas/pandas_list_commands.html",
-                           pandas_list=pandas_list,)
+                           pandas_list=pandas_list, )
 
 
 @app.route("/pandas/view/<int:pandas_id>")
 def get_post_pandas_command(pandas_id):
     conn = get_db_connection()
-    pandas_view = conn.execute("SELECT pandas_id, pandas_command, pandas_name FROM pandas WHERE pandas_id = ?", (pandas_id,)).fetchone()
+    pandas_view = conn.execute("SELECT * FROM pandas WHERE pandas_id = ?",
+                               (pandas_id,)).fetchone()
     conn.close()
     return render_template("pandas/pandas_view_command.html",
                            pandas_view=pandas_view)
@@ -335,15 +364,19 @@ def get_post_pandas_command(pandas_id):
 @app.route("/pandas/edit/<int:pandas_id>/", methods=("GET", "POST"))
 def edit_pandas_command(pandas_id):
     conn = get_db_connection()
-    edit_pandas_command_view = conn.execute("SELECT pandas_id, pandas_command, pandas_name FROM pandas WHERE pandas_id = ?", (pandas_id,)).fetchone()
+    edit_pandas_command_view = conn.execute(
+        "SELECT * FROM pandas WHERE pandas_id = ?",
+        (pandas_id,)).fetchone()
     if request.method == "POST":
         pandas_command_edit = request.form["pandas_command"]
         pandas_name_edit = request.form["pandas_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        pandas_description_edit = request.form["pandas_description"]
         if len(request.form['pandas_command']) > 4 and len(request.form['pandas_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "UPDATE pandas SET pandas_command = ?, pandas_name = ? WHERE pandas_id = ?",
-                (pandas_command_edit, pandas_name_edit, pandas_id),
+                "UPDATE pandas SET pandas_command = ?, pandas_name = ?, pandas_description = ? WHERE pandas_id = ?",
+                (pandas_command_edit, pandas_name_edit, pandas_description_edit, pandas_id),
             )
             conn.commit()
             conn.close()
@@ -351,7 +384,8 @@ def edit_pandas_command(pandas_id):
                 flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
             else:
                 flash('Запись успешно сохранена!', category='success')
-
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("pandas_list_commands"))
         else:
             flash('Ошибка сохранения записи!', category='error')
 
@@ -363,10 +397,13 @@ def add_pandas_command():
     if request.method == "POST":
         new_pandas_command = request.form["pandas_command"]
         new_pandas_name = request.form["pandas_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        new_pandas_description = request.form["pandas_description"]
         if len(request.form['pandas_command']) > 4 and len(request.form['pandas_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "INSERT INTO pandas (pandas_command, pandas_name) VALUES (?, ?)", (new_pandas_command, new_pandas_name)
+                "INSERT INTO pandas (pandas_command, pandas_name, pandas_description) VALUES (?, ?, ?)",
+                (new_pandas_command, new_pandas_name, new_pandas_description)
             )
             conn.commit()
             conn.close()
@@ -374,7 +411,8 @@ def add_pandas_command():
                 flash('Ошибка сохранения записи!', category='error')
             else:
                 flash('Запись успешно добавлена!')
-
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("pandas_list_commands"))
         else:
             flash('Ошибка сохранения записи!', category='error')
 
@@ -384,7 +422,8 @@ def add_pandas_command():
 @app.route("/pandas/delete/<int:pandas_id>/", methods=("POST",))
 def delete_pandas_command(pandas_id):
     conn = get_db_connection()
-    conn.execute("DELETE FROM pandas WHERE pandas_id = ?", (pandas_id,))
+    conn.execute("DELETE FROM pandas WHERE pandas_id = ?",
+                 (pandas_id,))
     conn.commit()
     conn.close()
     return redirect(url_for("pandas_list_commands"))
@@ -393,17 +432,18 @@ def delete_pandas_command(pandas_id):
 # Блок links
 @app.route("/links")
 def links_list_commands():
-    conn = get_db_connection() 
+    conn = get_db_connection()
     links_list = conn.execute("SELECT * FROM links").fetchall()
     conn.close()
     return render_template("links/links_list_commands.html",
-                           links_list=links_list,)
+                           links_list=links_list, )
 
 
 @app.route("/links/view/<int:links_id>")
 def get_post_links_command(links_id):
     conn = get_db_connection()
-    links_view = conn.execute("SELECT links_id, links_command, links_name FROM links WHERE links_id = ?", (links_id,)).fetchone()
+    links_view = conn.execute("SELECT * FROM links WHERE links_id = ?",
+                              (links_id,)).fetchone()
     conn.close()
     return render_template("links/links_view_command.html",
                            links_view=links_view)
@@ -412,15 +452,18 @@ def get_post_links_command(links_id):
 @app.route("/links/edit/<int:links_id>/", methods=("GET", "POST"))
 def edit_links_command(links_id):
     conn = get_db_connection()
-    edit_links_command_view = conn.execute("SELECT links_id, links_command, links_name FROM links WHERE links_id = ?", (links_id,)).fetchone()
+    edit_links_command_view = conn.execute("SELECT * FROM links WHERE links_id = ?",
+                                           (links_id,)).fetchone()
     if request.method == "POST":
         links_command_edit = request.form["links_command"]
         links_name_edit = request.form["links_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        links_description_edit = request.form["links_description"]
         if len(request.form['links_command']) > 4 and len(request.form['links_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "UPDATE links SET links_command = ?, links_name = ? WHERE links_id = ?",
-                (links_command_edit, links_name_edit, links_id),
+                "UPDATE links SET links_command = ?, links_name = ?, links_description = ? WHERE links_id = ?",
+                (links_command_edit, links_name_edit, links_description_edit, links_id),
             )
             conn.commit()
             conn.close()
@@ -428,7 +471,8 @@ def edit_links_command(links_id):
                 flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
             else:
                 flash('Запись успешно сохранена!', category='success')
-
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("links_list_commands"))
         else:
             flash('Ошибка сохранения записи!', category='error')
 
@@ -440,10 +484,13 @@ def add_links_command():
     if request.method == "POST":
         new_links_command = request.form["links_command"]
         new_links_name = request.form["links_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        new_links_description = request.form["links_description"]
         if len(request.form['links_command']) > 4 and len(request.form['links_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "INSERT INTO links (links_command, links_name) VALUES (?, ?)", (new_links_command, new_links_name)
+                "INSERT INTO links (links_command, links_name, links_description) VALUES (?, ?, ?)",
+                (new_links_command, new_links_name, new_links_description)
             )
             conn.commit()
             conn.close()
@@ -451,7 +498,8 @@ def add_links_command():
                 flash('Ошибка сохранения записи!', category='error')
             else:
                 flash('Запись успешно добавлена!')
-
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("links_list_commands"))
         else:
             flash('Ошибка сохранения записи!', category='error')
 
@@ -461,7 +509,8 @@ def add_links_command():
 @app.route("/links/delete/<int:links_id>/", methods=("POST",))
 def delete_links_command(links_id):
     conn = get_db_connection()
-    conn.execute("DELETE FROM links WHERE links_id = ?", (links_id,))
+    conn.execute("DELETE FROM links WHERE links_id = ?",
+                 (links_id,))
     conn.commit()
     conn.close()
     return redirect(url_for("links_list_commands"))

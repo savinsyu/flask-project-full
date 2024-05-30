@@ -1,38 +1,30 @@
 {% extends "base.html" %} {% block title %}Команды Git{% endblock %} {% block content %}
-<div class="bd-example">
-    <table class="table">
-        <tr>
-            <th scope="col">Команда/Комбинация</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Действие</th>
-        </tr>
-        <tbody>
-            {% for git_list in git_list %}
-            <tr>
-                <td>{{ git_list['git_command'] }}</td>
-                <td>{{ git_list['git_name'] }}</td>
-                <td>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">
-                            <a href="{{ url_for('add_git_command') }}"><img src="/static/icons/plus.png" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <a href="{{ url_for('edit_git_command', git_id=git_list['git_id']) }}"> <img src="/static/icons/pencil.png" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <a href="{{ url_for('get_post_git_command', git_id=git_list['git_id']) }}"> <img src="/static/icons/eye.png" width="16px" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <form action="{{ url_for('delete_git_command', git_id=git_list['git_id']) }}" method="POST">
-                              <input type="image" src="/static/icons/trash.png" value="Удалить запись?" onclick="return confirm('Вы уверены что хотите удалить запись?')" />
-                           </form>
-                        </li>
-                     </ul>
-                  </td>
-               </tr>
-               {% endfor %}
-            </tbody>
-         </table>
+<div class="container p-4">
+   {% for git_list in git_list %}
+   <div class="card mb-3">
+      <h5 class="card-header">{{ git_list['git_name'] }}</h5>
+      <div class="card-body">
+         <h5 class="card-title">{{ git_list['git_command'] }}</h5>
+         <p class="card-text">{{ git_list['git_description'] }}</p>
+         <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+               <a href="{{ url_for('add_git_command') }}">Добавить</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('edit_git_command', git_id=git_list['git_id']) }}">Редактировать</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('get_post_git_command', git_id=git_list['git_id']) }}">Посмотреть</a>
+            </li>
+            <li class="list-group-item">
+               <form action="{{ url_for('delete_git_command', git_id=git_list['git_id']) }}" class="add" method="POST">
+                  <input type="submit" value="Удалить"
+                     onclick="return confirm('Вы уверены что хотите удалить запись?')" />
+               </form>
+            </li>
+         </ul>
       </div>
-      {% endblock %}
-      
+   </div>
+   {% endfor %}
+</div>
+{% endblock %}

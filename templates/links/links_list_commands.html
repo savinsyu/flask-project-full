@@ -1,38 +1,31 @@
 {% extends "base.html" %} {% block title %}Команды links{% endblock %} {% block content %}
-<div class="bd-example">
-    <table class="table">
-        <tr>
-            <th scope="col">Название</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Действие</th>
-        </tr>
-        <tbody>
-            {% for links_list in links_list %}
-            <tr>
-                <td>{{ links_list['links_name'] }}</td>
-                <td><a href="{{ links_list['links_command'] }}" target="_blank">{{ links_list['links_command'] }}</a></td>
-                <td>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">
-                            <a href="{{ url_for('add_links_command') }}"><img src="/static/icons/plus.png" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <a href="{{ url_for('edit_links_command', links_id=links_list['links_id']) }}"> <img src="/static/icons/pencil.png" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <a href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}"> <img src="/static/icons/eye.png" width="16px" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <form action="{{ url_for('delete_links_command', links_id=links_list['links_id']) }}" method="POST">
-                              <input type="image" src="/static/icons/trash.png" value="Удалить запись?" onclick="return confirm('Вы уверены что хотите удалить запись?')" />
-                           </form>
-                        </li>
-                     </ul>
-                  </td>
-               </tr>
-               {% endfor %}
-            </tbody>
-         </table>
+<div class="container p-4">
+   {% for links_list in links_list %}
+   <div class="card mb-3">
+      <h5 class="card-header">{{ links_list['links_name'] }}</h5>
+      <div class="card-body">
+         <h5 class="card-title"><a href="{{ links_list['links_command'] }}" target="_blank">{{ links_list['links_command'] }}</a></h5>
+         <p class="card-text">{{ links_list['links_description'] }}</p>
+         <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+               <a href="{{ url_for('add_links_command') }}">Добавить</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('edit_links_command', links_id=links_list['links_id']) }}">Редактировать</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">Посмотреть</a>
+            </li>
+            <li class="list-group-item">
+               <form action="{{ url_for('delete_links_command', links_id=links_list['links_id']) }}" class="add" method="POST">
+                  <input type="submit" value="Удалить"
+                     onclick="return confirm('Вы уверены что хотите удалить запись?')" />
+               </form>
+            </li>
+         </ul>
       </div>
-      {% endblock %}
+   </div>
+   {% endfor %}
+</div>
+{% endblock %}
       

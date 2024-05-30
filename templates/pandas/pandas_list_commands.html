@@ -1,38 +1,31 @@
 {% extends "base.html" %} {% block title %}Команды pandas{% endblock %} {% block content %}
-<div class="bd-example">
-    <table class="table">
-        <tr>
-            <th scope="col">Команда/Комбинация</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Действие</th>
-        </tr>
-        <tbody>
-            {% for pandas_list in pandas_list %}
-            <tr>
-                <td>{{ pandas_list['pandas_command'] }}</td>
-                <td>{{ pandas_list['pandas_name'] }}</td>
-                <td>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">
-                            <a href="{{ url_for('add_pandas_command') }}"><img src="/static/icons/plus.png" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <a href="{{ url_for('edit_pandas_command', pandas_id=pandas_list['pandas_id']) }}"> <img src="/static/icons/pencil.png" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <a href="{{ url_for('get_post_pandas_command', pandas_id=pandas_list['pandas_id']) }}"> <img src="/static/icons/eye.png" width="16px" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <form action="{{ url_for('delete_pandas_command', pandas_id=pandas_list['pandas_id']) }}" method="POST">
-                              <input type="image" src="/static/icons/trash.png" value="Удалить запись?" onclick="return confirm('Вы уверены что хотите удалить запись?')" />
-                           </form>
-                        </li>
-                     </ul>
-                  </td>
-               </tr>
-               {% endfor %}
-            </tbody>
-         </table>
+<div class="container p-4">
+   {% for pandas_list in pandas_list %}
+   <div class="card mb-3">
+      <h5 class="card-header">{{ pandas_list['pandas_name'] }}</h5>
+      <div class="card-body">
+         <h5 class="card-title">{{ pandas_list['pandas_command'] }}</h5>
+         <p class="card-text">{{ pandas_list['pandas_description'] }}</p>
+         <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+               <a href="{{ url_for('add_pandas_command') }}">Добавить</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('edit_pandas_command', pandas_id=pandas_list['pandas_id']) }}">Редактировать</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('get_post_pandas_command', pandas_id=pandas_list['pandas_id']) }}">Посмотреть</a>
+            </li>
+            <li class="list-group-item">
+               <form action="{{ url_for('delete_pandas_command', pandas_id=pandas_list['pandas_id']) }}" class="add"
+                  method="POST">
+                  <input type="submit" value="Удалить"
+                     onclick="return confirm('Вы уверены что хотите удалить запись?')" />
+               </form>
+            </li>
+         </ul>
       </div>
-      {% endblock %}
-      
+   </div>
+   {% endfor %}
+</div>
+{% endblock %}

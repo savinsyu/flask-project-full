@@ -1,38 +1,31 @@
 {% extends "base.html" %} {% block title %}Команды sql{% endblock %} {% block content %}
-<div class="bd-example">
-    <table class="table">
-        <tr>
-            <th scope="col">Команда/Комбинация</th>
-            <th scope="col">Описание</th>
-            <th scope="col">Действие</th>
-        </tr>
-        <tbody>
-            {% for sql_list in sql_list %}
-            <tr>
-                <td>{{ sql_list['sql_command'] }}</td>
-                <td>{{ sql_list['sql_name'] }}</td>
-                <td>
-                    <ul class="list-group list-group-horizontal">
-                        <li class="list-group-item">
-                            <a href="{{ url_for('add_sql_command') }}"><img src="/static/icons/plus.png" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <a href="{{ url_for('edit_sql_command', sql_id=sql_list['sql_id']) }}"> <img src="/static/icons/pencil.png" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <a href="{{ url_for('get_post_sql_command', sql_id=sql_list['sql_id']) }}"> <img src="/static/icons/eye.png" width="16px" /></a>
-                        </li>
-                        <li class="list-group-item">
-                           <form action="{{ url_for('delete_sql_command', sql_id=sql_list['sql_id']) }}" method="POST">
-                              <input type="image" src="/static/icons/trash.png" value="Удалить запись?" onclick="return confirm('Вы уверены что хотите удалить запись?')" />
-                           </form>
-                        </li>
-                     </ul>
-                  </td>
-               </tr>
-               {% endfor %}
-            </tbody>
-         </table>
+<div class="container p-4">
+   {% for sql_list in sql_list %}
+   <div class="card mb-3">
+      <h5 class="card-header">{{ sql_list['sql_name'] }}</h5>
+      <div class="card-body">
+         <h5 class="card-title">{{ sql_list['sql_command'] }}</h5>
+         <p class="card-text">{{ sql_list['sql_description'] }}</p>
+         <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+               <a href="{{ url_for('add_sql_command') }}">Добавить</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('edit_sql_command', sql_id=sql_list['sql_id']) }}">Редактировать</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('get_post_sql_command', sql_id=sql_list['sql_id']) }}">Посмотреть</a>
+            </li>
+            <li class="list-group-item">
+               <form action="{{ url_for('delete_sql_command', sql_id=sql_list['sql_id']) }}" class="add"
+                  method="POST">
+                  <input type="submit" value="Удалить"
+                     onclick="return confirm('Вы уверены что хотите удалить запись?')" />
+               </form>
+            </li>
+         </ul>
       </div>
-      {% endblock %}
-      
+   </div>
+   {% endfor %}
+</div>
+{% endblock %}

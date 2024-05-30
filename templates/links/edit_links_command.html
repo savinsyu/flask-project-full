@@ -1,29 +1,34 @@
 {% extends 'base.html' %}
 {% block title %}Редактировать запись{% endblock %}
 {% block content %}
-{% include 'errors.html' %}
-<div class="bd-example">
+<div class="container p-4">
    <form method="post">
-      <div class="mb-3">
-         <label for="links_command" class="form-label">Команда</label>
+      <div class="card mb-3">
+         <label for="links_command" class="card-header">Команда</label>
          <textarea class="form-control" id="links_command" name="links_command" rows="1" placeholder="Введите команду"
             required>{{ edit_links_command_view.links_command }}</textarea>
       </div>
-      <div class="mb-3">
-         <label for="links_name" class="form-label">Описание команды</label>
+      <div class="card mb-3">
+         <label for="links_name" class="card-header">Описание команды</label>
          <textarea class="form-control" id="links_name" name="links_name" rows="3" placeholder="Введите описание команды"
             required>{{ edit_links_command_view.links_name }}</textarea>
-         <ul class="list-group list-group-horizontal">
-            <li class="list-group-item">
-               <button type="submit" value=><img
-                     src="/static/icons/save.png"></button>
-            </li>
-            <li class="list-group-item"><a href="{{ url_for('links_list_commands') }}"><img
-                     src="/static/icons/list.png"></a>
-            </li>
-         </ul>
       </div>
+      <div class="card mb-3">
+         <label for="links_description" class="card-header">Описание команды</label>
+         <textarea class="form-control" id="links_description" name="links_description" rows="3" placeholder="Введите описание команды"
+            required>{{ edit_links_command_view.links_description }}</textarea>
+      </div>
+      <ul class="list-group list-group-horizontal">
+         <li class="list-group-item">
+             <a href="{{ url_for('links_list_commands') }}">Вернуться к списку</a>
+         </li>
+         <li class="list-group-item">
+            <button type="submit" value="" class="add">Сохранить изменения</button>
+         </li>
+      </ul>
    </form>
 </div>
-
+<div class="container p-4">
+   {% include 'errors.html' %}
+</div>
 {% endblock %}
