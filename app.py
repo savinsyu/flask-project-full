@@ -433,7 +433,7 @@ def delete_pandas_command(pandas_id):
 @app.route("/links")
 def links_list_commands():
     conn = get_db_connection()
-    links_list = conn.execute("SELECT * FROM links").fetchall()
+    links_list = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("links/links_list_commands.html",
                            links_list=links_list, )
