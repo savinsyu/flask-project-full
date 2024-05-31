@@ -68,7 +68,7 @@ The page itself can be simply copied from index.html to change the content.
 HTML page.
 ```
 <title>Python Flask File Upload Example</title>
-<h2>Select a file to upload</h2>
+<h2>Select a file to upload</h4>
 <p>
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}

@@ -74,8 +74,17 @@ def close_db_connection(conn):
 @app.route("/")
 def index():
     conn = get_db_connection()
-    last_post = conn.execute("SELECT * FROM links ORDER BY links_id DESC").fetchone()
-    return render_template("index.html", last_post=last_post)
+    last_links = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchone()
+    last_git = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchone()
+    last_pandas = conn.execute("SELECT * FROM pandas ORDER BY 1 DESC").fetchone()
+    last_sql = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchone()
+    last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
+    return render_template("index.html", 
+                           last_links=last_links,
+                           last_git = last_git,
+                           last_pandas = last_pandas,
+                           last_sql = last_sql,
+                           last_bash = last_bash,)
 
 
 # Блок Git
@@ -85,7 +94,7 @@ def git_list_commands():
     git_list = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("git/git_list_commands.html",
-                           git_list=git_list, )
+                           git_list=git_list,)
 
 
 @app.route("/git/view/<int:git_id>")

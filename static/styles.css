@@ -1,16 +1,25 @@
+/* Задаем глобальный стиль всем элементам */
 * {
     font-family: Bahnschrift;
-    font-size: 11pt;
+    font-size: 14pt;
     color: black;
+    margin: 0;
+    padding: 0;
 }
-
-.list-group-item a, .add{
+/* Задаем селектору всех ссылок значения */
+a {
+    color: black;
     text-decoration: none;
-    color: black;
-    font-size: 11pt;
-    font-weight: bold;
 }
 
-.list-group-item a:hover{
+a:hover {
     color: red;
+}
+/* Подклассу .card в index задаем минимальную высоту блока*/
+.index .card {
+    min-block-size: 200px;
+}
+
+.row {
+  margin: 10px;
 }
