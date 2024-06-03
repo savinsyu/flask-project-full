@@ -350,6 +350,179 @@ def delete_sql_command(sql_id):
     return redirect(url_for("sql_list_commands"))
 
 
+# Блок html
+@app.route("/html")
+def html_list_commands():
+    conn = get_db_connection()
+    html_list = conn.execute("SELECT * FROM html ORDER BY 1 DESC").fetchall()
+    conn.close()
+    return render_template("html/html_list_commands.html",
+                           html_list=html_list, )
+
+
+@app.route("/html/view/<int:html_id>")
+def get_post_html_command(html_id):
+    conn = get_db_connection()
+    html_view = conn.execute("SELECT * FROM html WHERE html_id = ?",
+                            (html_id,)).fetchone()
+    conn.close()
+    return render_template("html/html_view_command.html",
+                           html_view=html_view)
+
+
+@app.route("/html/edit/<int:html_id>/", methods=("GET", "POST"))
+def edit_html_command(html_id):
+    conn = get_db_connection()
+    edit_html_command_view = conn.execute("SELECT * FROM html WHERE html_id = ?",
+                                         (html_id,)).fetchone()
+    if request.method == "POST":
+        html_command_edit = request.form["html_command"]
+        html_name_edit = request.form["html_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        html_description_edit = request.form["html_description"]
+        if len(request.form['html_command']) > 4 and len(request.form['html_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "UPDATE html SET html_command = ?, html_name = ?, html_name = ? WHERE html_id = ?",
+                (html_command_edit, html_name_edit, html_description_edit, html_id),
+            )
+            conn.commit()
+            conn.close()
+            if not html_command_edit:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("html_list_commands"))
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("html/edit_html_command.html", edit_html_command_view=edit_html_command_view)
+
+
+@app.route("/html/new_html_command", methods=["GET", "POST"])
+def add_html_command():
+    if request.method == "POST":
+        new_html_command = request.form["html_command"]
+        new_html_name = request.form["html_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        new_html_description = request.form["html_description"]
+        if len(request.form['html_command']) > 4 and len(request.form['html_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO html (html_command, html_name, html_description) VALUES (?, ?, ?)",
+                (new_html_command, new_html_name, new_html_description)
+            )
+            conn.commit()
+            conn.close()
+            if not new_html_command:
+                flash('Ошибка сохранения записи!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("html_list_commands"))
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("html/add_html_command.html")
+
+
+@app.route("/html/delete/<int:html_id>/", methods=("POST",))
+def delete_html_command(html_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM html WHERE html_id = ?",
+                 (html_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("html_list_commands"))
+
+
+# Блок css
+@app.route("/css")
+def css_list_commands():
+    conn = get_db_connection()
+    css_list = conn.execute("SELECT * FROM css ORDER BY 1 DESC").fetchall()
+    conn.close()
+    return render_template("css/css_list_commands.html",
+                           css_list=css_list, )
+
+
+@app.route("/css/view/<int:css_id>")
+def get_post_css_command(css_id):
+    conn = get_db_connection()
+    css_view = conn.execute("SELECT * FROM css WHERE css_id = ?",
+                            (css_id,)).fetchone()
+    conn.close()
+    return render_template("css/css_view_command.html",
+                           css_view=css_view)
+
+
+@app.route("/css/edit/<int:css_id>/", methods=("GET", "POST"))
+def edit_css_command(css_id):
+    conn = get_db_connection()
+    edit_css_command_view = conn.execute("SELECT * FROM css WHERE css_id = ?",
+                                         (css_id,)).fetchone()
+    if request.method == "POST":
+        css_command_edit = request.form["css_command"]
+        css_name_edit = request.form["css_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        css_description_edit = request.form["css_description"]
+        if len(request.form['css_command']) > 4 and len(request.form['css_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "UPDATE css SET css_command = ?, css_name = ?, css_name = ? WHERE css_id = ?",
+                (css_command_edit, css_name_edit, css_description_edit, css_id),
+            )
+            conn.commit()
+            conn.close()
+            if not css_command_edit:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("css_list_commands"))
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("css/edit_css_command.html", edit_css_command_view=edit_css_command_view)
+
+
+@app.route("/css/new_css_command", methods=["GET", "POST"])
+def add_css_command():
+    if request.method == "POST":
+        new_css_command = request.form["css_command"]
+        new_css_name = request.form["css_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        new_css_description = request.form["css_description"]
+        if len(request.form['css_command']) > 4 and len(request.form['css_name']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO css (css_command, css_name, css_description) VALUES (?, ?, ?)",
+                (new_css_command, new_css_name, new_css_description)
+            )
+            conn.commit()
+            conn.close()
+            if not new_css_command:
+                flash('Ошибка сохранения записи!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("css_list_commands"))
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("css/add_css_command.html")
+
+
+@app.route("/css/delete/<int:css_id>/", methods=("POST",))
+def delete_css_command(css_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM css WHERE css_id = ?",
+                 (css_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("css_list_commands"))
+
 # Блок Pandas
 @app.route("/pandas")
 def pandas_list_commands():

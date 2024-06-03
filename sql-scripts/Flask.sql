@@ -22,7 +22,7 @@ INSERT INTO  git_and_bash (command, name) VALUES ('date', 'Вывод текущ
 
 # Добавление нескольких записей в таблицу
 
-INSERT INTO  git_and_bash (command, name) VALUES 
+INSERT INTO  git_and_bash (command, name) VALUES
 ('date', 'Вывод текущей даты и времени'),
 ('test1', 'test1');
 

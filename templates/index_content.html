@@ -69,5 +69,31 @@
             </div>
          </div>
       </div>
+      <div class="col-sm-6">
+         <div class="card">
+            <h4 class="card-header">Последняя добавленная команда HTML.</h4>
+            <div class="card-body">
+               <h5 class="card-title">{{ last_html.html_name }}</h5>
+               <ul class="list-group list-group-horizontal">
+                  <li class="list-group-item">
+                     <a href="{{ url_for('git_list_commands') }}">Перейти ко всем командам HTML</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="col-sm-6">
+         <div class="card">
+            <h4 class="card-header">Последняя добавленная команда CSS.</h4>
+            <div class="card-body">
+               <h5 class="card-title">{{ last_css.css_name }}</h5>
+               <ul class="list-group list-group-horizontal">
+                  <li class="list-group-item">
+                     <a href="{{ url_for('git_list_commands') }}">Перейти ко всем командам CSS</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
    </div>
 </div>

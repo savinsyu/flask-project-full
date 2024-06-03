@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать запись{% endblock %}
+{% block content %}
+<div class="container p-4">
+   <form method="post">
+      <div class="card mb-3">
+         <label for="html_command" class="card-header">Команда</label>
+         <textarea class="form-control" id="html_command" name="html_command" rows="1" placeholder="Введите команду"
+            required>{{ edit_html_command_view.html_command }}</textarea>
+      </div>
+      <div class="card mb-3">
+         <label for="html_name" class="card-header">Описание команды</label>
+         <textarea class="form-control" id="html_name" name="html_name" rows="1" placeholder="Введите описание команды"
+            required>{{ edit_html_command_view.html_name }}</textarea>
+      </div>
+      <div class="card mb-3">
+         <label for="html_description" class="card-header">Подробно</label>
+         <textarea class="form-control" id="html_description" name="html_description" rows="8" placeholder="Введите описание команды"
+            required>{{ edit_html_command_view.html_description }}</textarea>
+      </div>
+      <ul class="list-group list-group-horizontal">
+         <li class="list-group-item">
+             <a href="{{ url_for('html_list_commands') }}">Вернуться к списку</a>
+         </li>
+         <li class="list-group-item">
+            <button type="submit" value="" class="add">Сохранить изменения</button>
+         </li>
+      </ul>
+   </form>
+</div>
+<div class="container p-4">
+   {% include 'errors.html' %}
+</div>
+{% endblock %}
