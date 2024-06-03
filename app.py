@@ -4,6 +4,7 @@ try:
     from datetime import datetime as dt
     from flask import Flask, render_template, request, redirect, url_for, flash, make_response
     from password_generator import generate_password
+    from models import index
 
     print('Все библиотеки установлены.')
 except ModuleNotFoundError:
@@ -79,12 +80,16 @@ def index():
     last_pandas = conn.execute("SELECT * FROM pandas ORDER BY 1 DESC").fetchone()
     last_sql = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchone()
     last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
-    return render_template("index.html", 
+    last_html = conn.execute("SELECT * FROM html ORDER BY 1 DESC").fetchone()
+    last_css = conn.execute("SELECT * FROM css ORDER BY 1 DESC").fetchone()
+    return render_template("index.html",
                            last_links=last_links,
-                           last_git = last_git,
-                           last_pandas = last_pandas,
-                           last_sql = last_sql,
-                           last_bash = last_bash,)
+                           last_git=last_git,
+                           last_pandas=last_pandas,
+                           last_sql=last_sql,
+                           last_bash=last_bash,
+                           last_css=last_css,
+                           last_html=last_html,)
 
 
 # Блок Git
@@ -94,7 +99,7 @@ def git_list_commands():
     git_list = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("git/git_list_commands.html",
-                           git_list=git_list,)
+                           git_list=git_list, )
 
 
 @app.route("/git/view/<int:git_id>")
@@ -364,7 +369,7 @@ def html_list_commands():
 def get_post_html_command(html_id):
     conn = get_db_connection()
     html_view = conn.execute("SELECT * FROM html WHERE html_id = ?",
-                            (html_id,)).fetchone()
+                             (html_id,)).fetchone()
     conn.close()
     return render_template("html/html_view_command.html",
                            html_view=html_view)
@@ -374,7 +379,7 @@ def get_post_html_command(html_id):
 def edit_html_command(html_id):
     conn = get_db_connection()
     edit_html_command_view = conn.execute("SELECT * FROM html WHERE html_id = ?",
-                                         (html_id,)).fetchone()
+                                          (html_id,)).fetchone()
     if request.method == "POST":
         html_command_edit = request.form["html_command"]
         html_name_edit = request.form["html_name"]
@@ -470,7 +475,7 @@ def edit_css_command(css_id):
         if len(request.form['css_command']) > 4 and len(request.form['css_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "UPDATE css SET css_command = ?, css_name = ?, css_name = ? WHERE css_id = ?",
+                "UPDATE css SET css_command = ?, css_name = ?, css_description = ? WHERE css_id = ?",
                 (css_command_edit, css_name_edit, css_description_edit, css_id),
             )
             conn.commit()
@@ -522,6 +527,7 @@ def delete_css_command(css_id):
     conn.commit()
     conn.close()
     return redirect(url_for("css_list_commands"))
+
 
 # Блок Pandas
 @app.route("/pandas")

@@ -1,5 +1,11 @@
 {% extends "base.html" %} {% block title %}Команды Git{% endblock %} {% block content %}
 <div class="container p-4">
+   <!--В этом коде выводим кнопку добавления вне цикла, так как может не быть записей в таблицу-->
+   <div class="card mb-3">
+      <div class="card-header text-center">
+         <a href="{{ url_for('add_git_command') }}">Добавить запись в базу данных</a>
+      </div>
+   </div>
    {% for git_list in git_list %}
    <div class="card mb-3">
       <h5 class="card-header">{{ git_list['git_name'] }}</h5>

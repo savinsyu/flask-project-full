@@ -1,7 +1,8 @@
 {% extends "base.html" %} {% block title %}Команды html{% endblock %} {% block content %}
 <div class="container p-4">
+<!--В этом коде выводим кнопку добавления вне цикла, так как может не быть записей в таблицу-->
    <div class="card mb-3">
-      <div class="card-body">
+      <div class="card-header text-center">
          <a href="{{ url_for('add_html_command') }}">Добавить запись в базу данных</a>
       </div>
    </div>
