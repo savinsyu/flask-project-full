@@ -1,0 +1,36 @@
+{% extends "base.html" %} {% block title %}Команды healthy{% endblock %} {% block content %}
+<div class="container p-4">
+<!--В этом коде выводим кнопку добавления вне цикла, так как может не быть записей в таблицу-->
+   <div class="card mb-3">
+      <div class="card-header text-center">
+         <a href="{{ url_for('add_healthy_post') }}">Добавить запись в базу данных</a>
+      </div>
+   </div>
+   {% for healthy_list in healthy_list %}
+   <div class="card mb-3">
+      <h5 class="card-header">{{ healthy_list['healthy_header'] }}</h5>
+      <div class="card-body">
+         <p class="card-text">{{ healthy_list['healthy_content'] }}</p>
+         <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+               <a href="{{ url_for('add_healthy_post') }}">Добавить</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('edit_healthy_post', healthy_id=healthy_list['healthy_id']) }}">Редактировать</a>
+            </li>
+            <li class="list-group-item">
+               <a href="{{ url_for('get_post_healthy', healthy_id=healthy_list['healthy_id']) }}">Посмотреть</a>
+            </li>
+            <li class="list-group-item">
+               <form action="{{ url_for('delete_healthy_post', healthy_id=healthy_list['healthy_id']) }}" class="add"
+                  method="POST">
+                  <input type="submit" value="Удалить"
+                     onclick="return confirm('Вы уверены что хотите удалить запись?')" />
+               </form>
+            </li>
+         </ul>
+      </div>
+   </div>
+   {% endfor %}
+</div>
+{% endblock %}

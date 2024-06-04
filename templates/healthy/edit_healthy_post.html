@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать пост{% endblock %}
+{% block content %}
+<div class="container p-4">
+   <form method="post">
+      <div class="card mb-3">
+         <label for="healthy_header" class="card-header">Название</label>
+         <textarea class="form-control" id="healthy_header" name="healthy_header" rows="1" placeholder="Введите название"
+            required>{{ edit_healthy_post_view.healthy_command }}</textarea>
+      </div>
+      <div class="card mb-3">
+         <label for="healthy_content" class="card-header">Описание</label>
+         <textarea class="form-control" id="healthy_content" name="healthy_content" rows="1" placeholder="Введите описание"
+            required>{{ edit_healthy_post_view.healthy_name }}</textarea>
+      </div>
+      <ul class="list-group list-group-horizontal">
+         <li class="list-group-item">
+             <a href="{{ url_for('healthy_list_posts') }}">Вернуться к списку</a>
+         </li>
+         <li class="list-group-item">
+            <button type="submit" value="" class="add">Сохранить изменения</button>
+         </li>
+      </ul>
+   </form>
+</div>
+<div class="container p-4">
+   {% include 'errors.html' %}
+</div>
+{% endblock %}

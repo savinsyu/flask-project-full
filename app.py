@@ -82,6 +82,7 @@ def index():
     last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
     last_html = conn.execute("SELECT * FROM html ORDER BY 1 DESC").fetchone()
     last_css = conn.execute("SELECT * FROM css ORDER BY 1 DESC").fetchone()
+    last_healthy = conn.execute("SELECT * FROM healthy ORDER BY 1 DESC").fetchone()
     return render_template("index.html",
                            last_links=last_links,
                            last_git=last_git,
@@ -89,7 +90,8 @@ def index():
                            last_sql=last_sql,
                            last_bash=last_bash,
                            last_css=last_css,
-                           last_html=last_html,)
+                           last_html=last_html,
+                           last_healthy=last_healthy,)
 
 
 # Блок Git
@@ -266,6 +268,90 @@ def delete_bash_command(bash_id):
     conn.commit()
     conn.close()
     return redirect(url_for("bash_list_commands"))
+
+# Блок Healthy
+@app.route("/healthy")
+def healthy_list_posts():
+    conn = get_db_connection()
+    healthy_list = conn.execute("SELECT * FROM healthy ORDER BY 1 DESC").fetchall()
+    conn.close()
+    return render_template("healthy/healthy_list_posts.html",
+                           healthy_list=healthy_list)
+
+
+@app.route("/healthy/view/<int:healthy_id>")
+def get_post_healthy(healthy_id):
+    conn = get_db_connection()
+    healthy_view = conn.execute("SELECT * FROM healthy WHERE healthy_id = ?",
+                             (healthy_id,)).fetchone()
+    conn.close()
+    return render_template("healthy/healthy_view_post.html",
+                           healthy_view=healthy_view)
+
+
+@app.route("/healthy/edit/<int:healthy_id>/", methods=("GET", "POST"))
+def edit_healthy_post(healthy_id):
+    conn = get_db_connection()
+    edit_healthy_post_view = conn.execute("SELECT * FROM healthy WHERE healthy_id = ?",
+                                          (healthy_id,)).fetchone()
+    if request.method == "POST":
+        healthy_header_edit = request.form["healthy_header"]
+        healthy_content_edit = request.form["healthy_content"]
+        if len(request.form['healthy_header']) > 1 and len(request.form['healthy_content']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "UPDATE healthy SET healthy_header = ?, healthy_content = ? WHERE healthy_id = ?",
+                (healthy_header_edit, healthy_content_edit,  healthy_id),
+            )
+            conn.commit()
+            conn.close()
+            if not healthy_content_edit:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("healthy_list_posts"))
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("healthy/edit_healthy_post.html", edit_healthy_post_view=edit_healthy_post_view)
+
+
+@app.route("/healthy/new_post", methods=["GET", "POST"])
+def add_healthy_post():
+    if request.method == "POST":
+        healthy_header = request.form["healthy_header"]
+        healthy_content = request.form["healthy_content"]
+        if len(request.form['healthy_header']) > 1 and len(request.form['healthy_content']) > 10:
+            conn = get_db_connection()
+            conn.execute(
+                "INSERT INTO healthy (healthy_header, healthy_content) VALUES (?, ?)",
+                (healthy_header, healthy_content)
+            )
+            conn.commit()
+            conn.close()
+            if not healthy_content:
+                flash('Ошибка сохранения записи, Вы ввели слишком мало символов!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("healthy_list_posts"))
+
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("healthy/add_healthy_post.html")
+
+
+@app.route("/healthy/delete/<int:healthy_id>/", methods=("POST",))
+def delete_healthy_post(healthy_id):
+    conn = get_db_connection()
+    conn.execute("DELETE FROM healthy WHERE healthy_id = ?",
+                 (healthy_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("healthy_list_posts"))
 
 
 # Блок SQL
