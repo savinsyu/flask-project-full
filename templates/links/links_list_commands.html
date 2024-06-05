@@ -20,6 +20,7 @@
                <a href="{{ url_for('edit_links_command', links_id=links_list['links_id']) }}">Редактировать</a>
             </li>
             <li class="list-group-item">
+               <!--Указываем ссылку для просмотра записи, в url передаем функцию просмотра, а после запятой указываем id текущей функции из базы данных-->
                <a href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">Посмотреть</a>
             </li>
             <li class="list-group-item">
@@ -34,4 +35,3 @@
    {% endfor %}
 </div>
 {% endblock %}
-      
