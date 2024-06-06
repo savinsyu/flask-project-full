@@ -1,14 +1,8 @@
-try:
-    import sqlite3
-    from datetime import datetime as dt
-    from datetime import datetime as dt
-    from flask import Flask, render_template, request, redirect, url_for, flash, make_response
-    from password_generator import generate_password
-    from models import index
-
-    print('Все библиотеки установлены.')
-except ModuleNotFoundError:
-    print('Некоторые библиотеки не установлены.')
+import sqlite3
+from datetime import datetime as dt
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response
+from password_generator import generate_password
+from flask_paginate import Pagination, get_page_args
 
 app = Flask(__name__)
 
@@ -91,7 +85,7 @@ def index():
                            last_bash=last_bash,
                            last_css=last_css,
                            last_html=last_html,
-                           last_healthy=last_healthy,)
+                           last_healthy=last_healthy, )
 
 
 # Блок Git
@@ -100,8 +94,23 @@ def git_list_commands():
     conn = get_db_connection()
     git_list = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchall()
     conn.close()
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(git_list)
+
+    def get_git_list(offset=0, per_page=5):
+        return git_list[offset: offset + per_page]
+
+    pagination_git = get_git_list(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
     return render_template("git/git_list_commands.html",
-                           git_list=git_list, )
+                           git_list=pagination_git,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
+                           )
 
 
 @app.route("/git/view/<int:git_id>")
@@ -187,8 +196,23 @@ def bash_list_commands():
     conn = get_db_connection()
     bash_list = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchall()
     conn.close()
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(bash_list)
+
+    def get_bash_list(offset=0, per_page=5):
+        return bash_list[offset: offset + per_page]
+
+    pagination_bash = get_bash_list(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
     return render_template("bash/bash_list_commands.html",
-                           bash_list=bash_list, )
+                           bash_list=pagination_bash,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
+                           )
 
 
 @app.route("/bash/view/<int:bash_id>")
@@ -269,21 +293,37 @@ def delete_bash_command(bash_id):
     conn.close()
     return redirect(url_for("bash_list_commands"))
 
+
 # Блок Healthy
 @app.route("/healthy")
 def healthy_list_posts():
     conn = get_db_connection()
     healthy_list = conn.execute("SELECT * FROM healthy ORDER BY 1 DESC").fetchall()
     conn.close()
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(healthy_list)
+
+    def get_healthy_list(offset=0, per_page=5):
+        return healthy_list[offset: offset + per_page]
+
+    pagination_healthy = get_healthy_list(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
     return render_template("healthy/healthy_list_posts.html",
-                           healthy_list=healthy_list)
+                           healthy_list=pagination_healthy,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
+                           )
 
 
 @app.route("/healthy/view/<int:healthy_id>")
 def get_post_healthy(healthy_id):
     conn = get_db_connection()
     healthy_view = conn.execute("SELECT * FROM healthy WHERE healthy_id = ?",
-                             (healthy_id,)).fetchone()
+                                (healthy_id,)).fetchone()
     conn.close()
     return render_template("healthy/healthy_view_post.html",
                            healthy_view=healthy_view)
@@ -301,7 +341,7 @@ def edit_healthy_post(healthy_id):
             conn = get_db_connection()
             conn.execute(
                 "UPDATE healthy SET healthy_header = ?, healthy_content = ? WHERE healthy_id = ?",
-                (healthy_header_edit, healthy_content_edit,  healthy_id),
+                (healthy_header_edit, healthy_content_edit, healthy_id),
             )
             conn.commit()
             conn.close()
@@ -360,8 +400,23 @@ def sql_list_commands():
     conn = get_db_connection()
     sql_list = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchall()
     conn.close()
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(sql_list)
+
+    def get_sql_list(offset=0, per_page=5):
+        return sql_list[offset: offset + per_page]
+
+    pagination_sql = get_sql_list(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
     return render_template("sql/sql_list_commands.html",
-                           sql_list=sql_list, )
+                           sql_list=pagination_sql,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
+                           )
 
 
 @app.route("/sql/view/<int:sql_id>")
@@ -447,8 +502,23 @@ def html_list_commands():
     conn = get_db_connection()
     html_list = conn.execute("SELECT * FROM html ORDER BY 1 DESC").fetchall()
     conn.close()
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(html_list)
+
+    def get_html_list(offset=0, per_page=5):
+        return html_list[offset: offset + per_page]
+
+    pagination_html = get_html_list(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
     return render_template("html/html_list_commands.html",
-                           html_list=html_list, )
+                           html_list=pagination_html,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
+                           )
 
 
 @app.route("/html/view/<int:html_id>")
@@ -534,8 +604,23 @@ def css_list_commands():
     conn = get_db_connection()
     css_list = conn.execute("SELECT * FROM css ORDER BY 1 DESC").fetchall()
     conn.close()
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(css_list)
+
+    def get_css_list(offset=0, per_page=5):
+        return css_list[offset: offset + per_page]
+
+    pagination_css = get_css_list(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
     return render_template("css/css_list_commands.html",
-                           css_list=css_list, )
+                           css_list=pagination_css,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
+                           )
 
 
 @app.route("/css/view/<int:css_id>")
@@ -621,8 +706,23 @@ def pandas_list_commands():
     conn = get_db_connection()
     pandas_list = conn.execute("SELECT * FROM pandas ORDER BY 1 DESC").fetchall()
     conn.close()
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(pandas_list)
+
+    def get_pandas_list(offset=0, per_page=5):
+        return pandas_list[offset: offset + per_page]
+
+    pagination_pandas = get_pandas_list(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
     return render_template("pandas/pandas_list_commands.html",
-                           pandas_list=pandas_list, )
+                           pandas_list=pagination_pandas,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
+                           )
 
 
 @app.route("/pandas/view/<int:pandas_id>")
@@ -709,8 +809,23 @@ def links_list_commands():
     conn = get_db_connection()
     links_list = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchall()
     conn.close()
+
+    page, per_page, offset = get_page_args(page_parameter='page',
+                                           per_page_parameter='per_page')
+    total = len(links_list)
+
+    def get_links_list(offset=0, per_page=5):
+        return links_list[offset: offset + per_page]
+
+    pagination_links = get_links_list(offset=offset, per_page=per_page)
+    pagination = Pagination(page=page, per_page=per_page, total=total,
+                            css_framework='bootstrap4')
     return render_template("links/links_list_commands.html",
-                           links_list=links_list, )
+                           links_list=pagination_links,
+                           page=page,
+                           per_page=per_page,
+                           pagination=pagination,
+                           )
 
 
 @app.route("/links/view/<int:links_id>")

@@ -6,6 +6,8 @@
          <a href="{{ url_for('add_pandas_command') }}">Добавить запись в базу данных</a>
       </div>
    </div>
+   {{ pagination.links }}
+   {{ pagination.info }}
    {% for pandas_list in pandas_list %}
    <div class="card mb-3">
       <h5 class="card-header">{{ pandas_list['pandas_name'] }}</h5>
@@ -33,5 +35,6 @@
       </div>
    </div>
    {% endfor %}
+   {{ pagination.links }}
 </div>
 {% endblock %}

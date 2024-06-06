@@ -6,6 +6,8 @@
          <a href="{{ url_for('add_git_command') }}">Добавить запись в базу данных</a>
       </div>
    </div>
+   {{ pagination.links }}
+   {{ pagination.info }}
    {% for git_list in git_list %}
    <div class="card mb-3">
       <h5 class="card-header">{{ git_list['git_name'] }}</h5>
@@ -32,5 +34,6 @@
       </div>
    </div>
    {% endfor %}
+   {{ pagination.links }}
 </div>
 {% endblock %}

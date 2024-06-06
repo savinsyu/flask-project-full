@@ -6,6 +6,8 @@
          <a href="{{ url_for('add_bash_command') }}">Добавить запись в базу данных</a>
       </div>
    </div>
+  {{ pagination.links }}
+  {{ pagination.info }}
    {% for bash_list in bash_list %}
    <div class="card mb-3">
       <h5 class="card-header">{{ bash_list['bash_name'] }}</h5>
@@ -33,5 +35,6 @@
       </div>
    </div>
    {% endfor %}
+   {{ pagination.links }}
 </div>
 {% endblock %}

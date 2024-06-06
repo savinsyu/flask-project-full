@@ -8,18 +8,10 @@
 }
 /* Задаем селектору всех ссылок значения */
 a {
-    color: black;
+
     text-decoration: none;
 }
 
 a:hover {
     color: red;
-}
-/* Подклассу .card в index задаем минимальную высоту блока*/
-.index .card {
-    min-block-size: 200px;
-}
-
-.row {
-  margin: 10px;
 }

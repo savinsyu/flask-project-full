@@ -6,6 +6,8 @@
          <a href="{{ url_for('add_healthy_post') }}">Добавить запись в базу данных</a>
       </div>
    </div>
+   {{ pagination.links }}
+   {{ pagination.info }}
    {% for healthy_list in healthy_list %}
    <div class="card mb-3">
       <h5 class="card-header">{{ healthy_list['healthy_header'] }}</h5>
@@ -32,5 +34,6 @@
       </div>
    </div>
    {% endfor %}
+   {{ pagination.links }}
 </div>
 {% endblock %}
