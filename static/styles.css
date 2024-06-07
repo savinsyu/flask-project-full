@@ -6,9 +6,10 @@ a {
     color: red;
     background: rgb(255, 255, 255);
 }
+
 .navbar-dark .navbar-nav .nav-link:hover {
     color: red;
-}}
+}
 
 a:hover,
 .page-link:hover {
