@@ -196,7 +196,6 @@ def bash_list_commands():
     conn = get_db_connection()
     bash_list = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchall()
     conn.close()
-
     page, per_page, offset = get_page_args(page_parameter='page',
                                            per_page_parameter='per_page')
     total = len(bash_list)
