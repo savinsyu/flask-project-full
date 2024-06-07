@@ -818,7 +818,9 @@ def links_list_commands():
         return links_list[offset: offset + per_page]
 
     pagination_links = get_links_list(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total,
+    pagination = Pagination(page=page,
+                            per_page=per_page,
+                            total=total,
                             css_framework='bootstrap4')
     return render_template("links/links_list_commands.html",
                            links_list=pagination_links,
