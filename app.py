@@ -104,7 +104,9 @@ def git_list_commands():
 
     pagination_git = get_git_list(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
+                            css_framework='bootstrap4',
+                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
+                            record_name="записей")
     return render_template("git/git_list_commands.html",
                            git_list=pagination_git,
                            page=page,
@@ -205,7 +207,12 @@ def bash_list_commands():
 
     pagination_bash = get_bash_list(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
+                            css_framework='bootstrap4',
+                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
+                            record_name="записей",
+                            next_label="Следующая",
+                            prev_label="Предыдущая"
+                            )
     return render_template("bash/bash_list_commands.html",
                            bash_list=pagination_bash,
                            page=page,
@@ -309,7 +316,12 @@ def healthy_list_posts():
 
     pagination_healthy = get_healthy_list(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
+                            css_framework='bootstrap4',
+                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
+                            record_name="записей",
+                            next_label="Следующая",
+                            prev_label="Предыдущая"
+                            )
     return render_template("healthy/healthy_list_posts.html",
                            healthy_list=pagination_healthy,
                            page=page,
@@ -409,7 +421,10 @@ def sql_list_commands():
 
     pagination_sql = get_sql_list(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
+                            css_framework='bootstrap4',
+                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
+                            record_name="записей"
+                            )
     return render_template("sql/sql_list_commands.html",
                            sql_list=pagination_sql,
                            page=page,
@@ -511,7 +526,12 @@ def html_list_commands():
 
     pagination_html = get_html_list(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
+                            css_framework='bootstrap4',
+                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
+                            record_name="записей",
+                            next_label="Следующая",
+                            prev_label="Предыдущая"
+                            )
     return render_template("html/html_list_commands.html",
                            html_list=pagination_html,
                            page=page,
@@ -613,7 +633,12 @@ def css_list_commands():
 
     pagination_css = get_css_list(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
+                            css_framework='bootstrap4',
+                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
+                            record_name="записей",
+                            next_label="Следующая",
+                            prev_label="Предыдущая"
+                            )
     return render_template("css/css_list_commands.html",
                            css_list=pagination_css,
                            page=page,
@@ -715,7 +740,12 @@ def pandas_list_commands():
 
     pagination_pandas = get_pandas_list(offset=offset, per_page=per_page)
     pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4')
+                            css_framework='bootstrap4',
+                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
+                            record_name="записей",
+                            next_label="Следующая",
+                            prev_label="Предыдущая"
+                            )
     return render_template("pandas/pandas_list_commands.html",
                            pandas_list=pagination_pandas,
                            page=page,
@@ -820,7 +850,12 @@ def links_list_commands():
     pagination = Pagination(page=page,
                             per_page=per_page,
                             total=total,
-                            css_framework='bootstrap4')
+                            css_framework='bootstrap4',
+                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
+                            record_name="записей",
+                            next_label="Следующая",
+                            prev_label="Предыдущая"
+                            )
     return render_template("links/links_list_commands.html",
                            links_list=pagination_links,
                            page=page,
