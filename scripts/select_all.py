@@ -1,5 +1,6 @@
 # Подключаем библиотеку sqlite3
 import sqlite3
+import pandas as pd
 
 # Подключаемся в базе данных
 con = sqlite3.connect("../database.db")

@@ -67,6 +67,10 @@ def close_db_connection(conn):
 
 
 @app.route("/")
+def files():
+    return render_template("files.html")
+
+@app.route("/")
 def index():
     conn = get_db_connection()
     last_links = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchone()
