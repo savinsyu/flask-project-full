@@ -1,44 +1,39 @@
 * {
+  font-family:Century Gothic;
+}
+
+.nav-link {
+  font-size: 1.4rem;
+}
+
+.container {
   font-size: 1.2rem;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  padding: 0;
-  margin: 0;
-  color: #000;
-  transition: none;
 }
 
 a {
-  color: #000;
+  color: rgba(0, 0, 0, 0.7);
   text-decoration: none;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover,
 a:hover,
 .page-link:hover,
-.card-header a:hover,
-.page-link:hover {
-  color: red;
+.card-header a:hover {
+  color: rgba(164, 25, 25, 0.9);
   background-color: transparent;
 }
 
 .page-link {
-  color: #000;
+  color: rgba(0, 0, 0, 0.2);
   transition: none;
+  font-size: 1.2rem;
 }
 
 .page-item.active .page-link {
   background-color: transparent;
-  color: #000;
+  color: rgba(0, 0, 0, 0.5);
   border-color: #000;
   font-weight: 600;
-}
-
-pagination-page-info {
-  padding: 1rem;
-}
-
-.row {
-  padding: 1.5rem;
 }
 
 .sr-only {
@@ -48,19 +43,28 @@ pagination-page-info {
 .button {
   background: transparent;
   border-color: transparent;
-  color: red;
+  color: rgba(164, 25, 25, 0.5);
 }
 
 li.list-group-item.delete:hover {
-  background: black;
+  background: rgba(141, 138, 138, 0.5);
 }
 
 .save:hover {
-  background: grey;
+  background: rgba(0, 0, 0, 0.5);
   color: blueviolet;
 }
 
 .add {
   background: transparent;
   border-color: transparent;
+}
+
+.row {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.card {
+  height: 100%;
 }
