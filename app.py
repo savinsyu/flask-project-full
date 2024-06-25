@@ -1,7 +1,6 @@
 import sqlite3
-from datetime import datetime as dt
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response
-
+import os.path
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_paginate import Pagination, get_page_args
 
 app = Flask(__name__)
@@ -16,8 +15,12 @@ def page_not_found(e):
     return render_template('404.html'), 404
 
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
 def get_db_connection():
-    conn = sqlite3.connect("database.db")
+    db_path = os.path.join(BASE_DIR, "database.db")
+    conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
 
