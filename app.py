@@ -8,6 +8,7 @@ app = Flask(__name__)
 
 app.secret_key = "secret key"
 
+
 # RUS Пишем логику для отображения страницы с 404 ошибкой
 # ENG Handling 404 Error in Flask
 @app.errorhandler(404)
