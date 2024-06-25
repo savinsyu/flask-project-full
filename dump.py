@@ -2,7 +2,7 @@ import sqlite3
 import io
 # RUS Создаем подключение к файлу базы данных
 # ENG Create a connection to the database file
-conn = sqlite3.connect('database.db')
+conn = sqlite3.connect('database1.db')
 
 # RUS Сохраняем в файл дамп базы данных (папка dump)
 # ENG Save the database dump to a file (dump folder)

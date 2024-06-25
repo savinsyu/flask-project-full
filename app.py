@@ -1,53 +1,12 @@
 import sqlite3
 from datetime import datetime as dt
 from flask import Flask, render_template, request, redirect, url_for, flash, make_response
-from password_generator import generate_password
+
 from flask_paginate import Pagination, get_page_args
 
 app = Flask(__name__)
 
 app.secret_key = "secret key"
-
-
-@app.route("/password", methods=["POST", "GET"])
-def password():
-    options = {"debug": None, "language": "en", "spaces": "0", "symbol": "1",
-               "uppercase": "1"}
-    if request.method == "POST":
-        resp = make_response("")
-        for k in options:
-            # Ensure invalid POST variables are not left unhandled
-            try:
-                resp.set_cookie(
-                    f"fp_{k}", request.form.get(k),
-                    max_age=60 * 60 * 24 * 7)
-            except KeyError:
-                pass
-        resp.headers["location"] = "./"
-        return resp, 302
-    else:
-        # Prioritize GET values over cookies
-        for k in options:
-            try:
-                # Set default to ensure existing options are not overridden
-                # if HTML query strings or POST variables are not defined
-                if request.args.get(k, default=None) is not None:
-                    options[k] = request.args.get(k, '')
-                elif request.cookies.get(f"fp_{k}", default=None) is not None:
-                    options[k] = request.cookies.get(f"fp_{k}")
-            except KeyError:
-                pass
-        password = generate_password(
-            language=options["language"], spaces=options["spaces"],
-            symbol=options["symbol"], uppercase=options["uppercase"])
-        return render_template(
-            "generation_password.html", debug=options["debug"], debug_data=options,
-            # language=options["language"], release=RELEASE,
-            spaces=options["spaces"], symbol=options["symbol"],
-            uppercase=options["uppercase"], theme="sea-blue",
-            title="Password Generator", password=password, year=dt.now().year,
-        )
-
 
 # RUS Пишем логику для отображения страницы с 404 ошибкой
 # ENG Handling 404 Error in Flask
@@ -542,7 +501,7 @@ def python_list_commands():
 def get_post_python_command(python_id):
     conn = get_db_connection()
     python_view = conn.execute("SELECT * FROM python WHERE python_id = ?",
-                             (python_id,)).fetchone()
+                               (python_id,)).fetchone()
     conn.close()
     return render_template("python/python_view_command.html",
                            python_view=python_view)
@@ -552,7 +511,7 @@ def get_post_python_command(python_id):
 def edit_python_command(python_id):
     conn = get_db_connection()
     edit_python_command_view = conn.execute("SELECT * FROM python WHERE python_id = ?",
-                                          (python_id,)).fetchone()
+                                            (python_id,)).fetchone()
     if request.method == "POST":
         python_command_edit = request.form["python_command"]
         python_name_edit = request.form["python_name"]
