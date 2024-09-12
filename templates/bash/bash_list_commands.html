@@ -1,40 +1,26 @@
 {% extends "base.html" %} {% block title %}Команды bash{% endblock %} {% block content %}
-<div class="container p-4">
-<!--В этом коде выводим кнопку добавления вне цикла, так как может не быть записей в таблицу-->
+   <!--В этом коде выводим кнопку добавления вне цикла, так как может не быть записей в таблицу-->
    <div class="card mb-3">
       <div class="card-header text-center">
          <a href="{{ url_for('add_bash_command') }}">Добавить запись в базу данных</a>
       </div>
    </div>
-  {{ pagination.links }}
-  {{ pagination.info }}
+<table class="table">
+   <thead>
+      <tr>
+         <th scope="col">Название</th>
+         <th scope="col">Команда</th>
+         <th scope="col">Описание команды</th>
+      </tr>
+   </thead>
    {% for bash_list in bash_list %}
-   <div class="card mb-3">
-      <h5 class="card-header">{{ bash_list['bash_name'] }}</h5>
-      <div class="card-body">
-         <h5 class="card-title">{{ bash_list['bash_command'] }}</h5>
-         <p class="card-text">{{ bash_list['bash_description'] }}</p>
-         <ul class="list-group list-group-horizontal">
-            <li class="list-group-item">
-               <a href="{{ url_for('add_bash_command') }}">Добавить</a>
-            </li>
-            <li class="list-group-item">
-               <a href="{{ url_for('edit_bash_command', bash_id=bash_list['bash_id']) }}">Редактировать</a>
-            </li>
-            <li class="list-group-item">
-               <a href="{{ url_for('get_post_bash_command', bash_id=bash_list['bash_id']) }}">Посмотреть</a>
-            </li>
-            <li class="list-group-item delete">
-               <form action="{{ url_for('delete_bash_command', bash_id=bash_list['bash_id']) }}" class="add"
-                  method="POST">
-                  <input type="submit" class="button" value="Удалить"
-                     onclick="return confirm('Вы уверены что хотите удалить запись?')" />
-               </form>
-            </li>
-         </ul>
-      </div>
-   </div>
+   <tbody>
+      <tr>
+         <td>{{ bash_list['bash_name'] }}</td>
+         <td>{{ bash_list['bash_command']  }}</td>
+         <td>{{ bash_list['bash_description'] }}</td>
+      </tr>
+   </tbody>
    {% endfor %}
-   {{ pagination.links }}
-</div>
+   </table>
 {% endblock %}

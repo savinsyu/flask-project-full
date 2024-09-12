@@ -34,7 +34,6 @@ def index():
     conn = get_db_connection()
     last_links = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchone()
     last_git = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchone()
-    last_pandas = conn.execute("SELECT * FROM pandas ORDER BY 1 DESC").fetchone()
     last_sql = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchone()
     last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
     last_python = conn.execute("SELECT * FROM python ORDER BY 1 DESC").fetchone()
@@ -42,7 +41,6 @@ def index():
     return render_template("index.html",
                            last_links=last_links,
                            last_git=last_git,
-                           last_pandas=last_pandas,
                            last_sql=last_sql,
                            last_bash=last_bash,
                            last_python=last_python,
@@ -55,24 +53,8 @@ def git_list_commands():
     conn = get_db_connection()
     git_list = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchall()
     conn.close()
-
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    total = len(git_list)
-
-    def get_git_list(offset=0, per_page=5):
-        return git_list[offset: offset + per_page]
-
-    pagination_git = get_git_list(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4',
-                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
-                            record_name="записей")
     return render_template("git/git_list_commands.html",
-                           git_list=pagination_git,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
+                           git_list=git_list,
                            )
 
 
@@ -157,28 +139,10 @@ def delete_git_command(git_id):
 @app.route("/bash")
 def bash_list_commands():
     conn = get_db_connection()
-    bash_list = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchall()
+    bash_list = conn.execute("SELECT * FROM bash").fetchall()
     conn.close()
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    total = len(bash_list)
-
-    def get_bash_list(offset=0, per_page=5):
-        return bash_list[offset: offset + per_page]
-
-    pagination_bash = get_bash_list(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4',
-                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
-                            record_name="записей",
-                            next_label="Следующая",
-                            prev_label="Предыдущая"
-                            )
     return render_template("bash/bash_list_commands.html",
-                           bash_list=pagination_bash,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
+                           bash_list=bash_list,
                            )
 
 
@@ -265,29 +229,10 @@ def delete_bash_command(bash_id):
 @app.route("/healthy")
 def healthy_list_posts():
     conn = get_db_connection()
-    healthy_list = conn.execute("SELECT * FROM healthy ORDER BY 1 DESC").fetchall()
+    healthy_list = conn.execute("SELECT * FROM healthy").fetchall()
     conn.close()
-
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    total = len(healthy_list)
-
-    def get_healthy_list(offset=0, per_page=5):
-        return healthy_list[offset: offset + per_page]
-
-    pagination_healthy = get_healthy_list(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4',
-                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
-                            record_name="записей",
-                            next_label="Следующая",
-                            prev_label="Предыдущая"
-                            )
     return render_template("healthy/healthy_list_posts.html",
-                           healthy_list=pagination_healthy,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
+                           healthy_list=healthy_list,
                            )
 
 
@@ -370,27 +315,10 @@ def delete_healthy_post(healthy_id):
 @app.route("/sql")
 def sql_list_commands():
     conn = get_db_connection()
-    sql_list = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchall()
+    sql_list = conn.execute("SELECT * FROM sql").fetchall()
     conn.close()
-
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    total = len(sql_list)
-
-    def get_sql_list(offset=0, per_page=5):
-        return sql_list[offset: offset + per_page]
-
-    pagination_sql = get_sql_list(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4',
-                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
-                            record_name="записей"
-                            )
     return render_template("sql/sql_list_commands.html",
-                           sql_list=pagination_sql,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
+                           sql_list=sql_list,
                            )
 
 
@@ -477,27 +405,8 @@ def python_list_commands():
     conn = get_db_connection()
     python_list = conn.execute("SELECT * FROM python ORDER BY 1 DESC").fetchall()
     conn.close()
-
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    total = len(python_list)
-
-    def get_python_list(offset=0, per_page=5):
-        return python_list[offset: offset + per_page]
-
-    pagination_python = get_python_list(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4',
-                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
-                            record_name="записей",
-                            next_label="Следующая",
-                            prev_label="Предыдущая"
-                            )
     return render_template("python/python_list_commands.html",
-                           python_list=pagination_python,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
+                           python_list=python_list,
                            )
 
 
@@ -578,114 +487,6 @@ def delete_python_command(python_id):
     return redirect(url_for("python_list_commands"))
 
 
-# Блок Pandas
-@app.route("/pandas")
-def pandas_list_commands():
-    conn = get_db_connection()
-    pandas_list = conn.execute("SELECT * FROM pandas ORDER BY 1 DESC").fetchall()
-    conn.close()
-
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    total = len(pandas_list)
-
-    def get_pandas_list(offset=0, per_page=5):
-        return pandas_list[offset: offset + per_page]
-
-    pagination_pandas = get_pandas_list(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page, per_page=per_page, total=total,
-                            css_framework='bootstrap4',
-                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
-                            record_name="записей",
-                            next_label="Следующая",
-                            prev_label="Предыдущая"
-                            )
-    return render_template("pandas/pandas_list_commands.html",
-                           pandas_list=pagination_pandas,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
-                           )
-
-
-@app.route("/pandas/view/<int:pandas_id>")
-def get_post_pandas_command(pandas_id):
-    conn = get_db_connection()
-    pandas_view = conn.execute("SELECT * FROM pandas WHERE pandas_id = ?",
-                               (pandas_id,)).fetchone()
-    conn.close()
-    return render_template("pandas/pandas_view_command.html",
-                           pandas_view=pandas_view)
-
-
-@app.route("/pandas/edit/<int:pandas_id>/", methods=("GET", "POST"))
-def edit_pandas_command(pandas_id):
-    conn = get_db_connection()
-    edit_pandas_command_view = conn.execute(
-        "SELECT * FROM pandas WHERE pandas_id = ?",
-        (pandas_id,)).fetchone()
-    if request.method == "POST":
-        pandas_command_edit = request.form["pandas_command"]
-        pandas_name_edit = request.form["pandas_name"]
-        # Поле description не обязательное, поэтому не будет делать условие
-        pandas_description_edit = request.form["pandas_description"]
-        if len(request.form['pandas_command']) > 4 and len(request.form['pandas_name']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "UPDATE pandas SET pandas_command = ?, pandas_name = ?, pandas_description = ? WHERE pandas_id = ?",
-                (pandas_command_edit, pandas_name_edit, pandas_description_edit, pandas_id),
-            )
-            conn.commit()
-            conn.close()
-            if not pandas_command_edit:
-                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
-            else:
-                flash('Запись успешно сохранена!', category='success')
-            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
-            return redirect(url_for("pandas_list_commands"))
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("pandas/edit_pandas_command.html", edit_pandas_command_view=edit_pandas_command_view)
-
-
-@app.route("/pandas/new_pandas_command", methods=["GET", "POST"])
-def add_pandas_command():
-    if request.method == "POST":
-        new_pandas_command = request.form["pandas_command"]
-        new_pandas_name = request.form["pandas_name"]
-        # Поле description не обязательное, поэтому не будет делать условие
-        new_pandas_description = request.form["pandas_description"]
-        if len(request.form['pandas_command']) > 4 and len(request.form['pandas_name']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "INSERT INTO pandas (pandas_command, pandas_name, pandas_description) VALUES (?, ?, ?)",
-                (new_pandas_command, new_pandas_name, new_pandas_description)
-            )
-            conn.commit()
-            conn.close()
-            if not new_pandas_command:
-                flash('Ошибка сохранения записи!', category='error')
-            else:
-                flash('Запись успешно добавлена!')
-            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
-            return redirect(url_for("pandas_list_commands"))
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("pandas/add_pandas_command.html")
-
-
-@app.route("/pandas/delete/<int:pandas_id>/", methods=("POST",))
-def delete_pandas_command(pandas_id):
-    conn = get_db_connection()
-    conn.execute("DELETE FROM pandas WHERE pandas_id = ?",
-                 (pandas_id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for("pandas_list_commands"))
-
-
 # Блок links
 @app.route("/links")
 def links_list_commands():
@@ -693,28 +494,8 @@ def links_list_commands():
     links_list = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchall()
     conn.close()
 
-    page, per_page, offset = get_page_args(page_parameter='page',
-                                           per_page_parameter='per_page')
-    total = len(links_list)
-
-    def get_links_list(offset=0, per_page=5):
-        return links_list[offset: offset + per_page]
-
-    pagination_links = get_links_list(offset=offset, per_page=per_page)
-    pagination = Pagination(page=page,
-                            per_page=per_page,
-                            total=total,
-                            css_framework='bootstrap4',
-                            display_msg="Показано <b>{start} - {end}</b> {record_name} из <b>{total}</b>",
-                            record_name="записей",
-                            next_label="Следующая",
-                            prev_label="Предыдущая"
-                            )
     return render_template("links/links_list_commands.html",
-                           links_list=pagination_links,
-                           page=page,
-                           per_page=per_page,
-                           pagination=pagination,
+                           links_list=links_list,
                            )
 
 

@@ -1,40 +1,26 @@
 {% extends "base.html" %} {% block title %}Команды Python{% endblock %} {% block content %}
-<div class="container p-4">
 <!--В этом коде выводим кнопку добавления вне цикла, так как может не быть записей в таблицу-->
    <div class="card mb-3">
       <div class="card-header text-center">
          <a href="{{ url_for('add_python_command') }}">Добавить запись в базу данных</a>
       </div>
    </div>
-   {{ pagination.links }}
-   {{ pagination.info }}
+<table class="table">
+   <thead>
+      <tr>
+         <th scope="col">Название</th>
+         <th scope="col">Команда</th>
+         <th scope="col">Описание команды</th>
+      </tr>
+   </thead>
    {% for python_list in python_list %}
-   <div class="card mb-3">
-      <h5 class="card-header">{{ python_list['python_name'] }}</h5>
-      <div class="card-body">
-         <h5 class="card-title">{{ python_list['python_command'] }}</h5>
-         <p class="card-text">{{ python_list['python_description'] }}</p>
-         <ul class="list-group list-group-horizontal">
-            <li class="list-group-item">
-               <a href="{{ url_for('add_python_command') }}">Добавить</a>
-            </li>
-            <li class="list-group-item">
-               <a href="{{ url_for('edit_python_command', python_id=python_list['python_id']) }}">Редактировать</a>
-            </li>
-            <li class="list-group-item">
-               <a href="{{ url_for('get_post_python_command', python_id=python_list['python_id']) }}">Посмотреть</a>
-            </li>
-            <li class="list-group-item delete">
-               <form action="{{ url_for('delete_python_command', python_id=python_list['python_id']) }}" class="add"
-                  method="POST">
-                   <input type="submit" class="button" value="Удалить"
-                     onclick="return confirm('Вы уверены что хотите удалить запись?')" />
-               </form>
-            </li>
-         </ul>
-      </div>
-   </div>
+   <tbody>
+      <tr>
+         <td>{{ python_list['python_name'] }}</td>
+         <td>{{ python_list['python_command'] }}</td>
+         <td>{{ python_list['python_description'] }}</td>
+      </tr>
+   </tbody>
    {% endfor %}
-   {{ pagination.links }}
-</div>
+   </table>
 {% endblock %}
