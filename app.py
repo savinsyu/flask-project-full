@@ -33,106 +33,14 @@ def close_db_connection(conn):
 def index():
     conn = get_db_connection()
     last_links = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchone()
-    last_git = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchone()
     last_sql = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchone()
     last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
     last_python = conn.execute("SELECT * FROM python ORDER BY 1 DESC").fetchone()
-    last_healthy = conn.execute("SELECT * FROM healthy ORDER BY 1 DESC").fetchone()
     return render_template("index.html",
                            last_links=last_links,
-                           last_git=last_git,
                            last_sql=last_sql,
                            last_bash=last_bash,
-                           last_python=last_python,
-                           last_healthy=last_healthy, )
-
-
-# Блок Git
-@app.route("/git")
-def git_list_commands():
-    conn = get_db_connection()
-    git_list = conn.execute("SELECT * FROM git ORDER BY 1 DESC").fetchall()
-    conn.close()
-    return render_template("git/git_list_commands.html",
-                           git_list=git_list,
-                           )
-
-
-@app.route("/git/view/<int:git_id>")
-def get_post_git_command(git_id):
-    conn = get_db_connection()
-    git_view = conn.execute("SELECT * FROM git WHERE git_id = ?",
-                            (git_id,)).fetchone()
-    conn.close()
-    return render_template("git/git_view_command.html",
-                           git_view=git_view)
-
-
-@app.route("/git/edit/<int:git_id>/", methods=("GET", "POST"))
-def edit_git_command(git_id):
-    conn = get_db_connection()
-    edit_git_command_view = conn.execute("SELECT * FROM git WHERE git_id = ?",
-                                         (git_id,)).fetchone()
-    if request.method == "POST":
-        git_command_edit = request.form["git_command"]
-        git_name_edit = request.form["git_name"]
-        # Поле description не обязательное, поэтому не будет делать условие
-        git_description_edit = request.form["git_description"]
-        if len(request.form['git_command']) > 4 and len(request.form['git_name']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "UPDATE git SET git_command = ?, git_name = ?, git_description = ? WHERE git_id = ?",
-                (git_command_edit, git_name_edit, git_description_edit, git_id),
-            )
-            conn.commit()
-            conn.close()
-            if not git_command_edit:
-                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
-            else:
-                flash('Запись успешно сохранена!', category='success')
-            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
-            return redirect(url_for("git_list_commands"))
-
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("git/edit_git_command.html", edit_git_command_view=edit_git_command_view)
-
-
-@app.route("/git/new_git_command", methods=["GET", "POST"])
-def add_git_command():
-    if request.method == "POST":
-        new_git_command = request.form["git_command"]
-        new_git_name = request.form["git_name"]
-        new_git_description = request.form["git_description"]
-        if len(request.form['git_command']) > 4 and len(request.form['git_name']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "INSERT INTO git (git_command, git_name, git_description) VALUES (?, ?, ?)",
-                (new_git_command, new_git_name, new_git_description)
-            )
-            conn.commit()
-            conn.close()
-            if not new_git_command:
-                flash('Ошибка сохранения записи!', category='error')
-            else:
-                flash('Запись успешно добавлена!')
-            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
-            return redirect(url_for("git_list_commands"))
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("git/add_git_command.html")
-
-
-@app.route("/git/delete/<int:git_id>/", methods=("POST",))
-def delete_git_command(git_id):
-    conn = get_db_connection()
-    conn.execute("DELETE FROM git WHERE git_id = ?",
-                 (git_id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for("git_list_commands"))
+                           last_python=last_python, )
 
 
 # Блок Bash
@@ -223,92 +131,6 @@ def delete_bash_command(bash_id):
     conn.commit()
     conn.close()
     return redirect(url_for("bash_list_commands"))
-
-
-# Блок Healthy
-@app.route("/healthy")
-def healthy_list_posts():
-    conn = get_db_connection()
-    healthy_list = conn.execute("SELECT * FROM healthy").fetchall()
-    conn.close()
-    return render_template("healthy/healthy_list_posts.html",
-                           healthy_list=healthy_list,
-                           )
-
-
-@app.route("/healthy/view/<int:healthy_id>")
-def get_post_healthy(healthy_id):
-    conn = get_db_connection()
-    healthy_view = conn.execute("SELECT * FROM healthy WHERE healthy_id = ?",
-                                (healthy_id,)).fetchone()
-    conn.close()
-    return render_template("healthy/healthy_view_post.html",
-                           healthy_view=healthy_view)
-
-
-@app.route("/healthy/edit/<int:healthy_id>/", methods=("GET", "POST"))
-def edit_healthy_post(healthy_id):
-    conn = get_db_connection()
-    edit_healthy_post_view = conn.execute("SELECT * FROM healthy WHERE healthy_id = ?",
-                                          (healthy_id,)).fetchone()
-    if request.method == "POST":
-        healthy_header_edit = request.form["healthy_header"]
-        healthy_content_edit = request.form["healthy_content"]
-        if len(request.form['healthy_header']) > 1 and len(request.form['healthy_content']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "UPDATE healthy SET healthy_header = ?, healthy_content = ? WHERE healthy_id = ?",
-                (healthy_header_edit, healthy_content_edit, healthy_id),
-            )
-            conn.commit()
-            conn.close()
-            if not healthy_content_edit:
-                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
-            else:
-                flash('Запись успешно сохранена!', category='success')
-            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
-            return redirect(url_for("healthy_list_posts"))
-
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("healthy/edit_healthy_post.html", edit_healthy_post_view=edit_healthy_post_view)
-
-
-@app.route("/healthy/new_post", methods=["GET", "POST"])
-def add_healthy_post():
-    if request.method == "POST":
-        healthy_header = request.form["healthy_header"]
-        healthy_content = request.form["healthy_content"]
-        if len(request.form['healthy_header']) > 1 and len(request.form['healthy_content']) > 10:
-            conn = get_db_connection()
-            conn.execute(
-                "INSERT INTO healthy (healthy_header, healthy_content) VALUES (?, ?)",
-                (healthy_header, healthy_content)
-            )
-            conn.commit()
-            conn.close()
-            if not healthy_content:
-                flash('Ошибка сохранения записи, Вы ввели слишком мало символов!', category='error')
-            else:
-                flash('Запись успешно добавлена!')
-            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
-            return redirect(url_for("healthy_list_posts"))
-
-        else:
-            flash('Ошибка сохранения записи!', category='error')
-
-    return render_template("healthy/add_healthy_post.html")
-
-
-@app.route("/healthy/delete/<int:healthy_id>/", methods=("POST",))
-def delete_healthy_post(healthy_id):
-    conn = get_db_connection()
-    conn.execute("DELETE FROM healthy WHERE healthy_id = ?",
-                 (healthy_id,))
-    conn.commit()
-    conn.close()
-    return redirect(url_for("healthy_list_posts"))
 
 
 # Блок SQL

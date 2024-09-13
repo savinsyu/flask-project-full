@@ -1,17 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
    <div class="container-fluid">
-      <a class="navbar-brand" href="{{ url_for('index') }}">WIKI FLASK</a>
+      <a class="navbar-brand" href="{{ url_for('index') }}">WIKI</a>
      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
      </button>
      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
        <div class="navbar-nav">
          <a class="nav-link" href="{{ url_for('links_list_commands') }}">Ссылки</a>
-         <a class="nav-link" href="{{ url_for('git_list_commands') }}">Git</a>
          <a class="nav-link" href="{{ url_for('bash_list_commands') }}">Bash</a>
          <a class="nav-link" href="{{ url_for('sql_list_commands') }}">SQL</a>
          <a class="nav-link" href="{{ url_for('python_list_commands') }}">Python</a>
-         <a class="nav-link" href="{{ url_for('healthy_list_posts') }}">Полезно</a>
        </div>
      </div>
    </div>

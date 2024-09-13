@@ -1,88 +1,56 @@
-<div class="index">
-   <div class="row">
-      <div class="col-sm-6">
-         <div class="card">
-            <h4 class="card-header">Последняя добавленная ссылка.</h4>
-            <div class="card-body">
-               <h5 class="card-title">{{ last_links.links_name }}</h5>
-               <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item">
-                     <a href="{{ url_for('links_list_commands') }}">Перейти ко всем ссылкам</a>
-                  </li>
-               </ul>
-            </div>
-         </div>
-      </div>
-      <div class="col-sm-6">
-         <div class="card">
-            <h4 class="card-header">Последняя добавленная команда SQL.</h4>
-            <div class="card-body">
-               <h5 class="card-title">{{ last_sql.sql_name }}</h5>
-               <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item">
-                     <a href="{{ url_for('sql_list_commands') }}">Перейти ко всем командам SQL</a>
-                  </li>
-               </ul>
-            </div>
+<div class="row">
+   <div class="col-sm-6">
+      <div class="card">
+         <h4 class="card-header">Последняя добавленная ссылка.</h4>
+         <div class="card-body">
+            <h5 class="card-title">{{ last_links.links_name }}</h5>
+            <ul class="list-group list-group-horizontal">
+               <li class="list-group-item">
+                  <a href="{{ url_for('links_list_commands') }}">Перейти ко всем ссылкам</a>
+               </li>
+            </ul>
          </div>
       </div>
    </div>
-   <div class="row">
-      <div class="col-sm-6">
-         <div class="card">
-            <h4 class="card-header">Последняя добавленная команда Bash.</h4>
-            <div class="card-body">
-               <h5 class="card-title">{{ last_bash.bash_name }}</h5>
-               <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item">
-                     <a href="{{ url_for('bash_list_commands') }}">Перейти ко всем командам Bash</a>
-                  </li>
-               </ul>
-            </div>
+   <div class="col-sm-6">
+      <div class="card">
+         <h4 class="card-header">Последняя добавленная команда SQL.</h4>
+         <div class="card-body">
+            <h5 class="card-title">{{ last_sql.sql_name }}</h5>
+            <ul class="list-group list-group-horizontal">
+               <li class="list-group-item">
+                  <a href="{{ url_for('sql_list_commands') }}">Перейти ко всем командам SQL</a>
+               </li>
+            </ul>
          </div>
       </div>
    </div>
-   <div class="row">
-      <div class="col-sm-6">
-         <div class="card">
-            <h4 class="card-header">Последняя добавленная команда Git.</h4>
-            <div class="card-body">
-               <h5 class="card-title">{{ last_git.git_name }}</h5>
-               <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item">
-                     <a href="{{ url_for('git_list_commands') }}">Перейти ко всем командам Git</a>
-                  </li>
-               </ul>
-            </div>
-         </div>
-      </div>
-      <div class="col-sm-6">
-         <div class="card">
-            <h4 class="card-header">Последняя добавленная команда python.</h4>
-            <div class="card-body">
-               <h5 class="card-title">{{ last_python.python_name }}</h5>
-               <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item">
-                     <a href="{{ url_for('python_list_commands') }}">Перейти ко всем командам python</a>
-                  </li>
-               </ul>
-            </div>
+</div>
+<div class="row">
+   <div class="col-sm-6">
+      <div class="card">
+         <h4 class="card-header">Последняя добавленная команда Bash.</h4>
+         <div class="card-body">
+            <h5 class="card-title">{{ last_bash.bash_name }}</h5>
+            <ul class="list-group list-group-horizontal">
+               <li class="list-group-item">
+                  <a href="{{ url_for('bash_list_commands') }}">Перейти ко всем командам Bash</a>
+               </li>
+            </ul>
          </div>
       </div>
    </div>
-   <div class="row">
-      <div class="col-sm-6">
-         <div class="card">
-            <h4 class="card-header">Последний пост.</h4>
-            <div class="card-body">
-               <h5 class="card-title">{{ last_healthy.healthy_name }}</h5>
-               <ul class="list-group list-group-horizontal">
-                  <li class="list-group-item">
-                     <a href="{{ url_for('healthy_list_posts') }}">Перейти ко всем постам</a>
-                  </li>
-               </ul>
-            </div>
-         </div>
+</div>
+<div class="col-sm-6">
+   <div class="card">
+      <h4 class="card-header">Последняя добавленная команда python.</h4>
+      <div class="card-body">
+         <h5 class="card-title">{{ last_python.python_name }}</h5>
+         <ul class="list-group list-group-horizontal">
+            <li class="list-group-item">
+               <a href="{{ url_for('python_list_commands') }}">Перейти ко всем командам python</a>
+            </li>
+         </ul>
       </div>
    </div>
 </div>
