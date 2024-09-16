@@ -1,16 +1,18 @@
 {% extends "base.html" %} {% block title %}Команды links{% endblock %} {% block content %}
-   <!--В этом коде выводим кнопку добавления вне цикла, так как может не быть записей в таблицу-->
-   <div class="card mb-3">
-      <div class="card-header text-center">
-         <a href="{{ url_for('add_links_command') }}">Добавить запись в базу данных</a>
-      </div>
+<!--В этом коде выводим кнопку добавления вне цикла, так как может не быть записей в таблицу-->
+<div class="card mb-3">
+   <div class="card-header text-center">
+      <a href="{{ url_for('add_links_command') }}">Добавить запись в базу данных</a>
    </div>
-   <table class="table">
-   <thead>
+</div>
+<table class="table table-hover table-borderless align-middle table-responsive caption-top">
+   <caption>Всего записей:</caption>
+   <thead class="table-light">
       <tr>
          <th scope="col">Название</th>
          <th scope="col">Команда</th>
          <th scope="col">Описание команды</th>
+         <th scope="col">Действие</th>
       </tr>
    </thead>
    {% for links_list in links_list %}
@@ -19,8 +21,29 @@
          <td>{{ links_list['links_name'] }}</td>
          <td>{{ links_list['links_command'] }}</td>
          <td>{{ links_list['links_description'] }}</td>
+         <td>
+            <ul class="list-group list-group-horizontal">
+               <li class="list-group-item">
+                  <a href="{{ url_for('add_links_command') }}">Добавить</a>
+               </li>
+               <li class="list-group-item">
+                  <a href="{{ url_for('edit_links_command', links_id=links_list['links_id']) }}">Редактировать</a>
+               </li>
+               <li class="list-group-item">
+                  <!--Указываем ссылку для просмотра записи, в url передаем функцию просмотра, а после запятой указываем id текущей функции из базы данных-->
+                  <a href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">Посмотреть</a>
+               </li>
+               <li class="list-group-item delete">
+                  <form action="{{ url_for('delete_links_command', links_id=links_list['links_id']) }}" class="add"
+                     method="POST">
+                     <input type="submit" class="button" value="Удалить"
+                        onclick="return confirm('Вы уверены что хотите удалить запись?')" />
+                  </form>
+               </li>
+            </ul>
+         </td>
       </tr>
    </tbody>
    {% endfor %}
-   </table>
+</table>
 {% endblock %}

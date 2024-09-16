@@ -1,7 +1,8 @@
-import sqlite3
 import os.path
+import sqlite3
+
+import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_paginate import Pagination, get_page_args
 
 app = Flask(__name__)
 
@@ -52,7 +53,6 @@ def bash_list_commands():
     return render_template("bash/bash_list_commands.html",
                            bash_list=bash_list,
                            )
-
 
 @app.route("/bash/view/<int:bash_id>")
 def get_post_bash_command(bash_id):
