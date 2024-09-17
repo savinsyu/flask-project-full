@@ -1,7 +1,6 @@
 import os.path
 import sqlite3
 
-import pandas as pd
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
