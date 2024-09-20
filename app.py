@@ -1,6 +1,6 @@
 import os.path
 import sqlite3
-
+from dump import dump
 from flask import Flask, render_template, request, redirect, url_for, flash
 
 app = Flask(__name__)
@@ -27,6 +27,12 @@ def get_db_connection():
 
 def close_db_connection(conn):
     conn.close()
+
+
+@app.route("/dump")
+def dump_action():
+    dump()
+    return render_template("dump.html")
 
 
 @app.route("/")
