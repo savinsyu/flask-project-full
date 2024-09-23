@@ -131,6 +131,19 @@ def upload_file():
 ```
 <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 ```
+# Раскрывающееся меню
+```
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Сервисы
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="{{ url_for('dump') }}">Дамп базы данных</a></li>
+    <li><a class="dropdown-item" href="{{ url_for('xlsx') }}">Выгрузка таблиц баз данных в ексель</a></li>
+  </ul>
+</li>
+```
 # Страница 404
 Часто бывает, что пользователь случайно неправильно указывает ссылку в адресной строке. Для того, чтобы ошибка отображалась корректно, вам необходимо зарегистрировать страницу 404.
 ```

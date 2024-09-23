@@ -133,6 +133,19 @@ To connect your css file, you need to write the following code in base.html
 ```
 <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 ```
+# Drop-down menu
+```
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+    aria-expanded="false">
+    Сервисы
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" href="{{ url_for('dump') }}">Дамп базы данных</a></li>
+    <li><a class="dropdown-item" href="{{ url_for('xlsx') }}">Выгрузка таблиц баз данных в ексель</a></li>
+  </ul>
+</li>
+```
 # Handling 404 Error in Flask
 It often happens that the user accidentally incorrectly specifies a link in the address bar. In order for the error to be displayed correctly, you need to register page 404.
 ```

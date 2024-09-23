@@ -1,2 +1,2 @@
 #!/bin/bash
-venv/Scripts/python.ewxe app.py &
+venv/Scripts/python.exe app.py &
