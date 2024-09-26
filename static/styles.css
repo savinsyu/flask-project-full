@@ -1,12 +1,22 @@
 * {
-  font-family: sans-serif;
-  font-size: 1rem;
+  font-family: consolas;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.5;
   margin: 0;
+  padding: 0;
 }
 
 a {
   color: black;
   text-decoration: none;
+}
+
+a:hover {
+  color: red;
+}
+
+.nav-link {
+  font-size: 1.4rem;
+  text-transform: uppercase;
 }

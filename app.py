@@ -116,13 +116,11 @@ def edit_bash_command(bash_id):
     if request.method == "POST":
         bash_command_edit = request.form["bash_command"]
         bash_name_edit = request.form["bash_name"]
-        # Поле description не обязательное, поэтому не будет делать условие
-        bash_description_edit = request.form["bash_description"]
         if len(request.form['bash_command']) > 1 and len(request.form['bash_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "UPDATE bash SET bash_command = ?, bash_name = ?, bash_description = ? WHERE bash_id = ?",
-                (bash_command_edit, bash_name_edit, bash_description_edit, bash_id),
+                "UPDATE bash SET bash_command = ?, bash_name = ?  WHERE bash_id = ?",
+                (bash_command_edit, bash_name_edit, bash_id),
             )
             conn.commit()
             conn.close()
@@ -144,13 +142,12 @@ def add_bash_command():
     if request.method == "POST":
         new_bash_command = request.form["bash_command"]
         new_bash_name = request.form["bash_name"]
-        # Поле description не обязательное, поэтому не будет делать условие
-        new_bash_description = request.form["bash_description"]
+
         if len(request.form['bash_command']) > 1 and len(request.form['bash_name']) > 10:
             conn = get_db_connection()
             conn.execute(
-                "INSERT INTO bash (bash_command, bash_name, bash_description) VALUES (?, ?, ?)",
-                (new_bash_command, new_bash_name, new_bash_description)
+                "INSERT INTO bash (bash_command, bash_name) VALUES (?, ?)",
+                (new_bash_command, new_bash_name)
             )
             conn.commit()
             conn.close()
