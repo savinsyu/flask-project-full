@@ -1,15 +1,23 @@
 {% extends "base.html" %} {% block title %}Команды bash{% endblock %} {% block content %}
-   <table class="table table-hover caption-top">
-      <caption>Всего записей в таблице bash: <b>{{ bash_list_count_print_int }}</b>, <a
-            href="{{ url_for('add_bash_command') }}">добавить новую запись</a></caption>
+<p>Всего записей в таблице bash: <b>{{ bash_list_count_print_int }}</b></p>
+<p><a class="btn btn-success" href="{{ url_for('add_bash_command') }}">Добавить новую запись</a></p>
+<table class="table table-striped">
+   <thead>
+      <tr>
+         <th scope="col">Название</th>
+         <th scope="col">Команда</th>
+         <th scope="col">Действие</th>
+      </tr>
+   </thead>
+   <tbody>
       {% for bash_list in bash_list %}
-      <tbody>
-         <tr>
-            <td><a href="{{ url_for('get_post_bash_command', bash_id=bash_list['bash_id']) }}">{{ bash_list['bash_name']
-                  }}</a></td>
-            <td>{{ bash_list['bash_command'] }}</td>
-         </tr>
-      </tbody>
+      <tr>
+         <td>{{ bash_list['bash_name']
+               }}</a></td>
+         <td>{{ bash_list['bash_command'] }}</td>
+         <td><a href="{{ url_for('get_post_bash_command', bash_id=bash_list['bash_id']) }}">Перейти к записи</a></td>
+      </tr>
       {% endfor %}
-   </table>
+   </tbody>
+</table>
 {% endblock %}

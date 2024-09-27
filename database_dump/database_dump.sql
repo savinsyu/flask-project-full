@@ -71,6 +71,7 @@ INSERT INTO "bash" VALUES(91,'git pull','Скачивание изменения из репозитория на 
 INSERT INTO "bash" VALUES(92,'~/AppData/Local/Programs/Python/Python39/python.exe -m pip install --upgrade pip','Обновление pip');
 INSERT INTO "bash" VALUES(93,'~/AppData/Local/Programs/Python/Python39/python.exe venv/Scripts/pip.exe install pandas','Установка библиотеки Pandas');
 INSERT INTO "bash" VALUES(96,'ТестТестТестТест','ТестТестТестТест');
+INSERT INTO "bash" VALUES(97,'fsdfffffffffffffffff','fsdfffffffffffffffff');
 CREATE TABLE "links"
 (
     links_id      INTEGER
@@ -144,7 +145,7 @@ INSERT INTO "sql" VALUES(1159,'SELECT DISTINCT field FROM table;','Поиск уникаль
 INSERT INTO "sql" VALUES(1161,'SELECT * FROM table;','Вывод всех записей таблицы','Вывод всех записей таблицы');
 INSERT INTO "sql" VALUES(1162,'Тестовое сообщение','Тестовое сообщение','Тестовое сообщение');
 DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('bash',96);
+INSERT INTO "sqlite_sequence" VALUES('bash',97);
 INSERT INTO "sqlite_sequence" VALUES('sql',1162);
 INSERT INTO "sqlite_sequence" VALUES('links',23);
 INSERT INTO "sqlite_sequence" VALUES('python',2090);

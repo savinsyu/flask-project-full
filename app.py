@@ -70,12 +70,17 @@ dump()
 
 @app.route("/")
 def index():
+    return render_template("index.html")
+
+
+@app.route("/analytics")
+def analytics():
     conn = get_db_connection()
     last_links = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchone()
     last_sql = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchone()
     last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
     last_python = conn.execute("SELECT * FROM python ORDER BY 1 DESC").fetchone()
-    return render_template("index.html",
+    return render_template("analytics.html",
                            last_links=last_links,
                            last_sql=last_sql,
                            last_bash=last_bash,
