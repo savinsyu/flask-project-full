@@ -70,7 +70,6 @@ INSERT INTO "bash" VALUES(90,'git init','Инициализация git в папке');
 INSERT INTO "bash" VALUES(91,'git pull','Скачивание изменения из репозитория на локальную машину');
 INSERT INTO "bash" VALUES(92,'~/AppData/Local/Programs/Python/Python39/python.exe -m pip install --upgrade pip','Обновление pip');
 INSERT INTO "bash" VALUES(93,'~/AppData/Local/Programs/Python/Python39/python.exe venv/Scripts/pip.exe install pandas','Установка библиотеки Pandas');
-INSERT INTO "bash" VALUES(96,'ТестТестТестТест','ТестТестТестТест');
 INSERT INTO "bash" VALUES(97,'fsdfffffffffffffffff','fsdfffffffffffffffff');
 CREATE TABLE "links"
 (

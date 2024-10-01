@@ -76,6 +76,19 @@ def index():
 @app.route("/analytics")
 def analytics():
     conn = get_db_connection()
+    cur = conn.cursor()
+    bash_list_count = cur.execute("SELECT COUNT(*) FROM bash")
+    bash_list_count_print = bash_list_count.fetchone()
+    bash_list_count_print_int = int(bash_list_count_print[0])
+    sql_list_count = cur.execute("SELECT COUNT(*) FROM sql")
+    sql_list_count_print = sql_list_count.fetchone()
+    sql_list_count_print_int = int(sql_list_count_print[0])
+    python_list_count = cur.execute("SELECT COUNT(*) FROM python")
+    python_list_count_print = python_list_count.fetchone()
+    python_list_count_print_int = int(python_list_count_print[0])
+    links_list_count = cur.execute("SELECT COUNT(*) FROM links")
+    links_list_count_print = links_list_count.fetchone()
+    links_list_count_print_int = int(links_list_count_print[0])
     last_links = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchone()
     last_sql = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchone()
     last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
@@ -84,22 +97,22 @@ def analytics():
                            last_links=last_links,
                            last_sql=last_sql,
                            last_bash=last_bash,
-                           last_python=last_python, )
+                           last_python=last_python,
+                           bash_list_count_print_int=bash_list_count_print_int,
+                           sql_list_count_print_int=sql_list_count_print_int,
+                           python_list_count_print_int=python_list_count_print_int,
+                           links_list_count_print_int=links_list_count_print_int,
+                            )
 
 
 # Блок Bash
 @app.route("/bash")
 def bash_list_commands():
     conn = get_db_connection()
-    cur = conn.cursor()
-    bash_list_count = cur.execute("SELECT COUNT(*) FROM bash")
-    bash_list_count_print = bash_list_count.fetchone()
-    bash_list_count_print_int = int(bash_list_count_print[0])
     bash_list = conn.execute("SELECT * FROM bash").fetchall()
     conn.close()
     return render_template("bash/bash_list_commands.html",
                            bash_list=bash_list,
-                           bash_list_count_print_int=bash_list_count_print_int,
                            )
 
 
@@ -183,15 +196,10 @@ def delete_bash_command(bash_id):
 @app.route("/sql")
 def sql_list_commands():
     conn = get_db_connection()
-    cur = conn.cursor()
-    sql_list_count = cur.execute("SELECT COUNT(*) FROM sql")
-    sql_list_count_print = sql_list_count.fetchone()
-    sql_list_count_print_int = int(sql_list_count_print[0])
     sql_list = conn.execute("SELECT * FROM sql").fetchall()
     conn.close()
     return render_template("sql/sql_list_commands.html",
                            sql_list=sql_list,
-                           sql_list_count_print_int=sql_list_count_print_int,
                            )
 
 
@@ -276,15 +284,10 @@ def delete_sql_command(sql_id):
 @app.route("/python")
 def python_list_commands():
     conn = get_db_connection()
-    cur = conn.cursor()
-    python_list_count = cur.execute("SELECT COUNT(*) FROM python")
-    python_list_count_print = python_list_count.fetchone()
-    python_list_count_print_int = int(python_list_count_print[0])
     python_list = conn.execute("SELECT * FROM python ORDER BY 1 DESC").fetchall()
     conn.close()
     return render_template("python/python_list_commands.html",
                            python_list=python_list,
-                           python_list_count_print_int=python_list_count_print_int,
                            )
 
 
@@ -369,16 +372,11 @@ def delete_python_command(python_id):
 @app.route("/links")
 def links_list_commands():
     conn = get_db_connection()
-    cur = conn.cursor()
-    links_list_count = cur.execute("SELECT COUNT(*) FROM links")
-    links_list_count_print = links_list_count.fetchone()
-    links_list_count_print_int = int(links_list_count_print[0])
     links_list = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchall()
     conn.close()
 
     return render_template("links/links_list_commands.html",
                            links_list=links_list,
-                           links_list_count_print_int=links_list_count_print_int,
                            )
 
 

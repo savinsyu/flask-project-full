@@ -1,16 +1,19 @@
 {% extends "base.html" %} {% block title %}Ссылки{% endblock %} {% block content %}
 
-<table class="table table-hover caption-top">
-   <caption>Всего записей в таблице links: <b>{{ links_list_count_print_int }}</b>, <a
-         href="{{ url_for('add_links_command') }}">добавить новую запись</a></caption>
+<p><a class="btn btn-success" href="{{ url_for('add_links_command') }}">Добавить новую запись</a></p>
+<table class="table table-striped">
+   <tr>
+      <th scope="col">Название</th>
+      <th scope="col">Ссылка</th>
+      <th scope="col">Действие</th>
+   </tr>
    {% for links_list in links_list %}
-   <tbody>
-      <tr>
-         <td><a href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">{{ links_list['links_name']
-               }}</a></td>
-         <td>{{ links_list['links_command'] }}</td>
-      </tr>
-   </tbody>
+   <tr>
+      <td>{{ links_list['links_name'] }}</td>
+      <td>{{ links_list['links_command'] }}</td>
+      <td><a class="btn btn-primary"
+            href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">Перейти</a></td>
+   </tr>
    {% endfor %}
 </table>
 
