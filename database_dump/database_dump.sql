@@ -90,6 +90,12 @@ INSERT INTO "links" VALUES(19,'Сайт с документацией по веб-технологиям','https:/
 INSERT INTO "links" VALUES(20,'Документация по Bootstrap','https://getbootstrap.com/','Документация по Bootstrap.');
 INSERT INTO "links" VALUES(21,'Описание библиотеки, которая позволяет работает с базой mysql','https://pypi.org/project/PyMySQL/','Описание библиотеки, которая позволяет работает с базой mysql.');
 INSERT INTO "links" VALUES(22,'Документация CLI PowerSHell','https://learn.microsoft.com/ru-ru/powershell/','Документация CLI PowerSHell');
+INSERT INTO "links" VALUES(27,'Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.','Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.','Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века. В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов. Lorem Ipsum не только успешно пережил без заметных изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum.');
+CREATE TABLE [meaning] ( 
+  [meaning_id] INTEGER AUTO_INCREMENT NULL,
+  [meaning_name] TEXT NOT NULL, [meaning] INT NULL,
+   PRIMARY KEY ([meaning_id])
+);
 CREATE TABLE "python" (
     "python_id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "python_command" TEXT NOT NULL,
@@ -143,9 +149,14 @@ INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных',
 INSERT INTO "sql" VALUES(1159,'SELECT DISTINCT field FROM table;','Поиск уникальных значений','DISTINCT ищет и выводит уникальные значения указанного в запросе столбца ');
 INSERT INTO "sql" VALUES(1161,'SELECT * FROM table;','Вывод всех записей таблицы','Вывод всех записей таблицы');
 INSERT INTO "sql" VALUES(1162,'Тестовое сообщение','Тестовое сообщение','Тестовое сообщение');
+CREATE TABLE [tasks] ( 
+  [task_id] INTEGER AUTO_INCREMENT NULL,
+  [task_name] TEXT NOT NULL,
+   PRIMARY KEY ([task_id])
+);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('bash',97);
 INSERT INTO "sqlite_sequence" VALUES('sql',1162);
-INSERT INTO "sqlite_sequence" VALUES('links',23);
+INSERT INTO "sqlite_sequence" VALUES('links',27);
 INSERT INTO "sqlite_sequence" VALUES('python',2090);
 COMMIT;
