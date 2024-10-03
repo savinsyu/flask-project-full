@@ -1,8 +1,22 @@
-{% extends "base.html" %} {% block title %}Команды sql{% endblock %} {% block content %}
+{% extends "base.html" %} 
+{% block title %}Команды sql{% endblock %}
+{% block content %}
 
-<table class="table table-hover caption-top">
-   <caption>Всего записей в таблице sql: <b>{{ sql_list_count_print_int }}</b>, <a
-         href="{{ url_for('add_sql_command') }}">добавить новую запись</a></caption>
+<div class="card m-2"></div>
+   <div class="card-header">
+      Добавление новой записи
+   </div>
+   <div class="card-body">
+      <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
+      <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
+      <a class="btn btn-primary" href="{{ url_for('add_sql_command') }}">Добавить</a>
+   </div>
+</div>
+<table class="table table-striped m-2">
+   <tr>
+      <th>Перейти к записи</th>
+      <th>Ссылка</th>
+   </tr>
    {% for sql_list in sql_list %}
    <tbody>
       <tr>

@@ -1,23 +1,22 @@
-{% extends "base.html" %} {% block title %}Команды bash{% endblock %}
+{% extends "base.html" %} 
+{% block title %}Команды bash{% endblock %}
 {% block content %}
-<div class="container mb-3 mt-3 rounded">
+<div class="bd-example">
    <form method="post">
-      <div class="card mb-3">
-         <label for="bash_command" class="card-header">Команда</label>
+      <div class="mb-3">
+         <label for="bash_command" class="form-label"><h4>Команда</h4></label>
          <textarea class="form-control" id="bash_command" name="bash_command" rows="1" placeholder="Введите команду"
             required></textarea>
       </div>
-      <div class="card mb-3">
-         <label for="bash_name" class="card-header">Описание команды</label>
+      <div class="mb-3">
+         <label for="bash_name" class="form-label"><h4>Описание команды</h4></label>
          <textarea class="form-control" id="bash_name" name="bash_name" rows="1" placeholder="Введите описание команды"
             required></textarea>
       </div>
-      <div class="row g-2">
-         <div class="col-auto">
-            <a class="btn btn-secondary" href="{{ url_for('bash_list_commands') }} ">Вернуться к списку</a>
-         </div>
-         <div class="col-auto">
-            <button type="submit" value="" class="btn btn-success">Сохранить</button>
+      <div class="mb-3">
+         <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-secondary" href="{{ url_for('bash_list_commands') }}">Вернуться к списку</a>
+            <button type="submit" value="" class="btn btn-success">Сохранить изменения</button>
          </div>
       </div>
    </form>

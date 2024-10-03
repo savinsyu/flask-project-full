@@ -1,39 +1,30 @@
-{% extends "base.html" %} {% block title %}Команды python{% endblock %} {% block content %}
+{% extends "base.html" %} 
+{% block title %}Команды Python{% endblock %} 
+{% block content %}
 
-<table class="table table-hover caption-top">
-   <caption></b>, <a
-         href="{{ url_for('add_python_command') }}">добавить новую запись</a></caption>
-   {% for python_list in python_list %}
-   <tbody>
-      <tr>
-         <td><a href="{{ url_for('get_post_python_command', python_id=python_list['python_id']) }}">{{ python_list['python_name']
-               }}</a></td>
-         <td>{{ python_list['python_command'] }}</td>
-      </tr>
-   </tbody>
-   {% endfor %}
-</table>
-
-{% endblock %}
-
-
-{% extends "base.html" %} {% block title %}Команды python{% endblock %} {% block content %}
-
-<p><a class="btn btn-success" href="{{ url_for('add_python_command') }}">Добавить новую запись</a></p>
-<table class="table table-striped">
+<div class="card m-2">
+   <div class="card-header">
+      Добавление новой записи
+   </div>
+   <div class="card-body">
+      <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
+      <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
+      <a class="btn btn-primary" href="{{ url_for('add_python_command') }}">Добавить</a>
+   </div>
+</div>
+<table class="table table-striped m-2">
    <tr>
-      <th scope="col">Название</th>
-      <th scope="col">Команда</th>
-      <th scope="col">Действие</th>
+      <th>Перейти к записи</th>
+      <th>Ссылка</th>
    </tr>
    {% for python_list in python_list %}
    <tr>
-      <td>{{ bash_list['python_name']}}</td>
+      <td><a href="{{ url_for('get_post_python_command', python_id=python_list['python_id']) }}">{{
+            python_list['python_name']
+            }}</a></td>
       <td>{{ python_list['python_command'] }}</td>
-      <td><a class="btn btn-primary"
-            href="{{ url_for('get_post_bash_command', bash_id=bash_list['bash_id']) }}">Перейти</a></td>
    </tr>
    {% endfor %}
-   </tbody>
 </table>
+
 {% endblock %}

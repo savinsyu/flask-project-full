@@ -11,11 +11,14 @@
    </div>
 </div>
 <table class="table table-striped  m-2">
+   <tr>
+      <th>Перейти к записи</th>
+      <th>Ссылка</th>
+   </tr>
+
    {% for links_list in links_list %}
    <tr>
-      <td><a class="btn btn-primary m-2"
-            href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">Перейти</a></td>
-      <td>{{ links_list['links_name'] }}</td>
+      <td><a href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">{{ links_list['links_name'] }}</a></td>
       <td>{{ links_list['links_command'] }}</td>
    </tr>
    {% endfor %}

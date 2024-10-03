@@ -1,34 +1,36 @@
 {% extends 'base.html' %}
-{% block title %}Добавить команду{% endblock %}
+{% block title %}Добавить команду SQL{% endblock %}
 {% block content %}
-<div class="container p-4">
+<div class="bd-example">
    <form method="post">
-      <div class="card mb-3">
-         <label for="sql_command" class="card-header">Команда</label>
+      <div class="mb-3">
+         <label for="sql_command" class="form-label">
+            <h4>Команда</h4>
+         </label>
          <textarea class="form-control" id="sql_command" name="sql_command" rows="1" placeholder="Введите команду"
             required></textarea>
       </div>
-      <div class="card mb-3">
-         <label for="sql_name" class="card-header">Описание команды</label>
+      <div class="mb-3">
+         <label for="sql_name" class="form-label">
+            <h4>Описание команды</h4>
+         </label>
          <textarea class="form-control" id="sql_name" name="sql_name" rows="1" placeholder="Введите описание команды"
             required></textarea>
       </div>
-      <div class="card mb-3">
-         <label for="sql_description" class="card-header">Подробно</label>
-         <textarea class="form-control" id="sql_description" name="sql_description" rows="8" placeholder="Подробно о команде"
-            required></textarea>
+      <div class="mb-3">
+         <label for="sql_description" class="form-label">
+            <h4>Подробно</h4>
+         </label>
+         <textarea class="form-control" id="sql_description" name="sql_description" rows="8"
+            placeholder="Подробно о команде" required></textarea>
       </div>
-      <ul class="list-group list-group-horizontal">
-         <li class="list-group-item">
-            <a href="{{ url_for('sql_list_commands') }}">Вернуться к списку</a>
-         </li>
-         <li class="list-group-item save">
-            <button type="submit" value="" class="add">Сохранить</button>
-         </li>
-      </ul>
+      <div class="mb-3">
+         <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-secondary" href="{{ url_for('sql_list_commands') }}">Вернуться к списку</a>
+            <button type="submit" value="" class="btn btn-success">Сохранить</button>
+         </div>
+      </div>
    </form>
 </div>
-<div class="container p-4">
-   {% include 'errors.html' %}
-</div>
+{% include 'errors.html' %}
 {% endblock %}

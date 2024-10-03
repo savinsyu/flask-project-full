@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Добавить запись{% endblock %}
+{% block title %}Добавить ссылку{% endblock %}
 {% block content %}
-
 <div class="bd-example">
    <form method="post">
       <div class="mb-3">
@@ -28,13 +27,10 @@
       <div class="mb-3">
          <div class="btn-group" role="group" aria-label="Basic example">
             <a class="btn btn-secondary" href="{{ url_for('links_list_commands') }}">Вернуться к списку</a>
-            <button type="submit" value="" class="btn btn-success">Сохранить изменения</button>
+            <button type="submit" value="" class="btn btn-success">Сохранить</button>
          </div>
       </div>
    </form>
-
 </div>
-<div class="container p-4">
-   {% include 'errors.html' %}
-</div>
+{% include 'errors.html' %}
 {% endblock %}
