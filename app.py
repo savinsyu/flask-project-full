@@ -4,8 +4,14 @@ import io
 import pandas as pd
 from openpyxl.workbook import Workbook
 from flask import Flask, render_template, request, redirect, url_for, flash
+from modules import message  # подключаем модуль message
 
 app = Flask(__name__)
+
+# выводим значение переменной hello
+print(message.hello)  # Hello all
+# обращаемся к функции print_message
+message.print_message("Hello work")  # Message: Hello work
 
 app.secret_key = "secret key"
 
