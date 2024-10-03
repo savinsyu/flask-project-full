@@ -1,16 +1,85 @@
 {% extends 'base.html' %}
 {% block title %}Аналитика{% endblock %}
 {% block content %}
-<p>Последняя добавленная ссылка</p>
-<p>{{ last_links.links_name }}</p>
-<p>Последняя добавленная команда SQL</p>
-<p>{{ last_sql.sql_name }}</p>
-<p>Последняя добавленная команда Bash</p>
-<p>{{ last_bash.bash_name }}</p>
-<p>Последняя добавленная команда Python</p>
-<p>{{ last_python.python_name }}</p>
-<p>Всего записей в таблице bash: <b>{{ bash_list_count_print_int }}</b></p>
-<p>Всего записей в таблице sql: <b>{{ sql_list_count_print_int }}</b></p>
-<p>Всего записей в таблице links: <b>{{ links_list_count_print_int }}</b></p>
-<p>Всего записей в таблице python: <b>{{ python_list_count_print_int }}</b></p>
+
+<div class="row">
+    <div class="col">
+        <div class="card m-2">
+            <div class="card-header">
+                Количество записей в разделах
+            </div>
+            <div class="card-body">
+                <p class="card-text">Всего записей в таблице bash: <b>{{ bash_list_count_print_int }}</b></p>
+                <p class="card-text">Всего записей в таблице sql: <b>{{ sql_list_count_print_int }}</b></p>
+                <p class="card-text">Всего записей в таблице links: <b>{{ links_list_count_print_int }}</b></p>
+                <p class="card-text">Всего записей в таблице python: <b>{{ python_list_count_print_int }}</b></p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card m-2">
+            <div class="card-header">
+                Последние записи в разделах
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#last_links" aria-expanded="true" aria-controls="last_links">
+                                Последняя добавленная ссылка
+                            </button>
+                        </h2>
+                        <div id="last_links" class="accordion-collapse collapse show"
+                            data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {{ last_links.links_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#last_sql" aria-expanded="false" aria-controls="last_sql">
+                                Последняя добавленная команда SQL
+                            </button>
+                        </h2>
+                        <div id="last_sql" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {{ last_sql.sql_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#last_bash" aria-expanded="false" aria-controls="last_bash">
+                                Последняя добавленная команда Bash
+                            </button>
+                        </h2>
+                        <div id="last_bash" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {{ last_bash.bash_name }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item"></div>
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#last_python" aria-expanded="false" aria-controls="last_python">
+                            Последняя добавленная команда Python
+                        </button>
+                    </h2>
+                    <div id="last_python" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            {{ last_python.python_name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}

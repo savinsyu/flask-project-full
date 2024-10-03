@@ -1,34 +1,38 @@
 {% extends 'base.html' %}
 {% block title %}Редактировать запись{% endblock %}
 {% block content %}
-<div class="container p-4">
+
+<div class="bd-example">
    <form method="post">
-      <div class="card mb-3">
-         <label for="bash_command" class="card-header">Команда</label>
+      <div class="mb-3">
+         <label for="bash_command" class="form-label">
+            <h4>Команда</h4>
+         </label>
          <textarea class="form-control" id="bash_command" name="bash_command" rows="1" placeholder="Введите команду"
             required>{{ edit_bash_command_view.bash_command }}</textarea>
       </div>
-      <div class="card mb-3">
-         <label for="bash_name" class="card-header">Описание команды</label>
+      <div class="mb-3">
+         <label for="bash_name" class="form-label">
+            <h4>Описание команды</h4>
+         </label>
          <textarea class="form-control" id="bash_name" name="bash_name" rows="1" placeholder="Введите описание команды"
             required>{{ edit_bash_command_view.bash_name }}</textarea>
       </div>
-      <div class="card mb-3">
-         <label for="bash_description" class="card-header">Подробно</label>
-         <textarea class="form-control" id="bash_description" name="bash_description" rows="8" placeholder="Введите описание команды"
-            required>{{ edit_bash_command_view.bash_description }}</textarea>
+      <div class="mb-3">
+         <label for="bash_description" class="form-label">
+            <h4>Подробно</h4>
+         </label>
+         <textarea class="form-control" id="bash_description" name="bash_description" rows="8"
+            placeholder="Введите описание команды" required>{{ edit_bash_command_view.bash_description }}</textarea>
       </div>
-      <ul class="list-group list-group-horizontal">
-         <li class="list-group-item">
-             <a href="{{ url_for('bash_list_commands') }}">Вернуться к списку</a>
-         </li>
-         <li class="list-group-item save">
-            <button type="submit" value="" class="add">Сохранить изменения</button>
-         </li>
-      </ul>
+      <div class="mb-3">
+         <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-secondary" href="{{ url_for('bash_list_commands') }}">Вернуться к списку</a>
+            <button type="submit" value="" class="btn btn-success">Сохранить изменения</button>
+         </div>
+      </div>
    </form>
 </div>
-<div class="container p-4">
-   {% include 'errors.html' %}
-</div>
+
+{% include 'errors.html' %}
 {% endblock %}

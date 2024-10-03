@@ -109,7 +109,7 @@ def analytics():
 @app.route("/bash")
 def bash_list_commands():
     conn = get_db_connection()
-    bash_list = conn.execute("SELECT * FROM bash").fetchall()
+    bash_list = conn.execute("SELECT * FROM bash ORDER BY bash_id DESC").fetchall()
     conn.close()
     return render_template("bash/bash_list_commands.html",
                            bash_list=bash_list,
@@ -196,7 +196,7 @@ def delete_bash_command(bash_id):
 @app.route("/sql")
 def sql_list_commands():
     conn = get_db_connection()
-    sql_list = conn.execute("SELECT * FROM sql").fetchall()
+    sql_list = conn.execute("SELECT * FROM sql ORDER BY sql_id DESC").fetchall()
     conn.close()
     return render_template("sql/sql_list_commands.html",
                            sql_list=sql_list,
@@ -372,7 +372,7 @@ def delete_python_command(python_id):
 @app.route("/links")
 def links_list_commands():
     conn = get_db_connection()
-    links_list = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchall()
+    links_list = conn.execute("SELECT * FROM links ORDER BY links_id DESC").fetchall()
     conn.close()
 
     return render_template("links/links_list_commands.html",

@@ -1,30 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}Страница записи{% endblock %}
 {% block content %}
-<div class="container p-4">
+
+<div class="bd-example">
    <div class="card">
       <h5 class="card-header">{{ sql_view['sql_name'] }}</h5>
       <div class="card-body">
          <h5 class="card-title">{{ sql_view['sql_command'] }}</h5>
          <p class="card-text">{{ sql_view['sql_description'] }}</p>
-         <ul class="list-group list-group-horizontal">
-            <li class="list-group-item">
-               <a href="{{ url_for('edit_sql_command', sql_id=sql_view['sql_id']) }}">Редактировать</a>
-            </li>
-            <li class="list-group-item">
-               <a href="{{ url_for('sql_list_commands') }}">Вернуться к списку</a>
-            </li>
-            <li class="list-group-item delete">
-               <form action="{{ url_for('delete_sql_command', sql_id=sql_view['sql_id'])}}" class="add" method="POST">
-                  <input type="submit" class="button" value="Удалить"
-                     onclick="return confirm('Вы уверены что хотите удалить запись?')" />
-               </form>
-            </li>
-            <li class="list-group-item">
-               <a href="{{ url_for('add_sql_command') }}">Добавить новую</a>
-            </li>
-         </ul>
+         <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-primary"
+               href="{{ url_for('edit_sql_command', sql_id=sql_view['sql_id']) }}">Редактировать</a>
+            <a class="btn btn-secondary" href="{{ url_for('sql_list_commands') }}">Вернуться к списку</a>
+            <a class="btn btn-success" href="{{ url_for('add_links_command') }}">Добавить новую</a>
+            <form action="{{ url_for('delete_sql_command', sql_id=sql_view['sql_id'])}}" method="POST">
+               <input type="submit" class="btn btn-danger" value="Удалить"
+                  onclick="return confirm('Вы уверены что хотите удалить запись?')" />
+            </form>
+         </div>
       </div>
    </div>
-</div>
-{% endblock %}
+
+   {% endblock %}

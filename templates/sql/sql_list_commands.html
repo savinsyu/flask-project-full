@@ -1,8 +1,8 @@
-{% extends "base.html" %} 
-{% block title %}Команды sql{% endblock %}
+{% extends "base.html" %}
+{% block title %}Команды SQL{% endblock %}
 {% block content %}
 
-<div class="card m-2"></div>
+<div class="card m-2">
    <div class="card-header">
       Добавление новой записи
    </div>
@@ -18,13 +18,11 @@
       <th>Ссылка</th>
    </tr>
    {% for sql_list in sql_list %}
-   <tbody>
-      <tr>
-         <td><a href="{{ url_for('get_post_sql_command', sql_id=sql_list['sql_id']) }}">{{ sql_list['sql_name']
-               }}</a></td>
-         <td>{{ sql_list['sql_command'] }}</td>
-      </tr>
-   </tbody>
+   <tr>
+      <td><a href="{{ url_for('get_post_sql_command', sql_id=sql_list['sql_id']) }}">{{ sql_list['sql_name']
+            }}</a></td>
+      <td>{{ sql_list['sql_command'] }}</td>
+   </tr>
    {% endfor %}
 </table>
 

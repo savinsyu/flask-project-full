@@ -23,3 +23,10 @@ a:hover {
   border: solid #dee2e6;
   border-width: 1px
 }
+
+.bg-dark {
+  background-color: #212529 !important;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+}

@@ -1,27 +1,29 @@
-{% extends "base.html" %} {% block title %}Ссылки{% endblock %} {% block content %}
+{% extends "base.html" %} 
+{% block title %}Ссылки{% endblock %} 
+{% block content %}
 
-<div class="card m-2">
-   <div class="card-header">
-      Добавление новой записи
+   <div class="card m-2">
+      <div class="card-header">
+         Добавление новой записи
+      </div>
+      <div class="card-body">
+         <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
+         <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
+         <a class="btn btn-primary" href="{{ url_for('add_links_command') }}">Добавить</a>
+      </div>
    </div>
-   <div class="card-body">
-      <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
-      <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
-      <a class="btn btn-primary" href="{{ url_for('add_links_command') }}">Добавить</a>
-   </div>
-</div>
-<table class="table table-striped  m-2">
-   <tr>
-      <th>Перейти к записи</th>
-      <th>Ссылка</th>
-   </tr>
-
-   {% for links_list in links_list %}
-   <tr>
-      <td><a href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">{{ links_list['links_name'] }}</a></td>
-      <td>{{ links_list['links_command'] }}</td>
-   </tr>
-   {% endfor %}
-</table>
-
+   <table class="table table-striped  m-2">
+      <tr>
+         <th>Перейти к записи</th>
+         <th>Ссылка</th>
+      </tr>
+      {% for links_list in links_list %}
+      <tr>
+         <td><a href="{{ url_for('get_post_links_command', links_id=links_list['links_id']) }}">{{
+               links_list['links_name'] }}</a></td>
+         <td>{{ links_list['links_command'] }}</td>
+      </tr>
+      {% endfor %}
+   </table>
+   
 {% endblock %}
