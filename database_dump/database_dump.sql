@@ -70,7 +70,7 @@ INSERT INTO "bash" VALUES(90,'git init','Инициализация git в папке');
 INSERT INTO "bash" VALUES(91,'git pull','Скачивание изменения из репозитория на локальную машину');
 INSERT INTO "bash" VALUES(92,'~/AppData/Local/Programs/Python/Python39/python.exe -m pip install --upgrade pip','Обновление pip');
 INSERT INTO "bash" VALUES(93,'~/AppData/Local/Programs/Python/Python39/python.exe venv/Scripts/pip.exe install pandas','Установка библиотеки Pandas');
-INSERT INTO "bash" VALUES(97,'fsdfffffffffffffffff','fsdfffffffffffffffff');
+INSERT INTO "bash" VALUES(97,'fsdfffffffffffffffffdasdsafsdfffffffffffffffffasdasdfsdfffffffffffffffffasdasd','fsdfffffffffffffffffasdasdfsdfffffffffffffffffasdasdfsdfffffffffffffffffasdasd');
 CREATE TABLE "links"
 (
     links_id      INTEGER
@@ -90,7 +90,7 @@ INSERT INTO "links" VALUES(19,'Сайт с документацией по веб-технологиям','https:/
 INSERT INTO "links" VALUES(20,'Документация по Bootstrap','https://getbootstrap.com/','Документация по Bootstrap.');
 INSERT INTO "links" VALUES(21,'Описание библиотеки, которая позволяет работает с базой mysql','https://pypi.org/project/PyMySQL/','Описание библиотеки, которая позволяет работает с базой mysql.');
 INSERT INTO "links" VALUES(22,'Документация CLI PowerSHell','https://learn.microsoft.com/ru-ru/powershell/','Документация CLI PowerSHell');
-INSERT INTO "links" VALUES(28,'TestTestTestTestTestTestTest','TestTestTestTestTestTestTest','TestTestTestTestTestTestTest');
+INSERT INTO "links" VALUES(28,'TestTestTestTestTestTestTestgdgdfasd','TestTestTestTestTestTestTestdfgdfgasdasd','TestTestTestTestTestTestTestdfgdfasdas');
 CREATE TABLE [meaning] ( 
   [meaning_id] INTEGER AUTO_INCREMENT NULL,
   [meaning_name] TEXT NOT NULL,
@@ -133,7 +133,7 @@ INSERT INTO "python" VALUES(31,'df = pd.read_excel(''sotr.xlsx'', index_col=0)',
 INSERT INTO "python" VALUES(32,'data = pd.read_csv("data.csv")','Загрузка CSV-данных','Метод загружает csv файл с данными.');
 INSERT INTO "python" VALUES(2090,'Тестовое сообщение','Тестовое сообщение','Тестовое сообщение1');
 INSERT INTO "python" VALUES(2091,'TestTestTestTestTestTestTest','TestTestTestTestTestTestTest','TestTestTestTestTestTestTest');
-INSERT INTO "python" VALUES(2092,'пвавапавпав','павпвапавпвап','вапввввввввв');
+INSERT INTO "python" VALUES(2092,'пвавапавпавasdasd','павпвапавпвапasdasd','вапвввввввввasdad');
 CREATE TABLE [sql] ( 
   "sql_id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "sql_command" TEXT NOT NULL,
@@ -153,7 +153,7 @@ INSERT INTO "sql" VALUES(1159,'SELECT DISTINCT field FROM table;','Поиск уникаль
 INSERT INTO "sql" VALUES(1161,'SELECT * FROM table;','Вывод всех записей таблицы','Вывод всех записей таблицы');
 INSERT INTO "sql" VALUES(1162,'Тестовое сообщение','Тестовое сообщение','Тестовое сообщение');
 INSERT INTO "sql" VALUES(1163,'TestTestTestTestTestTestTest','TestTestTestTestTestTestTest','TestTestTestTestTestTestTest');
-INSERT INTO "sql" VALUES(1164,'TestTestTestTestTestTestTest','TestTestTestTestTestTestTest','TestTestTestTestTestTestTest');
+INSERT INTO "sql" VALUES(1164,'TestTestTestTestTestTestTestadasd','TestTestTestTestTestTestTestsadasd','TestTestTestTestTestTestTestasdsad');
 CREATE TABLE [tasks] ( 
   [task_id] INTEGER AUTO_INCREMENT NULL,
   [task_name] TEXT NOT NULL, [task_status] INT NULL DEFAULT 0,
