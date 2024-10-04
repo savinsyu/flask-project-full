@@ -4,7 +4,7 @@ import io
 import pandas as pd
 from openpyxl.workbook import Workbook
 from flask import Flask, render_template, request, redirect, url_for, flash
-from modules import message  # подключаем модуль message
+from modules import message, dump  # подключаем модуль message
 
 app = Flask(__name__)
 
@@ -59,19 +59,7 @@ def export_tables_sql_to_xlsx():
 export_tables_sql_to_xlsx()
 
 
-def dump():
-    conn = sqlite3.connect('database.db')
-    # RUS Сохраняем в файл дамп базы данных (папка dump)
-    # ENG Save the database dump to a file (dump folder)
-    with io.open('database_dump/database_dump.sql', 'w') as p:
-        # iterdump() function
-        for line in conn.iterdump():
-            p.write('%s\n' % line)
-    print('Database dump successfully completed!!')
-    conn.close()
-
-
-dump()
+dump.dump()
 
 
 @app.route("/")
