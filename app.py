@@ -108,7 +108,7 @@ def analytics():
                            sql_list_count_print_int=sql_list_count_print_int,
                            python_list_count_print_int=python_list_count_print_int,
                            links_list_count_print_int=links_list_count_print_int,
-                            )
+                           )
 
 
 # Блок Bash
