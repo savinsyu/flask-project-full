@@ -1,8 +1,7 @@
 import os.path
 import sqlite3
-import io
-import pandas as pd
-from openpyxl.workbook import Workbook
+
+
 from flask import Flask, render_template, request, redirect, url_for, flash
 from modules import export_tables_sql_to_xlsx, dump  # подключаем модуль message
 

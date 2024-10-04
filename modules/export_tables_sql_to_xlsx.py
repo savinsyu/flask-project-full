@@ -1,10 +1,10 @@
 import pandas as pd
-
-from app import get_db_connection
+from openpyxl.workbook import Workbook
+import sqlite3
 
 
 def export_tables_sql_to_xlsx():
-    conn = get_db_connection()
+    conn = sqlite3.connect('database.db')
     bash_list = conn.execute("SELECT * FROM bash").fetchall()
     sql_list = conn.execute("SELECT * FROM sql").fetchall()
     python_list = conn.execute("SELECT * FROM python").fetchall()
