@@ -3,7 +3,7 @@ import sqlite3
 
 
 from flask import Flask, render_template, request, redirect, url_for, flash
-from modules import export_tables_sql_to_xlsx, dump  # подключаем модуль message
+from modules import export_tables_sql_to_xlsx, dump, analytics  # подключаем модули
 
 app = Flask(__name__)
 
@@ -45,36 +45,7 @@ def index():
     return render_template("index.html")
 
 
-@app.route("/analytics")
-def analytics():
-    conn = get_db_connection()
-    cur = conn.cursor()
-    bash_list_count = cur.execute("SELECT COUNT(*) FROM bash")
-    bash_list_count_print = bash_list_count.fetchone()
-    bash_list_count_print_int = int(bash_list_count_print[0])
-    sql_list_count = cur.execute("SELECT COUNT(*) FROM sql")
-    sql_list_count_print = sql_list_count.fetchone()
-    sql_list_count_print_int = int(sql_list_count_print[0])
-    python_list_count = cur.execute("SELECT COUNT(*) FROM python")
-    python_list_count_print = python_list_count.fetchone()
-    python_list_count_print_int = int(python_list_count_print[0])
-    links_list_count = cur.execute("SELECT COUNT(*) FROM links")
-    links_list_count_print = links_list_count.fetchone()
-    links_list_count_print_int = int(links_list_count_print[0])
-    last_links = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchone()
-    last_sql = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchone()
-    last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
-    last_python = conn.execute("SELECT * FROM python ORDER BY 1 DESC").fetchone()
-    return render_template("analytics.html",
-                           last_links=last_links,
-                           last_sql=last_sql,
-                           last_bash=last_bash,
-                           last_python=last_python,
-                           bash_list_count_print_int=bash_list_count_print_int,
-                           sql_list_count_print_int=sql_list_count_print_int,
-                           python_list_count_print_int=python_list_count_print_int,
-                           links_list_count_print_int=links_list_count_print_int,
-                           )
+analytics.analytics()
 
 
 # Блок Bash
