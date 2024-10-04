@@ -7,7 +7,7 @@ def export_tables_sql_to_xlsx():
     conn = sqlite3.connect('database.db')
     bash_list = conn.execute("SELECT * FROM bash").fetchall()
     sql_list = conn.execute("SELECT * FROM sql").fetchall()
-    python_list = conn.execute("SELECT * FROM python").fetchall()
+    python_list = conn.execute("SELECT * FROM python_module").fetchall()
     links_list = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchall()
     conn.close()
     df_sql_list = pd.DataFrame(sql_list)
