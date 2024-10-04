@@ -1,8 +1,6 @@
-from flask import render_template, request, flash, redirect, url_for
-
-from app import app
+from flask import Flask, render_template, request, redirect, url_for, flash
 from modules import connect
-
+from app import app
 
 def bash_module():
     @app.route("/bash")
