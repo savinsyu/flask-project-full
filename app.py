@@ -4,14 +4,10 @@ import io
 import pandas as pd
 from openpyxl.workbook import Workbook
 from flask import Flask, render_template, request, redirect, url_for, flash
-from modules import message, dump  # подключаем модуль message
+from modules import export_tables_sql_to_xlsx, dump  # подключаем модуль message
 
 app = Flask(__name__)
 
-# выводим значение переменной hello
-print(message.hello)  # Hello all
-# обращаемся к функции print_message
-message.print_message("Hello work")  # Message: Hello work
 
 app.secret_key = "secret key"
 
@@ -37,28 +33,11 @@ def close_db_connection(conn):
     conn.close()
 
 
-def export_tables_sql_to_xlsx():
-    conn = get_db_connection()
-    bash_list = conn.execute("SELECT * FROM bash").fetchall()
-    sql_list = conn.execute("SELECT * FROM sql").fetchall()
-    python_list = conn.execute("SELECT * FROM python").fetchall()
-    links_list = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchall()
-    conn.close()
-    df_sql_list = pd.DataFrame(sql_list)
-    df_python_list = pd.DataFrame(python_list)
-    df_links_list = pd.DataFrame(links_list)
-    df_bash_list = pd.DataFrame(bash_list)
-    with pd.ExcelWriter('xlsx_export/output.xlsx') as writer:
-        df_sql_list.to_excel(writer, sheet_name='SQL', header=False, index=False)
-        df_python_list.to_excel(writer, sheet_name='Python', header=False, index=False)
-        df_links_list.to_excel(writer, sheet_name='Links', header=False, index=False)
-        df_bash_list.to_excel(writer, sheet_name='Bash', header=False, index=False)
-        print('All tables are uploaded to excel!!')
+# Запускаем функцию модуля создания дампа
+export_tables_sql_to_xlsx.export_tables_sql_to_xlsx()
 
 
-export_tables_sql_to_xlsx()
-
-
+# Запускаем функцию модуля создания дампа
 dump.dump()
 
 
