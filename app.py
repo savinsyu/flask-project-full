@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 
 from modules import export_tables_sql_to_xlsx, dump, connect
 
-
 app = Flask(__name__)
 
 app.secret_key = "secret key"
@@ -41,7 +40,7 @@ def analytics():
     sql_list_count = cur.execute("SELECT COUNT(*) FROM sql")
     sql_list_count_print = sql_list_count.fetchone()
     sql_list_count_print_int = int(sql_list_count_print[0])
-    python_list_count = cur.execute("SELECT COUNT(*) FROM bash_module")
+    python_list_count = cur.execute("SELECT COUNT(*) FROM python")
     python_list_count_print = python_list_count.fetchone()
     python_list_count_print_int = int(python_list_count_print[0])
     links_list_count = cur.execute("SELECT COUNT(*) FROM links")
@@ -50,7 +49,7 @@ def analytics():
     last_links = conn.execute("SELECT * FROM links ORDER BY 1 DESC").fetchone()
     last_sql = conn.execute("SELECT * FROM sql ORDER BY 1 DESC").fetchone()
     last_bash = conn.execute("SELECT * FROM bash ORDER BY 1 DESC").fetchone()
-    last_python = conn.execute("SELECT * FROM bash_module ORDER BY 1 DESC").fetchone()
+    last_python = conn.execute("SELECT * FROM python ORDER BY 1 DESC").fetchone()
     return render_template("analytics.html",
                            last_links=last_links,
                            last_sql=last_sql,
@@ -236,31 +235,31 @@ def delete_sql_command(sql_id):
     return redirect(url_for("sql_list_commands"))
 
 
-# Блок bash_module
-@app.route("/bash_module")
+# Блок python
+@app.route("/python")
 def python_list_commands():
     conn = connect.get_db_connection()
-    python_list = conn.execute("SELECT * FROM bash_module ORDER BY 1 DESC").fetchall()
+    python_list = conn.execute("SELECT * FROM python ORDER BY 1 DESC").fetchall()
     conn.close()
-    return render_template("bash_module/python_list_commands.html",
+    return render_template("python/python_list_commands.html",
                            python_list=python_list,
                            )
 
 
-@app.route("/bash_module/view/<int:python_id>")
+@app.route("/python/view/<int:python_id>")
 def get_post_python_command(python_id):
     conn = connect.get_db_connection()
-    python_view = conn.execute("SELECT * FROM bash_module WHERE python_id = ?",
+    python_view = conn.execute("SELECT * FROM python WHERE python_id = ?",
                                (python_id,)).fetchone()
     conn.close()
-    return render_template("bash_module/python_view_command.html",
+    return render_template("python/python_view_command.html",
                            python_view=python_view)
 
 
-@app.route("/bash_module/edit/<int:python_id>/", methods=("GET", "POST"))
+@app.route("/python/edit/<int:python_id>/", methods=("GET", "POST"))
 def edit_python_command(python_id):
     conn = connect.get_db_connection()
-    edit_python_command_view = conn.execute("SELECT * FROM bash_module WHERE python_id = ?",
+    edit_python_command_view = conn.execute("SELECT * FROM python WHERE python_id = ?",
                                             (python_id,)).fetchone()
     if request.method == "POST":
         python_command_edit = request.form["python_command"]
@@ -270,7 +269,7 @@ def edit_python_command(python_id):
         if len(request.form['python_command']) > 4 and len(request.form['python_name']) > 10:
             conn = connect.get_db_connection()
             conn.execute(
-                "UPDATE bash_module SET python_command = ?, python_name = ?, python_description = ? WHERE python_id = ?",
+                "UPDATE python SET python_command = ?, python_name = ?, python_description = ? WHERE python_id = ?",
                 (python_command_edit, python_name_edit, python_description_edit, python_id),
             )
             conn.commit()
@@ -284,10 +283,10 @@ def edit_python_command(python_id):
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("bash_module/edit_python_command.html", edit_python_command_view=edit_python_command_view)
+    return render_template("python/edit_python_command.html", edit_python_command_view=edit_python_command_view)
 
 
-@app.route("/bash_module/new_python_command", methods=["GET", "POST"])
+@app.route("/python/new_python_command", methods=["GET", "POST"])
 def add_python_command():
     if request.method == "POST":
         new_python_command = request.form["python_command"]
@@ -297,7 +296,7 @@ def add_python_command():
         if len(request.form['python_command']) > 4 and len(request.form['python_name']) > 10:
             conn = connect.get_db_connection()
             conn.execute(
-                "INSERT INTO bash_module (python_command, python_name, python_description) VALUES (?, ?, ?)",
+                "INSERT INTO python (python_command, python_name, python_description) VALUES (?, ?, ?)",
                 (new_python_command, new_python_name, new_python_description)
             )
             conn.commit()
@@ -311,13 +310,13 @@ def add_python_command():
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("bash_module/add_python_command.html")
+    return render_template("python/add_python_command.html")
 
 
-@app.route("/bash_module/delete/<int:python_id>/", methods=("POST",))
+@app.route("/python/delete/<int:python_id>/", methods=("POST",))
 def delete_python_command(python_id):
     conn = connect.get_db_connection()
-    conn.execute("DELETE FROM bash_module WHERE python_id = ?",
+    conn.execute("DELETE FROM python WHERE python_id = ?",
                  (python_id,))
     conn.commit()
     conn.close()
@@ -408,6 +407,89 @@ def delete_links_command(links_id):
     conn = connect.get_db_connection()
     conn.execute("DELETE FROM links WHERE links_id = ?",
                  (links_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("links_list_commands"))
+
+
+@app.route("/tasks")
+def get_tasks_list():
+    conn = connect.get_db_connection()
+    tasks_list = conn.execute("SELECT * FROM tasks ORDER BY task_id DESC").fetchall()
+    conn.close()
+    return render_template("tasks/tasks_list.html",
+                           tasks_list=tasks_list,
+                           )
+
+
+@app.route("/tasks/view/<int:task_id>")
+def get_post_task(task_id):
+    conn = connect.get_db_connection()
+    task_view = conn.execute("SELECT * FROM tasks WHERE task_id = ?",
+                             (task_id,)).fetchone()
+    conn.close()
+    return render_template("tasks/task_view.html",
+                           task_view=task_view)
+
+
+@app.route("/tasks/edit/<int:task_id>/", methods=("GET", "POST"))
+def get_edit_task(task_id):
+    conn = connect.get_db_connection()
+    edit_task_view = conn.execute("SELECT * FROM tasks WHERE task_id = ?",
+                                  (task_id,)).fetchone()
+    if request.method == "POST":
+        task_edit_name = request.form["task_name"]
+        task_edit_status = request.form["task_status"]
+        if len(request.form['task_edit_name']) > 4:
+            conn = connect.get_db_connection()
+            conn.execute(
+                "UPDATE tasks SET task_name = ?, task_status = ? WHERE task_id = ?",
+                (task_edit_name, task_edit_status, task_id),
+            )
+            conn.commit()
+            conn.close()
+            if not task_edit_name:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("get_tasks_list"))
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("tasks/edit_task.html", edit_task_view=edit_task_view)
+
+
+@app.route("/tasks/new_links_command", methods=["GET", "POST"])
+def add_links_command():
+    if request.method == "POST":
+        new_task_name = request.form["task_name"]
+        new_task_name = request.form["task_status"]
+        if len(request.form['task_name']) > 4:
+            conn = connect.get_db_connection()
+            conn.execute(
+                "INSERT INTO tasks (task_name, task_status) VALUES (?, ?)",
+                (new_task_name, new_task_name,)
+            )
+            conn.commit()
+            conn.close()
+            if not new_task_name:
+                flash('Ошибка сохранения записи!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("get_tasks_list"))
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("links/add_links_command.html")
+
+
+@app.route("/tasks/delete/<int:task_id>/", methods=("POST",))
+def delete_links_command(task_id):
+    conn = connect.get_db_connection()
+    conn.execute("DELETE FROM tasks WHERE task_id = ?",
+                 (task_id,))
     conn.commit()
     conn.close()
     return redirect(url_for("links_list_commands"))
