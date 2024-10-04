@@ -4,7 +4,7 @@ from app import app
 from modules import connect
 
 
-def python_module():
+def bash_module():
     @app.route("/bash")
     def bash_list_commands():
         conn = connect.get_db_connection()
