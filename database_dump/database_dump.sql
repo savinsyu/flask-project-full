@@ -153,14 +153,18 @@ INSERT INTO "sql" VALUES(1161,'SELECT * FROM table;','Вывод всех записей таблицы
 INSERT INTO "sql" VALUES(1162,'Тестовое сообщение','Тестовое сообщение','Тестовое сообщение');
 INSERT INTO "sql" VALUES(1163,'TestTestTestTestTestTestTest','TestTestTestTestTestTestTest','TestTestTestTestTestTestTest');
 INSERT INTO "sql" VALUES(1164,'TestTestTestTestTestTestTestadasd','TestTestTestTestTestTestTestsadasd','TestTestTestTestTestTestTestasdsad');
-CREATE TABLE [tasks] ( 
-  [task_id] INTEGER AUTO_INCREMENT NULL,
-  [task_name] TEXT NOT NULL, [task_status] INT NULL DEFAULT 0,
-   PRIMARY KEY ([task_id])
-);
+CREATE TABLE [tasks] ( 
+[task_id] INTEGER PRIMARY KEY AUTOINCREMENT,
+  [task_name] TEXT NOT NULL,
+  [task_status] INT NULL);
+INSERT INTO "tasks" VALUES(1,'fgdfgdfgdfg',1);
+INSERT INTO "tasks" VALUES(3,'Добавить логику раздела Расчёты',0);
+INSERT INTO "tasks" VALUES(4,'Добавить логику раздела Значения
+',0);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('bash',97);
 INSERT INTO "sqlite_sequence" VALUES('sql',1164);
 INSERT INTO "sqlite_sequence" VALUES('links',28);
 INSERT INTO "sqlite_sequence" VALUES('python',2092);
+INSERT INTO "sqlite_sequence" VALUES('tasks',4);
 COMMIT;

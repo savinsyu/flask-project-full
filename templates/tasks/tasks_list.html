@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Команды Bash{% endblock %}
+{% block title %}Задачи{% endblock %}
 {% block content %}
 
    <div class="card m-2">
@@ -9,22 +9,21 @@
       <div class="card-body">
          <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
          <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
-         <a class="btn btn-primary" href="{{ url_for('add_bash_command') }}">Добавить</a>
+         <a class="btn btn-primary" href="{{ url_for('new_task') }}">Добавить</a>
       </div>
    </div>
    <table class="table table-striped">
       <tr>
-         <th>Перейти к записи</th>
-         <th>Команда</th>
+         <th>Перейти к задаче</th>
+         <th>Статус</th>
       </tr>
-      {% for bash_list in bash_list %}
+      {% for tasks_list in tasks_list %}
       <tr>
-         <td><a href="{{ url_for('get_post_bash_command', bash_id=bash_list['bash_id']) }}">{{ bash_list['bash_name']
+         <td><a href="{{ url_for('get_post_task', task_id=tasks_list['task_id']) }}">{{ tasks_list['task_name']
                }}</a></td>
-         <td>{{ bash_list['bash_command'] }}</td>
+         <td>{{ tasks_list['task_status'] }}</td>
       </tr>
       {% endfor %}
-      </tbody>
    </table>
    
 {% endblock %}

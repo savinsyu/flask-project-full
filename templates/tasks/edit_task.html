@@ -1,33 +1,26 @@
 {% extends 'base.html' %}
-{% block title %}Редактировать запись{% endblock %}
+{% block title %}Редактировать задачу{% endblock %}
 {% block content %}
 
 <div class="bd-example">
    <form method="post">
       <div class="mb-3">
-         <label for="bash_command" class="form-label">
-            <h4>Команда</h4>
+         <label for="task_name" class="form-label">
+            <h4>Задача</h4>
          </label>
-         <textarea class="form-control" id="bash_command" name="bash_command" rows="1" placeholder="Введите команду"
-            required>{{ edit_bash_command_view.bash_command }}</textarea>
+         <textarea class="form-control" id="task_name" name="task_name" rows="1" placeholder="Введите задачу"
+            required>{{ edit_task_view.task_name }}</textarea>
       </div>
       <div class="mb-3">
-         <label for="bash_name" class="form-label">
-            <h4>Описание команды</h4>
+         <label for="task_status" class="form-label">
+            <h4>Статус</h4>
          </label>
-         <textarea class="form-control" id="bash_name" name="bash_name" rows="1" placeholder="Введите описание команды"
-            required>{{ edit_bash_command_view.bash_name }}</textarea>
-      </div>
-      <div class="mb-3">
-         <label for="bash_description" class="form-label">
-            <h4>Подробно</h4>
-         </label>
-         <textarea class="form-control" id="bash_description" name="bash_description" rows="8"
-            placeholder="Введите описание команды" required>{{ edit_bash_command_view.bash_description }}</textarea>
+         <textarea class="form-control" id="task_status" name="task_status" rows="1" placeholder="Введите статус задачи"
+            required>{{ edit_task_view.task_status }}</textarea>
       </div>
       <div class="mb-3">
          <div class="btn-group" role="group" aria-label="Basic example">
-            <a class="btn btn-secondary" href="{{ url_for('bash_list_commands') }}">Вернуться к списку</a>
+            <a class="btn btn-secondary" href="{{ url_for('get_tasks_list') }}">Вернуться к списку</a>
             <button type="submit" value="" class="btn btn-success">Сохранить изменения</button>
          </div>
       </div>

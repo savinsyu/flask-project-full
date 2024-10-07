@@ -135,7 +135,7 @@ def add_bash_command():
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("bash/add_bash_command.html")
+    return render_template("bash/new_task.html")
 
 
 @app.route("/bash/delete/<int:bash_id>/", methods=("POST",))
@@ -440,7 +440,7 @@ def get_edit_task(task_id):
     if request.method == "POST":
         task_edit_name = request.form["task_name"]
         task_edit_status = request.form["task_status"]
-        if len(request.form['task_edit_name']) > 4:
+        if len(request.form['task_name']) > 4:
             conn = connect.get_db_connection()
             conn.execute(
                 "UPDATE tasks SET task_name = ?, task_status = ? WHERE task_id = ?",
@@ -460,16 +460,16 @@ def get_edit_task(task_id):
     return render_template("tasks/edit_task.html", edit_task_view=edit_task_view)
 
 
-@app.route("/tasks/new_links_command", methods=["GET", "POST"])
-def add_links_command():
+@app.route("/tasks/new_task", methods=["GET", "POST"])
+def new_task():
     if request.method == "POST":
         new_task_name = request.form["task_name"]
-        new_task_name = request.form["task_status"]
+        new_task_status = request.form["task_status"]
         if len(request.form['task_name']) > 4:
             conn = connect.get_db_connection()
             conn.execute(
                 "INSERT INTO tasks (task_name, task_status) VALUES (?, ?)",
-                (new_task_name, new_task_name,)
+                (new_task_name, new_task_status)
             )
             conn.commit()
             conn.close()
@@ -482,17 +482,17 @@ def add_links_command():
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("links/add_links_command.html")
+    return render_template("tasks/new_task.html")
 
 
 @app.route("/tasks/delete/<int:task_id>/", methods=("POST",))
-def delete_links_command(task_id):
+def delete_task(task_id):
     conn = connect.get_db_connection()
     conn.execute("DELETE FROM tasks WHERE task_id = ?",
                  (task_id,))
     conn.commit()
     conn.close()
-    return redirect(url_for("links_list_commands"))
+    return redirect(url_for("get_tasks_list"))
 
 
 if __name__ == "__main__":

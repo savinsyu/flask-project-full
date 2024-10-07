@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Новая задача{% endblock %}
+{% block content %}
+
+<div class="bd-example">
+   <form method="post">
+      <div class="mb-3">
+         <label for="task_name" class="form-label"><h4>Задача</h4></label>
+         <textarea class="form-control" id="task_name" name="task_name" rows="5" placeholder="Введите задачу"
+            required></textarea>
+      </div>
+      <div class="mb-3">
+         <label for="task_status" class="form-label"><h4>Статус</h4></label>
+         <textarea class="form-control" id="task_status" name="task_status" rows="1" placeholder="Введите статус"
+            required></textarea>
+      </div>
+      <div class="mb-3">
+         <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-secondary" href="{{ url_for('get_tasks_list') }}">Вернуться к списку</a>
+            <button type="submit" value="" class="btn btn-success">Сохранить</button>
+         </div>
+      </div>
+   </form>
+</div>
+
+{% include 'errors.html' %}
+{% endblock %}
+
+
