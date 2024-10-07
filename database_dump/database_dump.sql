@@ -89,7 +89,6 @@ INSERT INTO "links" VALUES(19,'Сайт с документацией по веб-технологиям','https:/
 INSERT INTO "links" VALUES(20,'Документация по Bootstrap','https://getbootstrap.com/','Документация по Bootstrap.');
 INSERT INTO "links" VALUES(21,'Описание библиотеки, которая позволяет работает с базой mysql','https://pypi.org/project/PyMySQL/','Описание библиотеки, которая позволяет работает с базой mysql.');
 INSERT INTO "links" VALUES(22,'Документация CLI PowerSHell','https://learn.microsoft.com/ru-ru/powershell/','Документация CLI PowerSHell');
-INSERT INTO "links" VALUES(28,'TestTestTestTestTestTestTestgdgdfasd','TestTestTestTestTestTestTestdfgdfgasdasd','TestTestTestTestTestTestTestdfgdfasdas');
 CREATE TABLE [meaning] ( 
   [meaning_id] INTEGER AUTO_INCREMENT NULL,
   [meaning_name] TEXT NOT NULL,
@@ -130,9 +129,6 @@ INSERT INTO "python" VALUES(26,'data_convert = data.astype("int16")','Изменение 
 INSERT INTO "python" VALUES(30,'df = pd.DataFrame(lst, columns=[c[0] for c in cur.description])','Создание датафрейма из базы данных','Команда позволяет создать датафрейм с данными из таблицы базы данных.');
 INSERT INTO "python" VALUES(31,'df = pd.read_excel(''sotr.xlsx'', index_col=0)','Загрузка данных из EXCEL файла',NULL);
 INSERT INTO "python" VALUES(32,'data = pd.read_csv("data.csv")','Загрузка CSV-данных','Метод загружает csv файл с данными.');
-INSERT INTO "python" VALUES(2090,'Тестовое сообщение','Тестовое сообщение','Тестовое сообщение1');
-INSERT INTO "python" VALUES(2091,'TestTestTestTestTestTestTest','TestTestTestTestTestTestTest','TestTestTestTestTestTestTest');
-INSERT INTO "python" VALUES(2092,'пвавапавпавasdasd','павпвапавпвапasdasd','вапвввввввввasdad');
 CREATE TABLE [sql] ( 
   "sql_id" INTEGER PRIMARY KEY AUTOINCREMENT,
   "sql_command" TEXT NOT NULL,
@@ -150,14 +146,10 @@ INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [f
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных',NULL);
 INSERT INTO "sql" VALUES(1159,'SELECT DISTINCT field FROM table;','Поиск уникальных значений','DISTINCT ищет и выводит уникальные значения указанного в запросе столбца ');
 INSERT INTO "sql" VALUES(1161,'SELECT * FROM table;','Вывод всех записей таблицы','Вывод всех записей таблицы');
-INSERT INTO "sql" VALUES(1162,'Тестовое сообщение','Тестовое сообщение','Тестовое сообщение');
-INSERT INTO "sql" VALUES(1163,'TestTestTestTestTestTestTest','TestTestTestTestTestTestTest','TestTestTestTestTestTestTest');
-INSERT INTO "sql" VALUES(1164,'TestTestTestTestTestTestTestadasd','TestTestTestTestTestTestTestsadasd','TestTestTestTestTestTestTestasdsad');
 CREATE TABLE [tasks] ( 
 [task_id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [task_name] TEXT NOT NULL,
   [task_status] INT NULL);
-INSERT INTO "tasks" VALUES(1,'fgdfgdfgdfg',1);
 INSERT INTO "tasks" VALUES(3,'Добавить логику раздела Расчёты',0);
 INSERT INTO "tasks" VALUES(4,'Добавить логику раздела Значения
 ',0);
