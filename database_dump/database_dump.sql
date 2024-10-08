@@ -89,6 +89,7 @@ INSERT INTO "links" VALUES(19,'Сайт с документацией по веб-технологиям','https:/
 INSERT INTO "links" VALUES(20,'Документация по Bootstrap','https://getbootstrap.com/','Документация по Bootstrap.');
 INSERT INTO "links" VALUES(21,'Описание библиотеки, которая позволяет работает с базой mysql','https://pypi.org/project/PyMySQL/','Описание библиотеки, которая позволяет работает с базой mysql.');
 INSERT INTO "links" VALUES(22,'Документация CLI PowerSHell','https://learn.microsoft.com/ru-ru/powershell/','Документация CLI PowerSHell');
+INSERT INTO "links" VALUES(29,'Логические типы в Python','https://pythonchik.ru/osnovy/logicheskiy-tip-dannyh','Логические типы в Python');
 CREATE TABLE [meaning] ( 
   [meaning_id] INTEGER AUTO_INCREMENT NULL,
   [meaning_name] TEXT NOT NULL,
@@ -153,10 +154,11 @@ CREATE TABLE [tasks] (
 INSERT INTO "tasks" VALUES(3,'Добавить логику раздела Расчёты',0);
 INSERT INTO "tasks" VALUES(4,'Добавить логику раздела Значения
 ',0);
+INSERT INTO "tasks" VALUES(5,'В разделе задачи, нужно выводить вместо 0 и 1 значения Закрыта" или "Открыта". Есть ссылка на проекте http://127.0.0.1:82/links/view/29',0);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('bash',97);
 INSERT INTO "sqlite_sequence" VALUES('sql',1164);
-INSERT INTO "sqlite_sequence" VALUES('links',28);
+INSERT INTO "sqlite_sequence" VALUES('links',29);
 INSERT INTO "sqlite_sequence" VALUES('python',2092);
-INSERT INTO "sqlite_sequence" VALUES('tasks',4);
+INSERT INTO "sqlite_sequence" VALUES('tasks',5);
 COMMIT;

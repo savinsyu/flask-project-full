@@ -2,16 +2,17 @@
 {% block title %}Задачи{% endblock %}
 {% block content %}
 
-   <div class="card m-2">
-      <div class="card-header">
-         Добавление новой записи
-      </div>
-      <div class="card-body">
-         <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
-         <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
-         <a class="btn btn-outline-primary" href="{{ url_for('new_task') }}">Добавить</a>
-      </div>
+<div class="card m-2">
+   <div class="card-header">
+      Добавление новой записи
    </div>
+   <div class="card-body">
+      <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
+      <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
+      <a class="btn btn-outline-primary" href="{{ url_for('new_task') }}">Добавить</a>
+   </div>
+</div>
+<div class="card m-2">
    <table class="table table-striped">
       <tr>
          <th>Перейти к задаче</th>
@@ -25,5 +26,5 @@
       </tr>
       {% endfor %}
    </table>
-   
+</div>
 {% endblock %}

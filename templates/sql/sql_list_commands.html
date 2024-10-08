@@ -12,18 +12,19 @@
       <a class="btn btn-outline-primary" href="{{ url_for('add_sql_command') }}">Добавить</a>
    </div>
 </div>
-<table class="table table-striped m-2">
-   <tr>
-      <th>Перейти к записи</th>
-      <th>Ссылка</th>
-   </tr>
-   {% for sql_list in sql_list %}
-   <tr>
-      <td><a href="{{ url_for('get_post_sql_command', sql_id=sql_list['sql_id']) }}">{{ sql_list['sql_name']
-            }}</a></td>
-      <td>{{ sql_list['sql_command'] }}</td>
-   </tr>
-   {% endfor %}
-</table>
-
+<div class="card m-2">
+   <table class="table table-striped m-2">
+      <tr>
+         <th>Перейти к записи</th>
+         <th>Ссылка</th>
+      </tr>
+      {% for sql_list in sql_list %}
+      <tr>
+         <td><a href="{{ url_for('get_post_sql_command', sql_id=sql_list['sql_id']) }}">{{ sql_list['sql_name']
+               }}</a></td>
+         <td>{{ sql_list['sql_command'] }}</td>
+      </tr>
+      {% endfor %}
+   </table>
+</div>
 {% endblock %}

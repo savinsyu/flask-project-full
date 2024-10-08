@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Редактировать значение{% endblock %}
+{% block content %}
+
+<div class="bd-example">
+   <form method="post">
+      <div class="mb-3">
+         <label for="value_name" class="form-label">
+            <h4>Наименование</h4>
+         </label>
+         <textarea class="form-control" id="value_name" name="value_name" rows="1" placeholder="Введите название"
+            required>{{ edit_value_view.value_name }}</textarea>
+      </div>
+      <div class="mb-3">
+         <label for="value" class="form-label">
+            <h4>Значение</h4>
+         </label>
+         <textarea class="form-control" id="value" name="value" rows="1" placeholder="Введите значение"
+            required>{{ edit_value_view.value }}</textarea>
+      </div>
+      <div class="mb-3">
+         <div class="btn-group" role="group" aria-label="Basic example">
+            <a class="btn btn-outline-secondary" href="{{ url_for('get_values') }}">Вернуться к списку</a>
+            <button type="submit" value="" class="btn btn-outline-success">Сохранить изменения</button>
+         </div>
+      </div>
+   </form>
+</div>
+
+{% include 'errors.html' %}
+{% endblock %}
