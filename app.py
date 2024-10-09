@@ -439,12 +439,11 @@ def get_edit_task(task_id):
                                   (task_id,)).fetchone()
     if request.method == "POST":
         task_edit_name = request.form["task_name"]
-        task_edit_status = request.form["task_status"]
         if len(request.form['task_name']) > 4:
             conn = connect.get_db_connection()
             conn.execute(
-                "UPDATE tasks SET task_name = ?, task_status = ? WHERE task_id = ?",
-                (task_edit_name, task_edit_status, task_id),
+                "UPDATE tasks SET task_name = ? WHERE task_id = ?",
+                (task_edit_name, task_id),
             )
             conn.commit()
             conn.close()
@@ -464,12 +463,11 @@ def get_edit_task(task_id):
 def new_task():
     if request.method == "POST":
         new_task_name = request.form["task_name"]
-        new_task_status = request.form["task_status"]
         if len(request.form['task_name']) > 4:
             conn = connect.get_db_connection()
             conn.execute(
-                "INSERT INTO tasks (task_name, task_status) VALUES (?, ?)",
-                (new_task_name, new_task_status)
+                "INSERT INTO tasks (task_name) VALUES (?)",
+                (new_task_name,)
             )
             conn.commit()
             conn.close()

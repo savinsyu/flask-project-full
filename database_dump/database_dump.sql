@@ -142,26 +142,22 @@ INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [f
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных',NULL);
 INSERT INTO "sql" VALUES(1159,'SELECT DISTINCT field FROM table;','Поиск уникальных значений','DISTINCT ищет и выводит уникальные значения указанного в запросе столбца ');
 INSERT INTO "sql" VALUES(1161,'SELECT * FROM table;','Вывод всех записей таблицы','Вывод всех записей таблицы');
+INSERT INTO "sql" VALUES(1165,'ALTER TABLE tasks 
+DROP COLUMN task_status','Удаление столбца таблицы','Удаление столбца таблицы');
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('bash',97);
-INSERT INTO "sqlite_sequence" VALUES('sql',1164);
+INSERT INTO "sqlite_sequence" VALUES('sql',1165);
 INSERT INTO "sqlite_sequence" VALUES('links',30);
 INSERT INTO "sqlite_sequence" VALUES('python',2092);
 INSERT INTO "sqlite_sequence" VALUES('tasks',6);
 INSERT INTO "sqlite_sequence" VALUES('values_tbl',3);
 CREATE TABLE [tasks] ( 
 [task_id] INTEGER PRIMARY KEY AUTOINCREMENT,
-  [task_name] TEXT NOT NULL,
-  [task_status] INT NULL);
-INSERT INTO "tasks" VALUES(3,'Добавить логику раздела Расчёты',0);
-INSERT INTO "tasks" VALUES(4,'Добавить логику раздела Значения(таблица values_td)
-',0);
-INSERT INTO "tasks" VALUES(5,'В разделе задачи, нужно выводить вместо 0 и 1 значения "Закрыта" или "Открыта". Есть ссылка на проекте http://127.0.0.1:82/links/view/29',0);
-INSERT INTO "tasks" VALUES(6,'Создать таблицу values в базе данных',1);
+  [task_name] TEXT NOT NULL);
 CREATE TABLE [values_tbl] ( 
   [value_id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   [value_name] TEXT NOT NULL,
   [value] REAL NOT NULL
 );
-INSERT INTO "values_tbl" VALUES(1,'new_values_name',50.0);
+INSERT INTO "values_tbl" VALUES(1,'new_values_name',98798798797979.0);
 COMMIT;

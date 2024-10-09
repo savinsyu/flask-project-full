@@ -16,13 +16,11 @@
    <table class="table table-striped">
       <tr>
          <th>Перейти к задаче</th>
-         <th>Статус</th>
       </tr>
       {% for tasks_list in tasks_list %}
       <tr>
          <td><a href="{{ url_for('get_post_task', task_id=tasks_list['task_id']) }}">{{ tasks_list['task_name']
                }}</a></td>
-         <td>{{ tasks_list['task_status'] }}</td>
       </tr>
       {% endfor %}
    </table>
