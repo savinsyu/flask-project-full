@@ -9,20 +9,21 @@
       <div class="card-body">
          <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
          <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
-         <a class="btn btn-outline-primary" href="{{ url_for('new_value') }}">Добавить</a>
+         <a class="btn btn-outline-primary" href="{{ url_for('add_value') }}">Добавить</a>
       </div>
    </div>
    <div class="card m-2">
       <table class="table table-striped">
          <tr>
-            <th>Перейти к задаче</th>
-            <th>Статус</th>
+            <th>Перейти к значению</th>
+            <th>Значение</th>
          </tr>
-         {% for values in values %}
+         {% for values_list in values_list %}
          <tr>
-            <td><a href="{{ url_for('get_post_value', value_id=values['value_id']) }}">{{ values['value_name']
+            <td><a href="{{ url_for('get_post_value', value_id=values_list['value_id']) }}">{{ values_list['value_name']
                   }}</a></td>
-            <td>{{ values['value'] }}</td>
+
+            <td>{{ values_list['value'] }}</td>
          </tr>
          {% endfor %}
       </table>

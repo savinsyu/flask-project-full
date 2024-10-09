@@ -90,12 +90,7 @@ INSERT INTO "links" VALUES(20,'Документация по Bootstrap','https://getbootstrap.
 INSERT INTO "links" VALUES(21,'Описание библиотеки, которая позволяет работает с базой mysql','https://pypi.org/project/PyMySQL/','Описание библиотеки, которая позволяет работает с базой mysql.');
 INSERT INTO "links" VALUES(22,'Документация CLI PowerSHell','https://learn.microsoft.com/ru-ru/powershell/','Документация CLI PowerSHell');
 INSERT INTO "links" VALUES(29,'Логические типы в Python','https://pythonchik.ru/osnovy/logicheskiy-tip-dannyh','Логические типы в Python');
-CREATE TABLE [meaning] ( 
-  [meaning_id] INTEGER AUTO_INCREMENT NULL,
-  [meaning_name] TEXT NOT NULL,
-  [meaning] INT NULL,
-   PRIMARY KEY ([meaning_id])
-);
+INSERT INTO "links" VALUES(30,'Описание SQLite','https://metanit.com/sql/sqlite/','Описание SQLite');
 CREATE TABLE "python" (
     "python_id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "python_command" TEXT NOT NULL,
@@ -147,18 +142,27 @@ INSERT INTO "sql" VALUES(9,'ALTER TABLE [train] RENAME COLUMN [train_name] TO [f
 INSERT INTO "sql" VALUES(10,'DROP TABLE [train];','Удаляет таблицу базы данных',NULL);
 INSERT INTO "sql" VALUES(1159,'SELECT DISTINCT field FROM table;','Поиск уникальных значений','DISTINCT ищет и выводит уникальные значения указанного в запросе столбца ');
 INSERT INTO "sql" VALUES(1161,'SELECT * FROM table;','Вывод всех записей таблицы','Вывод всех записей таблицы');
+DELETE FROM "sqlite_sequence";
+INSERT INTO "sqlite_sequence" VALUES('bash',97);
+INSERT INTO "sqlite_sequence" VALUES('sql',1164);
+INSERT INTO "sqlite_sequence" VALUES('links',30);
+INSERT INTO "sqlite_sequence" VALUES('python',2092);
+INSERT INTO "sqlite_sequence" VALUES('tasks',6);
+INSERT INTO "sqlite_sequence" VALUES('values_tbl',2);
 CREATE TABLE [tasks] ( 
 [task_id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [task_name] TEXT NOT NULL,
   [task_status] INT NULL);
 INSERT INTO "tasks" VALUES(3,'Добавить логику раздела Расчёты',0);
-INSERT INTO "tasks" VALUES(4,'Добавить логику раздела Значения
+INSERT INTO "tasks" VALUES(4,'Добавить логику раздела Значения(таблица values_td)
 ',0);
-INSERT INTO "tasks" VALUES(5,'В разделе задачи, нужно выводить вместо 0 и 1 значения Закрыта" или "Открыта". Есть ссылка на проекте http://127.0.0.1:82/links/view/29',0);
-DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('bash',97);
-INSERT INTO "sqlite_sequence" VALUES('sql',1164);
-INSERT INTO "sqlite_sequence" VALUES('links',29);
-INSERT INTO "sqlite_sequence" VALUES('python',2092);
-INSERT INTO "sqlite_sequence" VALUES('tasks',5);
+INSERT INTO "tasks" VALUES(5,'В разделе задачи, нужно выводить вместо 0 и 1 значения "Закрыта" или "Открыта". Есть ссылка на проекте http://127.0.0.1:82/links/view/29',0);
+INSERT INTO "tasks" VALUES(6,'Создать таблицу values в базе данных',1);
+CREATE TABLE [values_tbl] ( 
+  [value_id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+  [value_name] TEXT NOT NULL,
+  [value] REAL NOT NULL
+);
+INSERT INTO "values_tbl" VALUES(1,'new_values_name',50.0);
+INSERT INTO "values_tbl" VALUES(2,'new_values_name',13.0);
 COMMIT;

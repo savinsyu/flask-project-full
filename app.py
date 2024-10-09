@@ -495,5 +495,91 @@ def delete_task(task_id):
     return redirect(url_for("get_tasks_list"))
 
 
+@app.route("/values")
+def values():
+    conn = connect.get_db_connection()
+    values_list = conn.execute("SELECT * FROM values_tbl ORDER BY value_id DESC").fetchall()
+    conn.close()
+
+    return render_template("values/values.html",
+                           values_list=values_list,
+                           )
+
+
+@app.route("/values/view/<int:value_id>")
+def get_post_value(value_id):
+    conn = connect.get_db_connection()
+    values_view = conn.execute("SELECT * FROM values_tbl WHERE value_id = ?",
+                               (value_id,)).fetchone()
+    conn.close()
+    return render_template("values/values_view.html",
+                           values_view=values_view)
+
+
+@app.route("/values/edit/<int:value_id>/", methods=("GET", "POST"))
+def edit_values(value_id):
+    conn = connect.get_db_connection()
+    edit_values_view = conn.execute("SELECT * FROM values_tbl WHERE value_id = ?",
+                                    (value_id,)).fetchone()
+    if request.method == "POST":
+        values_edit = request.form["values"]
+        values_name_edit = request.form["values_name"]
+        # Поле description не обязательное, поэтому не будет делать условие
+        values_description_edit = request.form["values_description"]
+        if len(request.form['values']) > 4 and len(request.form['values_name']) > 10:
+            conn = connect.get_db_connection()
+            conn.execute(
+                "UPDATE values_tbl SET values = ?, values_name = ?, values_description = ? WHERE value_id = ?",
+                (values_edit, values_name_edit, values_description_edit, value_id),
+            )
+            conn.commit()
+            conn.close()
+            if not values_edit:
+                flash('Ошибка сохранения записи, вы ввели мало символов!', category='error')
+            else:
+                flash('Запись успешно сохранена!', category='success')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("values_lists"))
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("values/edit_values.html", edit_values_view=edit_values_view)
+
+
+@app.route("/values/new_value", methods=["GET", "POST"])
+def add_value():
+    if request.method == "POST":
+        new_value_name = request.form["value_name"]
+        new_value = request.form["value"]
+        if len(request.form['value_name']) > 5:
+            conn = connect.get_db_connection()
+            conn.execute(
+                "INSERT INTO values_tbl (value_name, value) VALUES (?, ?)",
+                (new_value_name, new_value)
+            )
+            conn.commit()
+            conn.close()
+            if not new_value_name:
+                flash('Ошибка сохранения записи!', category='error')
+            else:
+                flash('Запись успешно добавлена!')
+            # В случае соблюдения условий заполнения полей, произойдёт перенаправление
+            return redirect(url_for("values"))
+        else:
+            flash('Ошибка сохранения записи!', category='error')
+
+    return render_template("values/new_value.html")
+
+
+@app.route("/values/delete/<int:value_id>/", methods=("POST",))
+def delete_values(value_id):
+    conn = connect.get_db_connection()
+    conn.execute("DELETE FROM values_tbl WHERE value_id = ?",
+                 (value_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("values_lists"))
+
+
 if __name__ == "__main__":
     app.run(debug=True, host='0.0.0.0', port=82)
