@@ -148,7 +148,7 @@ INSERT INTO "sqlite_sequence" VALUES('sql',1164);
 INSERT INTO "sqlite_sequence" VALUES('links',30);
 INSERT INTO "sqlite_sequence" VALUES('python',2092);
 INSERT INTO "sqlite_sequence" VALUES('tasks',6);
-INSERT INTO "sqlite_sequence" VALUES('values_tbl',2);
+INSERT INTO "sqlite_sequence" VALUES('values_tbl',3);
 CREATE TABLE [tasks] ( 
 [task_id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [task_name] TEXT NOT NULL,
@@ -164,5 +164,4 @@ CREATE TABLE [values_tbl] (
   [value] REAL NOT NULL
 );
 INSERT INTO "values_tbl" VALUES(1,'new_values_name',50.0);
-INSERT INTO "values_tbl" VALUES(2,'new_values_name',13.0);
 COMMIT;
