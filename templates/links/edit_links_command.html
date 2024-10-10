@@ -1,38 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}Редактировать запись{% endblock %}
 {% block content %}
-
-<div>
-   <form method="post">
-      <div class="mb-3">
-         <label for="links_command" class="form-label">
-            <h4>Cсылка</h4>
-         </label>
-         <textarea class="form-control" id="links_command" name="links_command" rows="1" placeholder="Введите ссылку"
-            required>{{ edit_links_command_view.links_command }}</textarea>
+<form method="post">
+   <div class="mb-3">
+      <label for="links_command" class="form-label">
+         <h4>Cсылка</h4>
+      </label>
+      <textarea class="form-control" id="links_command" name="links_command" rows="1" placeholder="Введите ссылку"
+         required>{{ edit_links_command_view.links_command }}</textarea>
+   </div>
+   <div class="mb-3">
+      <label for="links_name" class="form-label">
+         <h4>Описание ссылки</h4>
+      </label>
+      <textarea class="form-control" id="links_name" name="links_name" rows="3" placeholder="Введите описание ссылки"
+         required>{{ edit_links_command_view.links_name }}</textarea>
+   </div>
+   <div class="mb-3">
+      <label for="links_description" class="form-label">
+         <h4>Подробное описание</h4>
+      </label>
+      <textarea class="form-control" id="links_description" name="links_description" rows="3"
+         placeholder="Введите подробное описание" required>{{ edit_links_command_view.links_description }}</textarea>
+   </div>
+   <div class="mb-3">
+      <div class="btn-group" role="group" aria-label="Basic example">
+         <a class="btn btn-outline-light" href="{{ url_for('links_list_commands') }}">Вернуться к списку</a>
+         <button type="submit" value="" class="btn btn-outline-light">Сохранить изменения</button>
       </div>
-      <div class="mb-3">
-         <label for="links_name" class="form-label">
-            <h4>Описание ссылки</h4>
-         </label>
-         <textarea class="form-control" id="links_name" name="links_name" rows="3" placeholder="Введите описание ссылки"
-            required>{{ edit_links_command_view.links_name }}</textarea>
-      </div>
-      <div class="mb-3">
-         <label for="links_description" class="form-label">
-            <h4>Подробное описание</h4>
-         </label>
-         <textarea class="form-control" id="links_description" name="links_description" rows="3"
-            placeholder="Введите подробное описание" required>{{ edit_links_command_view.links_description }}</textarea>
-      </div>
-      <div class="mb-3">
-         <div class="btn-group" role="group" aria-label="Basic example">
-            <a class="btn btn-outline-light" href="{{ url_for('links_list_commands') }}">Вернуться к списку</a>
-            <button type="submit" value="" class="btn btn-outline-light">Сохранить изменения</button>
-         </div>
-      </div>
-   </form>
-</div>
+   </div>
+</form>
 
 {% include 'errors.html' %}
 {% endblock %}

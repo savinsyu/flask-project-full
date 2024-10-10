@@ -135,7 +135,7 @@ def add_bash_command():
         else:
             flash('Ошибка сохранения записи!', category='error')
 
-    return render_template("bash/new_task.html")
+    return render_template("bash/add_bash_command.html")
 
 
 @app.route("/bash/delete/<int:bash_id>/", methods=("POST",))

@@ -147,18 +147,19 @@ DROP COLUMN task_status','Удаление столбца таблицы','Удаление столбца таблицы');
 CREATE TABLE [tasks] ( 
 [task_id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [task_name] TEXT NOT NULL);
-INSERT INTO "tasks" VALUES(7,'sfdsfdsfsdfsdf');
+INSERT INTO "tasks" VALUES(8,'Занести в таблицу значения стоимость бензина за литр 95-го
+');
 CREATE TABLE [values_tbl] ( 
   [value_id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   [value_name] TEXT NOT NULL,
   [value] REAL NOT NULL
 );
-INSERT INTO "values_tbl" VALUES(1,'new_values_name',98798798797979.0);
+INSERT INTO "values_tbl" VALUES(4,'Тестовая запись',15.0);
 DELETE FROM "sqlite_sequence";
 INSERT INTO "sqlite_sequence" VALUES('bash',97);
 INSERT INTO "sqlite_sequence" VALUES('sql',1165);
 INSERT INTO "sqlite_sequence" VALUES('links',30);
 INSERT INTO "sqlite_sequence" VALUES('python',2092);
-INSERT INTO "sqlite_sequence" VALUES('tasks',7);
-INSERT INTO "sqlite_sequence" VALUES('values_tbl',3);
+INSERT INTO "sqlite_sequence" VALUES('tasks',8);
+INSERT INTO "sqlite_sequence" VALUES('values_tbl',4);
 COMMIT;

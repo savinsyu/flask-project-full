@@ -1,38 +1,35 @@
 {% extends 'base.html' %}
 {% block title %}Редактировать запись{% endblock %}
 {% block content %}
-
-<div>
-   <form method="post">
-      <div class="mb-3">
-         <label for="python_command" class="form-label">
-            <h4>Команда</h4>
-         </label>
-         <textarea class="form-control" id="python_command" name="python_command" rows="1" placeholder="Введите команду"
-            required>{{ edit_python_command_view.python_command }}</textarea>
+<form method="post">
+   <div class="mb-3">
+      <label for="python_command" class="form-label">
+         <h4>Команда</h4>
+      </label>
+      <textarea class="form-control" id="python_command" name="python_command" rows="1" placeholder="Введите команду"
+         required>{{ edit_python_command_view.python_command }}</textarea>
+   </div>
+   <div class="mb-3">
+      <label for="python_name" class="form-label">
+         <h4>Описание команды</h4>
+      </label>
+      <textarea class="form-control" id="python_name" name="python_name" rows="1" placeholder="Введите описание команды"
+         required>{{ edit_python_command_view.python_name }}</textarea>
+   </div>
+   <div class="mb-3">
+      <label for="python_description" class="form-label">
+         <h4>Подробно</h4>
+      </label>
+      <textarea class="form-control" id="python_description" name="python_description" rows="8"
+         placeholder="Введите описание команды" required>{{ edit_python_command_view.python_description }}</textarea>
+   </div>
+   <div class="mb-3">
+      <div class="btn-group" role="group" aria-label="Basic example">
+         <a class="btn btn-outline-light" href="{{ url_for('python_list_commands') }}">Вернуться к списку</a>
+         <button type="submit" value="" class="btn btn-outline-light">Сохранить изменения</button>
       </div>
-      <div class="mb-3">
-         <label for="python_name" class="form-label">
-            <h4>Описание команды</h4>
-         </label>
-         <textarea class="form-control" id="python_name" name="python_name" rows="1"
-            placeholder="Введите описание команды" required>{{ edit_python_command_view.python_name }}</textarea>
-      </div>
-      <div class="mb-3">
-         <label for="python_description" class="form-label">
-            <h4>Подробно</h4>
-         </label>
-         <textarea class="form-control" id="python_description" name="python_description" rows="8"
-            placeholder="Введите описание команды" required>{{ edit_python_command_view.python_description }}</textarea>
-      </div>
-      <div class="mb-3">
-         <div class="btn-group" role="group" aria-label="Basic example">
-            <a class="btn btn-outline-light" href="{{ url_for('python_list_commands') }}">Вернуться к списку</a>
-            <button type="submit" value="" class="btn btn-outline-light">Сохранить изменения</button>
-         </div>
-      </div>
-   </form>
-</div>
+   </div>
+</form>
 
 {% include 'errors.html' %}
 {% endblock %}

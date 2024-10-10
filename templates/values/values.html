@@ -1,31 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Значения{% endblock %}
 {% block content %}
+<div>
+   <a class="btn btn-outline-light" href="{{ url_for('add_value') }}">Добавить</a>
+</div>
+<div>
+   <table class="table">
+      <tr>
+         <th>Перейти к значению</th>
+         <th>Значение</th>
+      </tr>
+      {% for values_list in values_list %}
+      <tr>
+         <td><a href="{{ url_for('get_post_value', value_id=values_list['value_id']) }}">{{ values_list['value_name']
+               }}</a></td>
 
-   <div>
-      <div >
-         Добавление нового значения
-      </div>
-      <div>
-         <h5>Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
-         <p>Просто нажми на кнопку "Добавить" ниже.</p>
-         <a class="btn btn-outline-light" href="{{ url_for('add_value') }}">Добавить</a>
-      </div>
-   </div>
-   <div>
-      <table class="table table-striped">
-         <tr>
-            <th>Перейти к значению</th>
-            <th>Значение</th>
-         </tr>
-         {% for values_list in values_list %}
-         <tr>
-            <td><a href="{{ url_for('get_post_value', value_id=values_list['value_id']) }}">{{ values_list['value_name']
-                  }}</a></td>
-
-            <td>{{ values_list['value'] }}</td>
-         </tr>
-         {% endfor %}
-      </table> 
-   </div>
-{% endblock %} 
+         <td>{{ values_list['value'] }}</td>
+      </tr>
+      {% endfor %}
+   </table>
+</div>
+{% endblock %}
