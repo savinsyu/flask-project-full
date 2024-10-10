@@ -2,17 +2,17 @@
 {% block title %}Страница задачи{% endblock %}
 {% block content %}
 
-<div class="bd-example">
-   <div class="card">
-      <h5 class="card-header">{{ task_view['task_name'] }}</h5>
-      <div class="card-body">
+<div>
+    <div>
+      <h5 >{{ task_view['task_name'] }}</h5>
+      <div>
          <div class="btn-group" role="group" aria-label="Basic example">
-            <a class="btn btn-outline-primary"
+            <a class="btn btn-outline-light"
                href="{{ url_for('get_edit_task', task_id=task_view['task_id']) }}">Редактировать</a>
-            <a class="btn btn-outline-secondary" href="{{ url_for('get_tasks_list') }}">Вернуться к списку</a>
-            <a class="btn btn-outline-success" href="{{ url_for('new_task') }}">Добавить новую</a>
+            <a class="btn btn-outline-light" href="{{ url_for('get_tasks_list') }}">Вернуться к списку</a>
+            <a class="btn btn-outline-light" href="{{ url_for('new_task') }}">Добавить новую</a>
             <form action="{{ url_for('delete_task', task_id=task_view['task_id'])}}" method="POST">
-               <input type="submit" class="btn btn-outline-danger" value="Удалить"
+               <input type="submit" class="btn btn-outline-light" value="Удалить"
                   onclick="return confirm('Вы уверены что хотите удалить запись?')" />
             </form>
          </div>

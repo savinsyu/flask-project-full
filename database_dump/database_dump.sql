@@ -144,20 +144,21 @@ INSERT INTO "sql" VALUES(1159,'SELECT DISTINCT field FROM table;','Поиск уникаль
 INSERT INTO "sql" VALUES(1161,'SELECT * FROM table;','Вывод всех записей таблицы','Вывод всех записей таблицы');
 INSERT INTO "sql" VALUES(1165,'ALTER TABLE tasks 
 DROP COLUMN task_status','Удаление столбца таблицы','Удаление столбца таблицы');
-DELETE FROM "sqlite_sequence";
-INSERT INTO "sqlite_sequence" VALUES('bash',97);
-INSERT INTO "sqlite_sequence" VALUES('sql',1165);
-INSERT INTO "sqlite_sequence" VALUES('links',30);
-INSERT INTO "sqlite_sequence" VALUES('python',2092);
-INSERT INTO "sqlite_sequence" VALUES('tasks',6);
-INSERT INTO "sqlite_sequence" VALUES('values_tbl',3);
 CREATE TABLE [tasks] ( 
 [task_id] INTEGER PRIMARY KEY AUTOINCREMENT,
   [task_name] TEXT NOT NULL);
+INSERT INTO "tasks" VALUES(7,'sfdsfdsfsdfsdf');
 CREATE TABLE [values_tbl] ( 
   [value_id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
   [value_name] TEXT NOT NULL,
   [value] REAL NOT NULL
 );
 INSERT INTO "values_tbl" VALUES(1,'new_values_name',98798798797979.0);
+DELETE FROM "sqlite_sequence";
+INSERT INTO "sqlite_sequence" VALUES('bash',97);
+INSERT INTO "sqlite_sequence" VALUES('sql',1165);
+INSERT INTO "sqlite_sequence" VALUES('links',30);
+INSERT INTO "sqlite_sequence" VALUES('python',2092);
+INSERT INTO "sqlite_sequence" VALUES('tasks',7);
+INSERT INTO "sqlite_sequence" VALUES('values_tbl',3);
 COMMIT;

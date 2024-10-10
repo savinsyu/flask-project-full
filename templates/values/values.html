@@ -2,17 +2,17 @@
 {% block title %}Значения{% endblock %}
 {% block content %}
 
-   <div class="card m-2">
-      <div class="card-header">
+   <div>
+      <div >
          Добавление нового значения
       </div>
-      <div class="card-body">
-         <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
-         <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
-         <a class="btn btn-outline-primary" href="{{ url_for('add_value') }}">Добавить</a>
+      <div>
+         <h5>Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
+         <p>Просто нажми на кнопку "Добавить" ниже.</p>
+         <a class="btn btn-outline-light" href="{{ url_for('add_value') }}">Добавить</a>
       </div>
    </div>
-   <div class="card m-2">
+   <div>
       <table class="table table-striped">
          <tr>
             <th>Перейти к значению</th>
@@ -26,6 +26,6 @@
             <td>{{ values_list['value'] }}</td>
          </tr>
          {% endfor %}
-      </table>
+      </table> 
    </div>
-{% endblock %}
+{% endblock %} 

@@ -2,7 +2,7 @@
 {% block title %}Добавить команду SQL{% endblock %}
 {% block content %}
 
-<div class="bd-example">
+<div>
    <form method="post">
       <div class="mb-3">
          <label for="sql_command" class="form-label">
@@ -27,8 +27,8 @@
       </div>
       <div class="mb-3">
          <div class="btn-group" role="group" aria-label="Basic example">
-            <a class="btn btn-outline-secondary" href="{{ url_for('sql_list_commands') }}">Вернуться к списку</a>
-            <button type="submit" value="" class="btn btn-outline-success">Сохранить</button>
+            <a class="btn btn-outline-light" href="{{ url_for('sql_list_commands') }}">Вернуться к списку</a>
+            <button type="submit" value="" class="btn btn-outline-light">Сохранить</button>
          </div>
       </div>
    </form>

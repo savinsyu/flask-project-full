@@ -2,30 +2,21 @@
 {% block title %}Команды Bash{% endblock %}
 {% block content %}
 
-   <div class="card m-2">
-      <div class="card-header">
-         Добавление новой записи
-      </div>
-      <div class="card-body">
-         <h5 class="card-title">Что делать если нужно добавить новую запись или записей в базе данных вообще нет?</h5>
-         <p class="card-text">Просто нажми на кнопку "Добавить" ниже.</p>
-         <a class="btn btn-outline-primary" href="{{ url_for('add_bash_command') }}">Добавить</a>
-      </div>
-   </div>
-   <div class="card m-2">
-   <table class="table table-striped">
-      <tr>
-         <th>Перейти к записи</th>
-         <th>Команда</th>
-      </tr>
-      {% for bash_list in bash_list %}
-      <tr>
-         <td><a href="{{ url_for('get_post_bash_command', bash_id=bash_list['bash_id']) }}">{{ bash_list['bash_name']
-               }}</a></td>
-         <td>{{ bash_list['bash_command'] }}</td>
-      </tr>
-      {% endfor %}
-      </tbody>
-   </table>
+<div>
+   <a class="btn btn-outline-light" href="{{ url_for('add_bash_command') }}">Добавить</a>
 </div>
+<table class="table">
+   <tr>
+      <th>Перейти к записи</th>
+      <th>Команда</th>
+   </tr>
+   {% for bash_list in bash_list %}
+   <tr>
+      <td><a href="{{ url_for('get_post_bash_command', bash_id=bash_list['bash_id']) }}">{{ bash_list['bash_name']
+            }}</a></td>
+      <td>{{ bash_list['bash_command'] }}</td>
+   </tr>
+   {% endfor %}
+   </tbody>
+</table>
 {% endblock %}
